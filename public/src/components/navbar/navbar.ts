@@ -47,7 +47,53 @@ class NavBar extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="../src/components/navBar/navBar.css">
+                <style>
+                .navbar-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px;
+                background-color: #fff;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .app-icon img, .community-icon img, .profile-pic img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+
+            .search-bar {
+                display: flex;
+                align-items: center;
+                width: 50%;
+            }
+
+            .search-bar input {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .search-bar i {
+                margin-left: -30px;
+                cursor: pointer;
+            }
+
+            @media screen and (max-width: 768px) {
+                .navbar-container {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .search-bar {
+                    width: 100%;
+                    margin: 10px 0;
+                }
+            }
+
+                </style>
                 <nav class='navbar-container'>
                     <div class='app-icon'>
                         <img src="${this.icon}" alt="App Icon">
