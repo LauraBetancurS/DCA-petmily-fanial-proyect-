@@ -4,16 +4,16 @@ export enum Attribute {
     'icon' = 'icon',
     'img' = 'img',
     'input' = 'input',
-    'communityIcon' = 'communityIcon',
-    'profilePic' = 'profilePic',
+    'communityicon' = 'communityicon',
+    'profilepic' = 'profilepic',
 };
 
 class NavBar extends HTMLElement {
     icon?: string;
     img?: string;
     input?: string;
-    communityIcon?: string;
-    profilePic?: string;
+    communityicon?: string;
+    profilepic?: string;
 
     constructor() {
         super();
@@ -35,9 +35,9 @@ class NavBar extends HTMLElement {
     }
 
     addEventListeners() {
-        const communityIcon = this.shadowRoot?.querySelector('.community-icon');
-        if (communityIcon) {
-            communityIcon.addEventListener('click', () => {
+        const communityicon = this.shadowRoot?.querySelector('.community-icon');
+        if (communityicon) {
+            communityicon.addEventListener('click', () => {
                 console.log("Community icon clicked");
                 // Add logic to navigate to community screen if needed
             });
@@ -47,7 +47,7 @@ class NavBar extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="../src/components/navBar/navBar.css">
+                <link rel="stylesheet" href="../public/src/components/navbar/style.css" />
                 <nav class='navbar-container'>
                     <div class='app-icon'>
                         <img src="${this.icon}" alt="App Icon">
@@ -59,11 +59,11 @@ class NavBar extends HTMLElement {
                     </div>
 
                     <div class='community-icon'>
-                        <img src="${this.communityIcon}" alt="Community Icon">
+                        <img src="${this.communityicon}" alt="Community Icon">
                     </div>
 
                     <div class='profile-pic'>
-                        <img src="${this.profilePic}" alt="Profile Picture">
+                        <img src="${this.profilepic}" alt="Profile Picture">
                     </div>
                 </nav>
             `;
