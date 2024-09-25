@@ -37,9 +37,18 @@ class PublicityCard extends HTMLElement{
     render(){
         if(this.shadowRoot){
             this.shadowRoot.innerHTML=`
-            <section>
+            <article>
+                <div>
+                    <h4>${this.cardtitle}</h4>
+                </div>
+                <div>
+                    <p>${this.description}</p>
+                </div>
+                <div>
+                    <img ${this.img}>
+                </div>
                
-            </section>
+            </article>
             
            
             
