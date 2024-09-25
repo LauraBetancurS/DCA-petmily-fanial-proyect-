@@ -4,16 +4,16 @@ export enum Attribute {
     'icon' = 'icon',
     'img' = 'img',
     'input' = 'input',
-    'communityIcon' = 'communityIcon',
-    'profilePic' = 'profilePic',
+    'communityicon' = 'communityicon',
+    'profilepic' = 'profilepic',
 };
 
 class NavBar extends HTMLElement {
     icon?: string;
     img?: string;
     input?: string;
-    communityIcon?: string;
-    profilePic?: string;
+    communityicon?: string;
+    profilepic?: string;
 
     constructor() {
         super();
@@ -35,9 +35,9 @@ class NavBar extends HTMLElement {
     }
 
     addEventListeners() {
-        const communityIcon = this.shadowRoot?.querySelector('.community-icon');
-        if (communityIcon) {
-            communityIcon.addEventListener('click', () => {
+        const communityicon = this.shadowRoot?.querySelector('.community-icon');
+        if (communityicon) {
+            communityicon.addEventListener('click', () => {
                 console.log("Community icon clicked");
                 // Add logic to navigate to community screen if needed
             });
@@ -47,53 +47,7 @@ class NavBar extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-                <style>
-                .navbar-container {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 10px;
-                background-color: #fff;
-                border-bottom: 1px solid #ccc;
-            }
-
-            .app-icon img, .community-icon img, .profile-pic img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-            }
-
-            .search-bar {
-                display: flex;
-                align-items: center;
-                width: 50%;
-            }
-
-            .search-bar input {
-                width: 100%;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            .search-bar i {
-                margin-left: -30px;
-                cursor: pointer;
-            }
-
-            @media screen and (max-width: 768px) {
-                .navbar-container {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .search-bar {
-                    width: 100%;
-                    margin: 10px 0;
-                }
-            }
-
-                </style>
+                <link rel="stylesheet" href="../public/src/components/navbar/style.css" />
                 <nav class='navbar-container'>
                     <div class='app-icon'>
                         <img src="${this.icon}" alt="App Icon">
@@ -105,11 +59,11 @@ class NavBar extends HTMLElement {
                     </div>
 
                     <div class='community-icon'>
-                        <img src="${this.communityIcon}" alt="Community Icon">
+                        <img src="${this.communityicon}" alt="Community Icon">
                     </div>
 
                     <div class='profile-pic'>
-                        <img src="${this.profilePic}" alt="Profile Picture">
+                        <img src="${this.profilepic}" alt="Profile Picture">
                     </div>
                 </nav>
             `;
