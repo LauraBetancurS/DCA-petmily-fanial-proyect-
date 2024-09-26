@@ -4,16 +4,16 @@
     width: 100%;
     max-width: 600px; /* Máximo ancho del post */
     margin: 20px auto;
-    background-color: #ffffff;
+    background-color: #fbfbfb;
     border-radius: 15px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     overflow: hidden;
     transition: box-shadow 0.3s ease;
   }
   
-  .cardpost-container:hover {
+  /* .cardpost-container:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Efecto hover */
-  }
+  
   
   .post-container {
     display: flex;
@@ -61,8 +61,20 @@
     max-height: 400px; /* Altura máxima de la imagen */
     object-fit: cover; /* Recorte de la imagen */
   }
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.icon-container svg {
+    width: 28px;
+    height: 28px;
+    /* fill: #10172A;  */
+}
   
-  /* Estilos responsivos */
+ 
   @media (max-width: 768px) {
     .cardpost-container {
       max-width: 90%;
@@ -75,21 +87,25 @@
     }
   
     .profile-icon img {
+    
       width: 40px;
       height: 40px;
-      margin-right: 0;
+      margin-right: 30px; 
       margin-bottom: 10px;
     }
   
     .info-post h4 {
+    text-align: left;
       font-size: 1em;
     }
   
     .info-post h5 {
+    text-align: left;
       font-size: 0.85em;
     }
   
     .info-post p {
+    text-align: left;
       font-size: 0.95em;
     }
   }
