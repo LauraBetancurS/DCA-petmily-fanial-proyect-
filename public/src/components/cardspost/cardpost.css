@@ -58,21 +58,28 @@
   
   .image-post img {
     width: 100%;
-    max-height: 400px; /* Altura máxima de la imagen */
-    object-fit: cover; /* Recorte de la imagen */
+    max-height: 400px; 
+    object-fit: cover; 
   }
   .icon-container {
     display: flex;
+    gap: 1rem;
     align-items: center;
-    justify-content: center;
-    margin: 10px 0;
+    justify-content: start;
+    margin: 10px 5px 5px 10px; 
 }
 
-.icon-container svg {
-    width: 28px;
-    height: 28px;
-    /* fill: #10172A;  */
+.icon-container i {
+    font-size: 28px;
+    color: #10172A;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
+
+.icon-container i:hover {
+    color: #AA6AFF; /* Cambia de color al hacer hover */
+}
+
   
  
   @media (max-width: 768px) {

@@ -1,7 +1,8 @@
 enum Attribute {
     "cardtitle" = "cardtitle",
     "description" = "description",
-    "img" = "img"
+    "img" = "img",
+    "background" = "background"
 
 }
 
@@ -9,6 +10,7 @@ class PublicityCard extends HTMLElement{
     cardtitle?: string;
     description?: string;
     img?: string;
+    background?: string;
 
 
 
@@ -23,7 +25,7 @@ class PublicityCard extends HTMLElement{
 
     }
 
-    attributeChangedCallback(oldValue: string | undefined, newValue: string | undefined, propName: Attribute){
+    attributeChangedCallback(propName:Attribute, oldValue: string | undefined, newValue: string | undefined){
         this[propName] = newValue; 
         this.render();
 
@@ -37,21 +39,17 @@ class PublicityCard extends HTMLElement{
     render(){
         if(this.shadowRoot){
             this.shadowRoot.innerHTML=`
-            <article>
-                <div>
-                    <h4>${this.cardtitle}</h4>
-                </div>
-                <div>
-                    <p>${this.description}</p>
-                </div>
-                <div>
-                    <img ${this.img}>
-                </div>
-               
-            </article>
-            
+             <link rel="stylesheet" href="../public/src/components/publicitycard/publicitycard.css" />
+
+            <article class="card-copy">
            
-            
+                <section class="card-info">
+                    <h3>${this.cardtitle}</h3>
+                    <p>${this.description}</p>
+                </section>
+                <img src="${this.img}" class="person-pic" />
+                <img src="${this.background}" class="bg-pattern"  />
+            </article>
             `
         }
 
