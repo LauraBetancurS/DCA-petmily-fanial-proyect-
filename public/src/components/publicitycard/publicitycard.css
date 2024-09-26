@@ -41,3 +41,9 @@
     height: 100%;
     width: 100%;
   }
+
+  @media (max-width: 1195px) {
+    .card-copy {
+      display: none;
+    }
+  }
