@@ -15,6 +15,7 @@ class AppContainer extends HTMLElement {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
                 <main-page></main-page>
+                 <my-profile-card></my-profile-card>
             `;
         }
     }

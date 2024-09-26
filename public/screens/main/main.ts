@@ -1,10 +1,13 @@
 import * as components from '../../src/components/indexPadre';
 import '../../src/components/navbar/navbar';
+import '../../src/components/myprofilecard/myprofilecard';
 
 import { data } from '../../src/data/data';
+
 class Main extends HTMLElement {
-    user: any[] = [];
     currentUserPic: string = '';
+    currentUserName: string = '';
+    currentUserDesc: string = '';
 
     constructor() {
         super();
@@ -14,16 +17,9 @@ class Main extends HTMLElement {
         const selectedUser = data.find(user => user.username === 'doglover99');
         if (selectedUser) {
             this.currentUserPic = selectedUser.profileImg;
+            this.currentUserName = selectedUser.name;
+            this.currentUserDesc = selectedUser.profileDesc;
         }
-
-        data.forEach(dataUser => {
-            const userCard = this.ownerDocument.createElement('user-info');
-            userCard.setAttribute('background', dataUser.profileBanner);
-            userCard.setAttribute('userpic', dataUser.profileImg);
-            userCard.setAttribute('name', dataUser.name);
-            userCard.setAttribute('at', dataUser.username);
-            this.user.push(userCard);
-        });
     }
 
     connectedCallback() {
@@ -32,20 +28,28 @@ class Main extends HTMLElement {
     
     render() {
         if (this.shadowRoot) {
+            // Limpia cualquier contenido previo para asegurar que no haya duplicados
+            this.shadowRoot.innerHTML = '';
+
             const navBar = this.ownerDocument.createElement('nav-bar');
             navBar.setAttribute('icon', "http://imgfz.com/i/DjpNIAU.png");
             navBar.setAttribute('input', "Search PetNet");
             navBar.setAttribute('communityIcon', "http://imgfz.com/i/rxAefV8.png");
             navBar.setAttribute('profilePic', this.currentUserPic);
+            navBar.setAttribute('createbtntext', 'Create');
 
-            const container = this.ownerDocument.createElement('section');
-            container.className = 'container';
+            // Crear solo un componente my-profile-card
+            const myProfileCard = this.ownerDocument.createElement('my-profile-card');
+            myProfileCard.setAttribute('profileImg', this.currentUserPic);
+            myProfileCard.setAttribute('username', 'doglover99');
+            myProfileCard.setAttribute('name', this.currentUserName);
+            myProfileCard.setAttribute('profileDesc', this.currentUserDesc);
 
-            this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../src/screens/main/main.css">
-            `;
+            // Añadir los elementos al shadow DOM
             this.shadowRoot.appendChild(navBar);
-            this.shadowRoot.appendChild(container);
+            this.shadowRoot.appendChild(myProfileCard);
+
+            console.log("Navbar and Profile Card appended");
         }
     }
 }
