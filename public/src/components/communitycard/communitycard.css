@@ -1,0 +1,61 @@
+.community-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 210px; /* Ajuste según la imagen proporcionada */
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .community-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .community-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .community-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .community-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .community-name {
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .community-card {
+      max-width: 90%;
+      padding: 15px;
+    }
+  
+    .community-title {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+  
+    .community-img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .community-name {
+      font-size: 1em;
+    }
+  }
+  

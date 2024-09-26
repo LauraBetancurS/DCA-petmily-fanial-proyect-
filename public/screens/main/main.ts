@@ -1,6 +1,7 @@
 import * as components from '../../src/components/indexPadre';
 import '../../src/components/navbar/navbar';
 import '../../src/components/myprofilecard/myprofilecard';
+import '../../src/components/communitycard/communitycard'; // Importa el componente de tarjeta de comunidad
 
 import { data } from '../../src/data/data';
 
@@ -11,7 +12,6 @@ class Main extends HTMLElement {
 
     constructor() {
         super();
-        console.log('Main component constructed');
         this.attachShadow({ mode: 'open' });
 
         // Seleccionamos el usuario doglover99
@@ -24,14 +24,11 @@ class Main extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log('Main component connected');
         this.render();
     }
     
     render() {
         if (this.shadowRoot) {
-            console.log('Main render method called');
-            // Limpia cualquier contenido previo para asegurar que no haya duplicados
             this.shadowRoot.innerHTML = '';
 
             const navBar = this.ownerDocument.createElement('nav-bar');
@@ -41,19 +38,19 @@ class Main extends HTMLElement {
             navBar.setAttribute('profilePic', this.currentUserPic);
             navBar.setAttribute('createbtntext', 'Create');
 
-            // Crear solo un componente my-profile-card
             const myProfileCard = this.ownerDocument.createElement('my-profile-card');
-            console.log('Creating my-profile-card');
             myProfileCard.setAttribute('profileImg', this.currentUserPic);
             myProfileCard.setAttribute('username', 'doglover99');
             myProfileCard.setAttribute('name', this.currentUserName);
             myProfileCard.setAttribute('profileDesc', this.currentUserDesc);
 
+            // Crear un solo componente CommunityCard
+            const communityCard = this.ownerDocument.createElement('community-card');
+
             // Añadir los elementos al shadow DOM
             this.shadowRoot.appendChild(navBar);
             this.shadowRoot.appendChild(myProfileCard);
-
-            console.log("Navbar and Profile Card appended");
+            this.shadowRoot.appendChild(communityCard);
         }
     }
 }
