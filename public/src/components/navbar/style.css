@@ -2,62 +2,80 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
-    gap: 10px;
-}
-
-.app-icon img {
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .app-icon img {
     width: 40px;
     height: 40px;
-}
-
-.community-icon img, .profile-pic img {
+  }
+  
+  .search-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+    position: relative;
+  }
+  
+  .search-bar input {
+    width: 40%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    margin-left: 6rem;
+  }
+  
+  .search-bar i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+  }
+  
+  .community-icon img {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .create-button {
+    padding: 10px 20px;
+    background-color: #a875ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+  
+  .profile-pic img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    width: 50%;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.create-button {
-    background-color: #A56CC1;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.create-button:hover {
-    background-color: #8e58a8;
-}
-
-@media screen and (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
     .navbar-container {
-        flex-direction: column;
-        align-items: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
     }
-
+  
     .search-bar {
-        width: 100%;
-        margin: 10px 0;
+      width: 100%;
+      margin: 10px 0;
     }
-
+  
     .create-button {
-        width: 100%;
-        margin: 10px 0;
+      margin-top: 10px;
+      width: 100%;
+      text-align: center;
     }
-}
+  }
+  

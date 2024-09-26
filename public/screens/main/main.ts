@@ -11,6 +11,7 @@ class Main extends HTMLElement {
 
     constructor() {
         super();
+        console.log('Main component constructed');
         this.attachShadow({ mode: 'open' });
 
         // Seleccionamos el usuario doglover99
@@ -23,11 +24,13 @@ class Main extends HTMLElement {
     }
 
     connectedCallback() {
+        console.log('Main component connected');
         this.render();
     }
     
     render() {
         if (this.shadowRoot) {
+            console.log('Main render method called');
             // Limpia cualquier contenido previo para asegurar que no haya duplicados
             this.shadowRoot.innerHTML = '';
 
@@ -40,6 +43,7 @@ class Main extends HTMLElement {
 
             // Crear solo un componente my-profile-card
             const myProfileCard = this.ownerDocument.createElement('my-profile-card');
+            console.log('Creating my-profile-card');
             myProfileCard.setAttribute('profileImg', this.currentUserPic);
             myProfileCard.setAttribute('username', 'doglover99');
             myProfileCard.setAttribute('name', this.currentUserName);

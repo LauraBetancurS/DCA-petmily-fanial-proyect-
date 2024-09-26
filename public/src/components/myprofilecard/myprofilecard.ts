@@ -25,12 +25,14 @@ class MyProfileCard extends HTMLElement {
   render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
-        <link rel="stylesheet" href="./myprofilecard.css">
+          <link rel="stylesheet" href="../public/src/components/myprofilecard/myprofilecard.css" />
         <div class="card">
-          <img src="${this.profileImg}" alt="Profile Picture">
-          <h2>${this.name}</h2>
-          <p>@${this.username}</p>
-          <p>${this.profileDesc}</p>
+          <div class="profile-pic-container">
+            <img src="${this.profileImg}" alt="Profile Picture" class="profile-pic">
+          </div>
+          <h2 class="name">${this.name}</h2>
+          <p class="username">@${this.username}</p>
+          <p class="description">${this.profileDesc}</p>
           <button class="btn">My Profile</button>
         </div>
       `;

@@ -53,7 +53,7 @@ class NavBar extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="./navbar.css" />
+              <link rel="stylesheet" href="../public/src/components/navbar/style.css" />
                 <nav class='navbar-container'>
                     <div class='app-icon'>
                         <img src="${this.icon}" alt="App Icon">
