@@ -1,8 +1,10 @@
 import * as components from '../../src/components/indexPadre';
 import '../../src/components/navbar/navbar';
 import '../../src/components/usermenu/usercard';
-import { data } from '../../src/data/data'; // Ensure this path is correct
-
+import CardPost, { Attribute } from '../../src/components/cardspost/cardpost';
+import  '../../src/components/cardspost/cardpost';
+import '../../src/components/publicitycard/publicitycard';
+import { data } from '../../src/data/data';
 interface User {
     uid: number;
     username: string;
