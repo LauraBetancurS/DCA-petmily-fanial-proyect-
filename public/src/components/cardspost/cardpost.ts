@@ -7,7 +7,7 @@ export enum Attribute {
 
 }
 
-class CardPost extends HTMLElement{
+class CardPost extends HTMLElement {
     username?: string;
     name?: string;
     profileimg?: string;
@@ -15,27 +15,27 @@ class CardPost extends HTMLElement{
     imgpost?: string;
 
 
-    constructor(){
+    constructor() {
         super();
-        this.attachShadow({mode: 'open'})
+        this.attachShadow({ mode: 'open' })
     }
 
-    static get observedAttributes(){
+    static get observedAttributes() {
         return Object.keys(Attribute);
     }
 
-    attributeChangedCallback(propName:Attribute, oldValue: string | undefined, newValue: string | undefined){
-        this[propName] = newValue; 
-        this.render();        
+    attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
+        this[propName] = newValue;
+        this.render();
     }
 
-    connectedCallback(){
-        this.render()        
+    connectedCallback() {
+        this.render()
     }
 
-    render(){
-        if(this.shadowRoot){
-            this.shadowRoot.innerHTML=`
+    render() {
+        if (this.shadowRoot) {
+            this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../public/src/components/cardspost/cardpost.css" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 

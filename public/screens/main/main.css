@@ -1,40 +1,45 @@
 .main-container {
     display: grid;
-    grid-template-columns: 200px 1fr 200px;
-    padding: 20px;
-    margin-top: 80px; /* Deja espacio para el NavBar fijo */
-    align-items: flex-start; /* Alinea los elementos al inicio en la dirección vertical */
+    grid-template-columns: 300px 1fr 300px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: 100px;
+    /* Deja espacio para el NavBar fijo */
+    align-items: flex-start;
+    /* Alinea los elementos al inicio en la dirección vertical */
 }
 
-nav-bar {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 10;
+body {
+    background-color: aqua;
 }
-
-
 
 .content-container {
-    width: 75%; /* Ajusta el ancho según sea necesario */
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 0; /* Asegúrate de que no haya margen superior para alinear con user-card */
 }
 
 .cardpost-container {
-    width: 100%; /* Asegura que los posts ocupen todo el ancho disponible en su contenedor */
+    width: 100%;
+    /* Asegura que los posts ocupen todo el ancho disponible en su contenedor */
 }
-user-card {
-    display: block; /* Asegura que se trate como un bloque y no se extienda innecesariamente */
-    width: fit-content; /* Ajusta el ancho al contenido */
-  }
-  
 
-@media (min-width: 768px) {
+user-card {
+    display: block;
+    /* Asegura que se trate como un bloque y no se extienda innecesariamente */
+    width: fit-content;
+    /* Ajusta el ancho al contenido */
+}
+
+/* @media (min-width: 768px) {
     .main-container {
         max-width: 1200px;
-        margin: 0 auto;
+    }
+} */
+
+@media (max-width: 1195px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
     }
 }

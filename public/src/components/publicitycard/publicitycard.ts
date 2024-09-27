@@ -39,16 +39,14 @@ class PublicityCard extends HTMLElement{
     render(){
         if(this.shadowRoot){
             this.shadowRoot.innerHTML=`
-             <link rel="stylesheet" href="../public/src/components/publicitycard/publicitycard.css" />
+            <link rel="stylesheet" href="../public/src/components/publicitycard/publicitycard.css" />
 
-            <article class="card-copy">
-           
+            <article style="background-image: url('https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2FpublicityCard.jpg?alt=media&token=8b20d49b-4388-43c2-8f0d-b87bdc762543')" class="card-copy">
                 <section class="card-info">
                     <h3>${this.cardtitle}</h3>
                     <p>${this.description}</p>
                 </section>
                 <img src="${this.img}" class="person-pic" />
-                <img src="${this.background}" class="bg-pattern"  />
             </article>
             `
         }

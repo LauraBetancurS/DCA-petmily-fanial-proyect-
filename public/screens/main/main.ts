@@ -59,7 +59,7 @@ class Main extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../public/src/screens/main/main.css">
+            <link rel="stylesheet" href="../public/screens/main/main.css">
             `;
 
             // Navbar
@@ -102,7 +102,6 @@ class Main extends HTMLElement {
 
             // Publicity Card - Se añade al contenedor del contenido principal
             const publicityCard = this.ownerDocument.createElement('publicity-card');
-            publicityCard.setAttribute('background', "https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2FpublicityCard.jpg?alt=media&token=8b20d49b-4388-43c2-8f0d-b87bdc762543");
             publicityCard.setAttribute('cardtitle', "The Social Network for Pet Lovers");
             publicityCard.setAttribute('description', "Together we provide the love and care they deserve. Share experiences, learn from other owners, and be part of a group that values animal welfare as much as you do. Make every footprint count!");
             publicityCard.setAttribute('img', "https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2FimgPublicityCard.png?alt=media&token=bba7b6d2-4dd4-4ab7-9d88-2e69638a2a49");

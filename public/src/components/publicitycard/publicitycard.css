@@ -1,13 +1,10 @@
 .card-copy{
     display: flex;
     flex-direction: column;
-    width: 362px;
-    height: 660px;
-    position: absolute;
     justify-content: space-between;
-    top: 100px;
-    right: 50px;
     border-radius: 30px;
+    overflow: hidden;
+    background-size: cover;
   }
 
   .card-info{
@@ -36,7 +33,6 @@
 
   .bg-pattern{
     border-radius: 30px;
-    position: absolute;
     object-fit: cover;
     height: 100%;
     width: 100%;

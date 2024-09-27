@@ -1,13 +1,9 @@
 .card-container {
-  background: #F1F1F1;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 200px; /* Limita el ancho máximo a 200px */
-  margin: 30px 10px;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
+  align-items: center;
 }
 
 .profile-card {
@@ -16,8 +12,7 @@
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-  max-width: 200px; /* Limita el ancho máximo a 200px */
+  width: 90%;
 }
 
 .profile-pic {
@@ -63,7 +58,9 @@
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 200px; /* Limita el ancho máximo a 200px */
+  display: flex;
+  flex-direction: column;
+  width: 90%;
 }
 
 .community-title {
@@ -97,7 +94,6 @@
 }
 
 .logout-btn {
-  margin-top: 2rem;
   background-color: #ffffff;
   color: #FF5C5C;
   padding: 10px;
@@ -106,4 +102,11 @@
   cursor: pointer;
   font-size: 1em;
   width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+}
+
+
+@media (max-width: 1195px) {
+  .card-container {
+    display: none;
+  }
 }
