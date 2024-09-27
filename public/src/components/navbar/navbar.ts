@@ -1,11 +1,10 @@
-
-
 export enum Attribute {
     'icon' = 'icon',
     'img' = 'img',
     'input' = 'input',
     'communityicon' = 'communityicon',
     'profilepic' = 'profilepic',
+    
 };
 
 class NavBar extends HTMLElement {

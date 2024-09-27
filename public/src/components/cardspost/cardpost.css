@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 600px; /* Máximo ancho del post */
+    max-width: 600px; 
     margin: 20px auto;
     background-color: #fbfbfb;
-    border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     overflow: hidden;
     transition: box-shadow 0.3s ease;
   }
@@ -19,7 +19,7 @@
   .profile-icon img {
     width: 50px;
     height: 50px;
-    border-radius: 50%; /* Imagen de perfil redonda */
+    border-radius: 50%;
     margin-right: 15px;
   }
   
@@ -83,29 +83,29 @@
   }
 
   .post-container {
-      display: flex; /* Aseguramos que el contenedor siga usando flex */
-      flex-direction: row; /* Cambiamos la dirección de columna a fila */
-      align-items: center; /* Alineamos verticalmente en el centro */
-      text-align: left; /* Alineamos el texto a la izquierda */
-      justify-content: flex-start; /* Alineamos los elementos al inicio */
-      gap: 10px; /* Espacio entre los elementos */
-      padding: 10px; /* Ajuste de padding */
+      display: flex; 
+      flex-direction: row; 
+      align-items: center; 
+      text-align: left; 
+      justify-content: flex-start; 
+      gap: 10px; 
+      padding: 10px; 
   }
 
   .profile-icon {
-      flex-shrink: 0; /* Previene que el perfil se reduzca demasiado */
-      margin-bottom: 0; /* Eliminamos el margen inferior para alinearlo horizontalmente */
+      flex-shrink: 0; 
+      margin-bottom: 0; 
   }
 
   .profile-icon img {
       width: 40px;
       height: 40px;
-      border-radius: 50%; /* Mantiene la imagen de perfil redonda */
-      margin-right: 10px; /* Espaciado a la derecha */
+      border-radius: 50%; 
+      margin-right: 10px; 
   }
 
   .info-post {
-      flex: 1; /* Ocupa el resto del espacio disponible */
+      flex: 1; 
       display: flex;
       flex-direction: column;
   }
@@ -134,7 +134,7 @@
   }
 
   .icon-container {
-      justify-content: flex-start; /* Alineamos los íconos al inicio */
-      margin: 10px; /* Espaciado adicional */
+      justify-content: flex-start; 
+      margin: 10px; 
   }
 }
