@@ -55,8 +55,8 @@ class CardPost extends HTMLElement{
                     <img src="${this.imgpost || "no post"}" />
                 </div>
                  <div class='icon-container'>
-                    <i class="fa-regular fa-heart" style="color: #2b2b2b;"></i>
-                    <i class="fa-regular fa-comment" style="color: #1c1c1c;"></i>
+                   <i class="fa-regular fa-heart" style="color: #2e2e2e;"></i>
+                   <i class="fas fa-comment"></i>
                 </div>
             
             </article>

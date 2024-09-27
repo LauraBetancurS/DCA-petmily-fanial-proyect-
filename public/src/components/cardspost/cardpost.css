@@ -11,10 +11,6 @@
     transition: box-shadow 0.3s ease;
   }
   
-  /* .cardpost-container:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Efecto hover */
-  
-  
   .post-container {
     display: flex;
     padding: 15px 20px;
@@ -66,55 +62,79 @@
     gap: 1rem;
     align-items: center;
     justify-content: start;
-    margin: 10px 5px 5px 10px; 
+    margin: 10px 10px 10px 10px; 
 }
 
 .icon-container i {
     font-size: 28px;
-    color: #10172A;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease
 }
 
-.icon-container i:hover {
-    color: #AA6AFF; /* Cambia de color al hacer hover */
+.icon-container i:hover{
+  color: #AA6AFF;
+  transform: scale(1.2); 
 }
 
-  
- 
-  @media (max-width: 768px) {
-    .cardpost-container {
+@media (max-width: 768px) {
+  .cardpost-container {
       max-width: 90%;
-    }
-  
-    .post-container {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .profile-icon img {
-    
+  }
+
+  .post-container {
+      display: flex; /* Aseguramos que el contenedor siga usando flex */
+      flex-direction: row; /* Cambiamos la dirección de columna a fila */
+      align-items: center; /* Alineamos verticalmente en el centro */
+      text-align: left; /* Alineamos el texto a la izquierda */
+      justify-content: flex-start; /* Alineamos los elementos al inicio */
+      gap: 10px; /* Espacio entre los elementos */
+      padding: 10px; /* Ajuste de padding */
+  }
+
+  .profile-icon {
+      flex-shrink: 0; /* Previene que el perfil se reduzca demasiado */
+      margin-bottom: 0; /* Eliminamos el margen inferior para alinearlo horizontalmente */
+  }
+
+  .profile-icon img {
       width: 40px;
       height: 40px;
-      margin-right: 30px; 
-      margin-bottom: 10px;
-    }
-  
-    .info-post h4 {
-    text-align: left;
-      font-size: 1em;
-    }
-  
-    .info-post h5 {
-    text-align: left;
-      font-size: 0.85em;
-    }
-  
-    .info-post p {
-    text-align: left;
-      font-size: 0.95em;
-    }
+      border-radius: 50%; /* Mantiene la imagen de perfil redonda */
+      margin-right: 10px; /* Espaciado a la derecha */
   }
-  
 
+  .info-post {
+      flex: 1; /* Ocupa el resto del espacio disponible */
+      display: flex;
+      flex-direction: column;
+  }
+
+  .info-post h4 {
+      font-size: 1em;
+      margin: 0;
+      font-weight: bold;
+      color: #333;
+  }
+
+  .info-post h5 {
+      font-size: 0.85em;
+      color: #888;
+      margin: 2px 0;
+  }
+
+  .info-post p {
+      font-size: 0.95em;
+      color: #555;
+      margin: 4px 0 0 0;
+  }
+
+  .image-post {
+      width: 100%;
+  }
+
+  .icon-container {
+      justify-content: flex-start; /* Alineamos los íconos al inicio */
+      margin: 10px; /* Espaciado adicional */
+  }
+}
