@@ -1,8 +1,9 @@
 .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
     padding: 20px;
+    margin-top: 80px; /* Deja espacio para el NavBar fijo */
+    align-items: flex-start; /* Alinea los elementos al inicio en la dirección vertical */
 }
 
 nav-bar {
@@ -12,25 +13,26 @@ nav-bar {
     z-index: 10;
 }
 
-user-menu {
-    margin-top: 80px; /* Deja espacio para el NavBar fijo */
-    width: 100%;
-    max-width: 300px;
+
+
+.content-container {
+    width: 75%; /* Ajusta el ancho según sea necesario */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 0; /* Asegúrate de que no haya margen superior para alinear con user-card */
 }
+
+.cardpost-container {
+    width: 100%; /* Asegura que los posts ocupen todo el ancho disponible en su contenedor */
+}
+user-card {
+    display: block; /* Asegura que se trate como un bloque y no se extienda innecesariamente */
+    width: fit-content; /* Ajusta el ancho al contenido */
+  }
+  
 
 @media (min-width: 768px) {
-    .main-container {
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-
-    user-menu {
-        margin-top: 0;
-        margin-right: 20px;
-    }
-}
-
-@media (min-width: 1024px) {
     .main-container {
         max-width: 1200px;
         margin: 0 auto;

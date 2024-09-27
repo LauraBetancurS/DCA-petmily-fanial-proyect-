@@ -77,5 +77,5 @@ class UserCard extends HTMLElement {
     }
 }
 
-customElements.define('user-card', UserCard);
+customElements.define('user-banner', UserCard);
 export default UserCard;
