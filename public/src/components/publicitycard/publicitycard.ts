@@ -1,7 +1,8 @@
 enum Attribute {
     "cardtitle" = "cardtitle",
     "description" = "description",
-    "img" = "img"
+    "img" = "img",
+    "background" = "background"
 
 }
 
@@ -9,6 +10,7 @@ class PublicityCard extends HTMLElement{
     cardtitle?: string;
     description?: string;
     img?: string;
+    background?: string;
 
 
 
@@ -23,7 +25,7 @@ class PublicityCard extends HTMLElement{
 
     }
 
-    attributeChangedCallback(oldValue: string | undefined, newValue: string | undefined, propName: Attribute){
+    attributeChangedCallback(propName:Attribute, oldValue: string | undefined, newValue: string | undefined){
         this[propName] = newValue; 
         this.render();
 
@@ -37,21 +39,15 @@ class PublicityCard extends HTMLElement{
     render(){
         if(this.shadowRoot){
             this.shadowRoot.innerHTML=`
-            <article>
-                <div>
-                    <h4>${this.cardtitle}</h4>
-                </div>
-                <div>
+            <link rel="stylesheet" href="../public/src/components/publicitycard/publicitycard.css" />
+
+            <article style="background-image: url('https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2FpublicityCard.jpg?alt=media&token=8b20d49b-4388-43c2-8f0d-b87bdc762543')" class="card-copy">
+                <section class="card-info">
+                    <h3>${this.cardtitle}</h3>
                     <p>${this.description}</p>
-                </div>
-                <div>
-                    <img ${this.img}>
-                </div>
-               
+                </section>
+                <img src="${this.img}" class="person-pic" />
             </article>
-            
-           
-            
             `
         }
 
@@ -59,4 +55,3 @@ class PublicityCard extends HTMLElement{
 }
 customElements.define('publicity-card', PublicityCard);
 export default PublicityCard;
-

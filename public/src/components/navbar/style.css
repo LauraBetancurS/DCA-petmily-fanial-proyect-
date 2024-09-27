@@ -1,44 +1,125 @@
+/* Estilos para la versión de escritorio */
 .navbar-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 50;
+  max-width: 1800px;
 }
 
-.app-icon img, .community-icon img, .profile-pic img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+/* Icono de la aplicación */
+.app-icon img {
+  width: 40px;
+  height: 40px;
 }
 
+/* Barra de búsqueda */
 .search-bar {
-    display: flex;
-    align-items: center;
-    width: 50%;
+  flex-grow: 1;
+  margin: 0 20px;
+  position: relative;
 }
 
 .search-bar input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 70%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  margin-left: 6rem;
 }
 
-.search-bar i {
-    margin-left: -30px;
-    cursor: pointer;
+/* Icono de búsqueda */
+.search-bar .search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-    .navbar-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+/* Icono de la comunidad */
+.community-icon img {
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  cursor: pointer;
+}
 
-    .search-bar {
-        width: 100%;
-        margin: 10px 0;
-    }
+/* Icono de creación de post */
+.create-icon img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+/* Imagen de perfil */
+.profile-pic img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .navbar-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around; /* Alineamos los íconos en una fila */
+      width: 100%;
+      background-color: #ffffff;
+      top: auto;
+      bottom: 0; /* Posicionamos la barra en la parte inferior */
+      border-radius: 0; /* Quitamos los bordes redondeados */
+      height: fit-content;
+  }
+
+  /* Mostramos la barra de búsqueda y el ícono de búsqueda en la vista móvil */
+  .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .search-bar input {
+      display: none; /* Ocultamos el input de búsqueda en móvil */
+  }
+
+  .search-bar .search-icon {
+      width: 24px;
+      height: 24px;
+  }
+
+  /* Ajustamos el tamaño de los iconos */
+  .app-icon img,
+  .community-icon img,
+  .create-icon img,
+  .profile-pic img {
+      width: 24px;
+      height: 24px;
+  }
+
+  /* Ajustamos el tamaño de los contenedores de iconos */
+  .app-icon,
+  .community-icon,
+  .create-icon,
+  .search-bar,
+  .profile-pic {
+      flex: 1; /* Ocupa el mismo espacio cada icono */
+      display: flex;
+      justify-content: center; /* Centramos cada icono */
+      align-items: center;
+  }
 }

@@ -1,11 +1,11 @@
-
-
 export enum Attribute {
     'icon' = 'icon',
     'img' = 'img',
     'input' = 'input',
     'communityicon' = 'communityicon',
     'profilepic' = 'profilepic',
+    'createicon' = 'createicon', 
+    'searchicon' = 'searchicon', // Añadimos el atributo para el ícono de lupa
 };
 
 class NavBar extends HTMLElement {
@@ -14,6 +14,8 @@ class NavBar extends HTMLElement {
     input?: string;
     communityicon?: string;
     profilepic?: string;
+    createicon?: string;
+    searchicon?: string; // Añadimos la propiedad para el ícono de lupa
 
     constructor() {
         super();
@@ -38,8 +40,14 @@ class NavBar extends HTMLElement {
         const communityicon = this.shadowRoot?.querySelector('.community-icon');
         if (communityicon) {
             communityicon.addEventListener('click', () => {
-                console.log("Community icon clicked");
-                // Add logic to navigate to community screen if needed
+                window.location.href = '/community'; // Ruta de la página de comunidad
+            });
+        }
+
+        const createIcon = this.shadowRoot?.querySelector('.create-icon');
+        if (createIcon) {
+            createIcon.addEventListener('click', () => {
+                window.location.href = '/createpost'; // Ruta de la página de creación de posts
             });
         }
     }
@@ -47,7 +55,7 @@ class NavBar extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="../public/src/components/navbar/style.css" />
+              <link rel="stylesheet" href="../public/src/components/navbar/style.css" />
                 <nav class='navbar-container'>
                     <div class='app-icon'>
                         <img src="${this.icon}" alt="App Icon">
@@ -55,11 +63,15 @@ class NavBar extends HTMLElement {
 
                     <div class='search-bar'>
                         <input type="text" placeholder="${this.input || 'Search PetNet'}">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <img class="search-icon" src="${this.searchicon}" alt="Search Icon"> <!-- Icono de lupa -->
                     </div>
 
                     <div class='community-icon'>
                         <img src="${this.communityicon}" alt="Community Icon">
+                    </div>
+
+                    <div class='create-icon'>
+                        <img src="${this.createicon}" alt="Create Icon">
                     </div>
 
                     <div class='profile-pic'>
