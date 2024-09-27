@@ -1,9 +1,15 @@
 import * as components from '../../src/components/indexPadre';
 import '../../src/components/navbar/navbar';
-import '../../src/components/myprofilecard/myprofilecard';
-import '../../src/components/communitycard/communitycard'; // Importa el componente de tarjeta de comunidad
+import '../../src/components/usermenu/usercard';
+import { data } from '../../src/data/data'; // Ensure this path is correct
 
-import { data } from '../../src/data/data';
+interface User {
+    uid: number;
+    username: string;
+    profileImg: string;
+    name: string;
+    profileDesc: string;
+}
 
 class Main extends HTMLElement {
     currentUserPic: string = '';
@@ -14,8 +20,7 @@ class Main extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
 
-        // Seleccionamos el usuario doglover99
-        const selectedUser = data.find(user => user.username === 'doglover99');
+        const selectedUser: User | undefined = data.find((user: User) => user.username === 'doglover99');
         if (selectedUser) {
             this.currentUserPic = selectedUser.profileImg;
             this.currentUserName = selectedUser.name;
@@ -36,21 +41,22 @@ class Main extends HTMLElement {
             navBar.setAttribute('input', "Search PetNet");
             navBar.setAttribute('communityIcon', "http://imgfz.com/i/rxAefV8.png");
             navBar.setAttribute('profilePic', this.currentUserPic);
-            navBar.setAttribute('createbtntext', 'Create');
+            navBar.setAttribute('createicon', "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276");
+            navBar.setAttribute('searchicon', "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
 
-            const myProfileCard = this.ownerDocument.createElement('my-profile-card');
-            myProfileCard.setAttribute('profileImg', this.currentUserPic);
-            myProfileCard.setAttribute('username', 'doglover99');
-            myProfileCard.setAttribute('name', this.currentUserName);
-            myProfileCard.setAttribute('profileDesc', this.currentUserDesc);
+            const userCard = this.ownerDocument.createElement('user-card');
+            userCard.setAttribute('profilepic', this.currentUserPic);
+            userCard.setAttribute('name', this.currentUserName);
+            userCard.setAttribute('username', 'doglover99');
+            userCard.setAttribute('profiledesc', this.currentUserDesc);
 
-            // Crear un solo componente CommunityCard
-            const communityCard = this.ownerDocument.createElement('community-card');
+            const container = this.ownerDocument.createElement('div');
+            container.classList.add('main-container');
 
-            // Añadir los elementos al shadow DOM
+            container.appendChild(userCard);
+
             this.shadowRoot.appendChild(navBar);
-            this.shadowRoot.appendChild(myProfileCard);
-            this.shadowRoot.appendChild(communityCard);
+            this.shadowRoot.appendChild(container);
         }
     }
 }
