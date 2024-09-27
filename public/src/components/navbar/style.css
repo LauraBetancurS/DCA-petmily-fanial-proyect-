@@ -23,7 +23,7 @@
 }
 
 .search-bar input {
-  width: 40%;
+  width: 70%;
   padding: 10px 15px;
   border-radius: 20px;
   border: none;
@@ -32,12 +32,15 @@
   margin-left: 6rem;
 }
 
-.search-bar i {
+/* Icono de búsqueda */
+.search-bar .search-icon {
   position: absolute;
-  right: 15px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  color: #888;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 /* Icono de la comunidad */
@@ -81,9 +84,20 @@
       padding: 10px 0;
   }
 
-  /* Ocultamos la barra de búsqueda y el ícono de creación en la vista móvil */
+  /* Mostramos la barra de búsqueda y el ícono de búsqueda en la vista móvil */
   .search-bar {
-      display: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .search-bar input {
+      display: none; /* Ocultamos el input de búsqueda en móvil */
+  }
+
+  .search-bar .search-icon {
+      width: 24px;
+      height: 24px;
   }
 
   /* Ajustamos el tamaño de los iconos */
@@ -98,6 +112,8 @@
   /* Ajustamos el tamaño de los contenedores de iconos */
   .app-icon,
   .community-icon,
+  .create-icon,
+  .search-bar,
   .profile-pic {
       flex: 1; /* Ocupa el mismo espacio cada icono */
       display: flex;
