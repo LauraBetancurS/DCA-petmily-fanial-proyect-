@@ -1,57 +1,78 @@
-import { registerUser } from "../../utils/firebase";
+import { dispatch } from '../../store';
+import { navigate } from '../../store/actions';
+import { Screens } from '../../types/store';
+import { registerUser } from '../../utils/firebase';
 
 const credentials = {
-  email: "",
-  password: "",
+	name: '',
+	email: '',
+	password: '',
 };
 
-class RegisterUser extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-  }
+class Register extends HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: 'open' });
+	}
 
-  connectedCallback() {
-    this.render();
-  }
+	connectedCallback() {
+		this.render();
+	}
 
-  changeEmail(e: any) {
-    credentials.email = e.target.value;
-  }
+	changeName(e: any) {
+		credentials.name = e.target.value;
+	}
 
-  changePassword(e: any) {
-    credentials.password = e.target.value;
-  }
+	changeEmail(e: any) {
+		credentials.email = e.target.value;
+	}
 
-  async submitForm() {
-    const resp = await registerUser(credentials.email, credentials.password);
-    resp
-    //   ? dispatch(navigate("DASHBOARD"))
-      : alert("No se pudo crear el usuario");
-  }
+	changePassword(e: any) {
+		credentials.password = e.target.value;
+	}
 
-  async render() {
-    if (this.shadowRoot) {
-      const title = this.ownerDocument.createElement("h1");
-      title.innerText = "Register";
-      this.shadowRoot.appendChild(title);
+	async submitForm() {
+		const resp = await registerUser(credentials);
+		if (resp) {
+			dispatch(navigate(Screens.LOGIN));
+		} else {
+			alert('Could not create user');
+		}
+	}
 
-      const pName = this.ownerDocument.createElement("input");
-      pName.placeholder = "Correo electronico";
-      pName.addEventListener("change", this.changeEmail);
-      this.shadowRoot.appendChild(pName);
+	async render() {
+		if (this.shadowRoot) {
+			const title = this.ownerDocument.createElement('h1');
+			title.innerText = 'Register';
+			this.shadowRoot.appendChild(title);
 
-      const pPrice = this.ownerDocument.createElement("input");
-      pPrice.placeholder = "Contraseña";
-      pPrice.addEventListener("change", this.changePassword);
-      this.shadowRoot.appendChild(pPrice);
+			const nameInput = this.ownerDocument.createElement('input');
+			nameInput.placeholder = 'Full name';
+			nameInput.required = true;
+			nameInput.addEventListener('change', (e) => this.changeName(e));
+			this.shadowRoot.appendChild(nameInput);
 
-      const save = this.ownerDocument.createElement("button");
-      save.innerText = "Registrarme";
-      save.addEventListener("click", this.submitForm);
-      this.shadowRoot.appendChild(save);
-    }
-  }
+			const emailInput = this.ownerDocument.createElement('input');
+			emailInput.placeholder = 'Email';
+			emailInput.type = 'email';
+			emailInput.required = true;
+			emailInput.addEventListener('change', (e) => this.changeEmail(e));
+			this.shadowRoot.appendChild(emailInput);
+
+			const passwordInput = this.ownerDocument.createElement('input');
+			passwordInput.placeholder = 'Password';
+			passwordInput.type = 'password';
+			passwordInput.required = true;
+			passwordInput.addEventListener('change', (e) => this.changePassword(e));
+			this.shadowRoot.appendChild(passwordInput);
+
+			const registerButton = this.ownerDocument.createElement('button');
+			registerButton.innerText = 'Register';
+			registerButton.addEventListener('click', () => this.submitForm());
+			this.shadowRoot.appendChild(registerButton);
+		}
+	}
 }
-customElements.define("register-user", RegisterUser);
-export default RegisterUser;
+
+customElements.define('app-register', Register);
+export default Register;
