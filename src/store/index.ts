@@ -3,6 +3,7 @@ import { reducer } from './reducer';
 import Storage from '../utils/storage';
 import { AppState, Observer } from '../types/store';
 
+
 //El estado global, appState
 const initialState: AppState = {
 	screen: 'REGISTER',

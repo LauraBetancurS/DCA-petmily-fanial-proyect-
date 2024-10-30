@@ -26,7 +26,7 @@ class RegisterUser extends HTMLElement {
   async submitForm() {
     const resp = await registerUser(credentials.email, credentials.password);
     resp
-      ? dispatch(navigate("DASHBOARD"))
+    //   ? dispatch(navigate("DASHBOARD"))
       : alert("No se pudo crear el usuario");
   }
 
