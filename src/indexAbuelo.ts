@@ -13,6 +13,8 @@ class AppContainer extends HTMLElement {
 
     render() {
         if (this.shadowRoot) {
+            const register= this.ownerDocument.createElement('register-user');
+            this.shadowRoot.appendChild(register);
             this.shadowRoot.innerHTML = `
                 <main-page></main-page>
                 
