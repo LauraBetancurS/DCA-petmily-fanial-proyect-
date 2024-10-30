@@ -1,5 +1,5 @@
 import { Actions, Screens } from '../types/store';
-import { getProducts } from '../utils/firebase';
+
 
 export const navigate = (screen: Screens) => {
 	return {

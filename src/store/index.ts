@@ -10,7 +10,7 @@ const onAuth = async () => {
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
 			user.uid !== null ? dispatch(setUserCredentials(user.uid)) : ''; // Guarda el id del usuario
-			dispatch(navigate(Screens.DASHBOARD)); // Navega al dashboard
+			dispatch(navigate(Screens.MAIN)); // Navega al dashboard
 		} else {
 			dispatch(navigate(Screens.LOGIN)); // Navega a login si no hay usuario autenticado
 		}
