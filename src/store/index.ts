@@ -1,33 +1,47 @@
 import { reducer } from './reducer';
-
 import Storage from '../utils/storage';
-import { AppState, Observer } from '../types/store';
+import { AppState, Observer, Screens } from '../types/store';
+import { onAuthStateChanged } from 'firebase/auth';
+import { getFirebaseInstance } from '../utils/firebase';
+import { navigate, setUserCredentials } from './actions';
 
-
-//El estado global, appState
-const initialState: AppState = {
-	screen: 'REGISTER',
+const onAuth = async () => {
+	const { auth } = await getFirebaseInstance();
+	onAuthStateChanged(auth, (user) => {
+		if (user) {
+			user.uid !== null ? dispatch(setUserCredentials(user.uid)) : ''; // Guarda el id del usuario
+			dispatch(navigate(Screens.DASHBOARD)); // Navega al dashboard
+		} else {
+			dispatch(navigate(Screens.LOGIN)); // Navega a login si no hay usuario autenticado
+		}
+	});
 };
 
-export let appState = Storage.get('STORE', initialState);
+// Llama a onAuth para activar la escucha de cambios en el estado de autenticación
+onAuth();
+
+// Estado global de la aplicación
+const initialState: AppState = {
+	screen: 'LOGIN',
+	products: [],
+	user: '',
+};
+
+export let appState = initialState;
 
 let observers: Observer[] = [];
 
-const persistStore = (state: any) => {
-	Storage.set('STORE', state);
-};
-
-//Crear el dispatch
+// Crear el dispatch para actualizar el estado
 export const dispatch = (action: any) => {
-	const clone = JSON.parse(JSON.stringify(appState));
-	const newState = reducer(action, clone);
+	const clone = JSON.parse(JSON.stringify(appState)); // Clona el estado actual
+	const newState = reducer(action, clone); // Genera el nuevo estado usando el reducer
 	appState = newState;
 
-	persistStore(newState);
+	// Notifica a los observadores para que se actualicen
 	observers.forEach((o: any) => o.render());
 };
 
-//Agregar los observadores para los interesados, los suscritos
+// Agregar observadores para actualizar los componentes interesados
 export const addObserver = (ref: any) => {
 	observers = [...observers, ref];
 };
