@@ -1,5 +1,5 @@
 import * as components from './components/indexPadre';
-import '../screens/main/main';
+import './screens/main/main';
 
 class AppContainer extends HTMLElement {
     constructor() {

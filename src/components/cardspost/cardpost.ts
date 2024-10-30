@@ -36,7 +36,7 @@ class CardPost extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../public/src/components/cardspost/cardpost.css" />
+            <link rel="stylesheet" href="../src/components/cardspost/cardpost.css" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
             <article class='cardpost-container'>

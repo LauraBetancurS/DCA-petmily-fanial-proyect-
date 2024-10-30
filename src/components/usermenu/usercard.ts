@@ -55,7 +55,7 @@ class UserCard extends HTMLElement {
             `).join('');
 
             this.shadowRoot.innerHTML = `
-               <link rel="stylesheet" href="../public/src/components/usermenu/usercard.css" />
+               <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
                 <div class="card-container">
                     <div class="profile-card">
                         <img src="${this.profilepic}" alt="Profile Picture" class="profile-pic">

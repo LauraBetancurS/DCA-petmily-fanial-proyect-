@@ -1,10 +1,10 @@
-import * as components from '../../src/components/indexPadre';
-import '../../src/components/navbar/navbar';
-import '../../src/components/usermenu/usercard';
-import CardPost, { Attribute } from '../../src/components/cardspost/cardpost';
-import '../../src/components/cardspost/cardpost';
-import '../../src/components/publicitycard/publicitycard';
-import { data } from '../../src/data/data';
+import * as components from '../../components/indexPadre';
+import '../../components/navbar/navbar';
+import '../../components/usermenu/usercard';
+import CardPost, { Attribute } from '../../components/cardspost/cardpost';
+import '../../components/cardspost/cardpost';
+import '../../components/publicitycard/publicitycard';
+import { data } from '../../data/data';
 
 interface User {
     uid: number;
@@ -59,7 +59,7 @@ class Main extends HTMLElement {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../public/screens/main/main.css">
+            <link rel="stylesheet" href="../src/screens/main/main.css">
             `;
 
             // Navbar
