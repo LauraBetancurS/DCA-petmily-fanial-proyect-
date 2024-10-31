@@ -27,6 +27,9 @@ class AppContainer extends HTMLElement {
       }
 
       this.shadowRoot.innerHTML = `
+
+      <login-user></login-user>
+      <register-user></register-user>
                 <main-page></main-page>
                 
             `;
