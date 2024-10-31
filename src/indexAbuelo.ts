@@ -26,10 +26,10 @@ class AppContainer extends HTMLElement {
           break;
       }
 
-      this.shadowRoot.innerHTML = `
-                <main-page></main-page>
+      // this.shadowRoot.innerHTML = `
+      //           <main-page></main-page>
                 
-            `;
+      //       `;
     }
   }
 }
