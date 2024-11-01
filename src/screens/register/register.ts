@@ -50,34 +50,34 @@ class Register extends HTMLElement {
 			title.innerText = 'Register';
 			this.shadowRoot.appendChild(title);
 
-			const nameInput = this.ownerDocument.createElement('input');
-			nameInput.placeholder = 'Full name';
-			nameInput.required = true;
-			nameInput.addEventListener('change', (e) => this.changeName(e));
-			this.shadowRoot.appendChild(nameInput);
+			const uName = this.ownerDocument.createElement('input');
+			uName.placeholder = 'Full name';
+			uName.required = true;
+			uName.addEventListener('change', (e) => this.changeName(e));
+			this.shadowRoot.appendChild(uName);
 
-			const emailInput = this.ownerDocument.createElement('input');
-			emailInput.placeholder = 'Email';
-			emailInput.type = 'email';
-			emailInput.required = true;
-			emailInput.addEventListener('change', (e) => this.changeEmail(e));
-			this.shadowRoot.appendChild(emailInput);
+			const uEmail = this.ownerDocument.createElement('input');
+			uEmail.placeholder = 'Email';
+			uEmail.type = 'email';
+			uEmail.required = true;
+			uEmail.addEventListener('change', (e) => this.changeEmail(e));
+			this.shadowRoot.appendChild(uEmail);
 
-			const passwordInput = this.ownerDocument.createElement('input');
-			passwordInput.placeholder = 'Password';
-			passwordInput.type = 'password';
-			passwordInput.required = true;
-			passwordInput.addEventListener('change', (e) => this.changePassword(e));
-			this.shadowRoot.appendChild(passwordInput);
+			const uPasswordInput = this.ownerDocument.createElement('input');
+			uPasswordInput.placeholder = 'Password';
+			uPasswordInput.type = 'password';
+			uPasswordInput.required = true;
+			uPasswordInput.addEventListener('change', (e) => this.changePassword(e));
+			this.shadowRoot.appendChild(uPasswordInput);
 
 			const registerButton = this.ownerDocument.createElement('button');
 			registerButton.innerText = 'Register';
 			registerButton.addEventListener('click', this.submitForm);
 			this.shadowRoot.appendChild(registerButton);
 
-			const cssCard = this.ownerDocument.createElement('style');
-			cssCard.innerHTML = styles;
-			this.shadowRoot.appendChild(cssCard);
+			const cssRegister = this.ownerDocument.createElement('style');
+			cssRegister.innerHTML = styles;
+			this.shadowRoot.appendChild(cssRegister);
 		}
 	}
 }

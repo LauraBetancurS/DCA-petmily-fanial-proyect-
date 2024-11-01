@@ -3,7 +3,7 @@ import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
 import { loginUser } from '../../utils/firebase';
 
-import desktopImg from '../../images/image1.jpg'
+// import desktopImg from '../../images/image1.jpg'
 import styles from './login.css'
 
 const credentials = {
@@ -49,20 +49,22 @@ class Login extends HTMLElement {
 			title.innerText = 'Login';
 			formContainer.appendChild(title);
 
-			const pName = this.ownerDocument.createElement('input');
-			pName.placeholder = 'Correo electronico';
-			pName.addEventListener('change', this.changeEmail);
-			formContainer.appendChild(pName);
+			const uEmail = this.ownerDocument.createElement('input');
+			uEmail.placeholder = 'Correo electronico';
+			uEmail.addEventListener('change', this.changeEmail);
+			formContainer.appendChild(uEmail);
 
-			const pPrice = this.ownerDocument.createElement('input');
-			pPrice.placeholder = 'Contraseña';
-			pPrice.addEventListener('change', this.changePassword);
-			formContainer.appendChild(pPrice);
+			const uPassword = this.ownerDocument.createElement('input');
+			uPassword.placeholder = 'Contraseña';
+			uPassword.type = 'password';
+			uPassword.required = true;
+			uPassword.addEventListener('change', this.changePassword);
+			formContainer.appendChild(uPassword);
 
-			const save = this.ownerDocument.createElement('button');
-			save.innerText = 'Iniciar sesión';
-			save.addEventListener('click', this.submitForm);
-			formContainer.appendChild(save);
+			const uSignIn = this.ownerDocument.createElement('button');
+			uSignIn.innerText = 'Iniciar sesión';
+			uSignIn.addEventListener('click', this.submitForm);
+			formContainer.appendChild(uSignIn);
 
 			const noAccount = this.ownerDocument.createElement('p')
 			const noAccountButton = this.ownerDocument.createElement('a')
@@ -76,9 +78,9 @@ class Login extends HTMLElement {
 
 			this.shadowRoot.appendChild(formContainer)
 
-			const image = this.ownerDocument.createElement('img')
-			image.src = desktopImg
-			this.shadowRoot.appendChild(image)
+			// const image = this.ownerDocument.createElement('img')
+			// image.src = desktopImg
+			// this.shadowRoot.appendChild(image)
 
 			const loginCss = this.ownerDocument.createElement('style');
 			loginCss.innerHTML = styles;
