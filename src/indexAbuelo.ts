@@ -17,7 +17,7 @@ class AppContainer extends HTMLElement {
     if (this.shadowRoot) {
       switch (appState.screen) {
         case "REGISTER":
-          const register = this.ownerDocument.createElement("register-user");
+          const register = this.ownerDocument.createElement("app-register");
           this.shadowRoot.appendChild(register);
 
           break;
@@ -26,13 +26,13 @@ class AppContainer extends HTMLElement {
           break;
       }
 
-      this.shadowRoot.innerHTML = `
+      // this.shadowRoot.innerHTML = `
 
-      <login-user></login-user>
-      <register-user></register-user>
-                <main-page></main-page>
+      // // <login-user></login-user>
+      // // <app-register></app-register>
+      // //           <main-page></main-page>
                 
-            `;
+      //       `;
     }
   }
 }

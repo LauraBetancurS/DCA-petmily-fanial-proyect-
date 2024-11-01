@@ -1,7 +1,10 @@
-/* import { dispatch } from '../../store';
+import { dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
 import { loginUser } from '../../utils/firebase';
+
+import desktopImg from '../../images/image1.jpg'
+import styles from './login.css'
 
 const credentials = {
 	email: '',
@@ -18,43 +21,71 @@ class Login extends HTMLElement {
 		this.render();
 	}
 
-	changeEmail(e: Event) {
-		const target = e.target as HTMLInputElement;
-		credentials.email = target.value;
+	changeEmail(e: any) {
+		credentials.email = e.target.value;
 	}
 
-	changePassword(e: Event) {
-		const target = e.target as HTMLInputElement;
-		credentials.password = target.value;
+	changePassword(e: any) {
+		credentials.password = e.target.value;
 	}
 
 	async submitForm() {
-		const success = await loginUser(credentials.email, credentials.password);
-		if (success) {
+		const resp = await loginUser(credentials.email, credentials.password);
+		if (resp) {
 			dispatch(navigate(Screens.MAIN));
+			console.log('usuario logeado');
 		} else {
-			alert('Login failed');
+			alert('Contraseña o Correo incorrectos');
 		}
 	}
 
 	async render() {
 		if (this.shadowRoot) {
-			this.shadowRoot.innerHTML = `
-				<link rel="stylesheet" href="./path/to/your/login.css">
-				<div class="container">
-					<h1>Log in</h1>
-					<input type="email" placeholder="Enter your email" required @change="${(e) => this.changeEmail(e)}" />
-					<input type="password" placeholder="Enter your password" required @change="${(e) => this.changePassword(e)}" />S
-					<button @click="${() => this.submitForm()}">Log in</button>
-					<div class="signup-link">
-						<span>No account? <a href="#" @click="${() => dispatch(navigate(Screens.REGISTER))}">Sign up</a></span>
-					</div>
-				</div>
-			`;
+
+			const formContainer = this.ownerDocument.createElement('div')
+			formContainer.className = 'form-container'
+
+			const title = this.ownerDocument.createElement('h1');
+			title.innerText = 'Login';
+			formContainer.appendChild(title);
+
+			const pName = this.ownerDocument.createElement('input');
+			pName.placeholder = 'Correo electronico';
+			pName.addEventListener('change', this.changeEmail);
+			formContainer.appendChild(pName);
+
+			const pPrice = this.ownerDocument.createElement('input');
+			pPrice.placeholder = 'Contraseña';
+			pPrice.addEventListener('change', this.changePassword);
+			formContainer.appendChild(pPrice);
+
+			const save = this.ownerDocument.createElement('button');
+			save.innerText = 'Iniciar sesión';
+			save.addEventListener('click', this.submitForm);
+			formContainer.appendChild(save);
+
+			const noAccount = this.ownerDocument.createElement('p')
+			const noAccountButton = this.ownerDocument.createElement('a')
+			noAccountButton.addEventListener('click', (e) => {
+				dispatch(navigate(Screens.REGISTER))
+			})
+			noAccount.textContent = 'No Account?'
+			noAccountButton.textContent = ' register now'
+			noAccount.appendChild(noAccountButton)
+			formContainer.appendChild(noAccount)
+
+			this.shadowRoot.appendChild(formContainer)
+
+			const image = this.ownerDocument.createElement('img')
+			image.src = desktopImg
+			this.shadowRoot.appendChild(image)
+
+			const loginCss = this.ownerDocument.createElement('style');
+			loginCss.innerHTML = styles;
+			formContainer.appendChild(loginCss);
 		}
 	}
 }
 
 customElements.define('app-login', Login);
 export default Login;
- */

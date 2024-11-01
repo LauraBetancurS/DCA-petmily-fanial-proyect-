@@ -3,6 +3,8 @@ import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
 import { registerUser } from '../../utils/firebase';
 
+import styles from './register.css'
+
 const credentials = {
 	name: '',
 	email: '',
@@ -34,7 +36,8 @@ class Register extends HTMLElement {
 	async submitForm() {
 		const resp = await registerUser(credentials);
 		if (resp) {
-			dispatch(navigate(Screens.LOGIN));
+			dispatch(navigate(Screens.MAIN));
+			console.log('usuario registrado');
 		} else {
 			alert('Could not create user');
 		}
@@ -42,6 +45,7 @@ class Register extends HTMLElement {
 
 	async render() {
 		if (this.shadowRoot) {
+
 			const title = this.ownerDocument.createElement('h1');
 			title.innerText = 'Register';
 			this.shadowRoot.appendChild(title);
@@ -68,8 +72,12 @@ class Register extends HTMLElement {
 
 			const registerButton = this.ownerDocument.createElement('button');
 			registerButton.innerText = 'Register';
-			registerButton.addEventListener('click', () => this.submitForm());
+			registerButton.addEventListener('click', this.submitForm);
 			this.shadowRoot.appendChild(registerButton);
+
+			const cssCard = this.ownerDocument.createElement('style');
+			cssCard.innerHTML = styles;
+			this.shadowRoot.appendChild(cssCard);
 		}
 	}
 }

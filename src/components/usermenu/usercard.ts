@@ -1,5 +1,6 @@
 import { data } from '../../data/data';
 import { datacommunity } from '../../data/datacommunity';
+import { logOut } from '../../utils/firebase';
 
 
 export enum Attribute {
@@ -40,7 +41,8 @@ class UserCard extends HTMLElement {
         const logoutButton = this.shadowRoot?.querySelector('.logout-btn');
         if (logoutButton) {
             logoutButton.addEventListener('click', () => {
-                window.location.href = '/logout'; // Adjust the logout route as necessary
+                console.log('logout clickeado');
+                logOut()
             });
         }
     }
@@ -55,7 +57,7 @@ class UserCard extends HTMLElement {
             `).join('');
 
             this.shadowRoot.innerHTML = `
-               <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
+            <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
                 <div class="card-container">
                     <div class="profile-card">
                         <img src="${this.profilepic}" alt="Profile Picture" class="profile-pic">
@@ -70,7 +72,7 @@ class UserCard extends HTMLElement {
                             ${communityItems}
                         </div>
                     </div>
-                    <button class="logout-btn">Log out</button>
+                    <div class="logout-btn">Log out</div>
                 </div>
             `;
         }

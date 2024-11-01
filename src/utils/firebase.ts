@@ -62,3 +62,15 @@ export const loginUser = async (email: string, password: string) => {
     return false;
   }
 };
+
+export const logOut = async () => {
+  const { auth } = await getFirebaseInstance();
+  const { signOut } = await import('firebase/auth');
+
+  try {
+    await signOut(auth); // Cierra la sesión del usuario
+    console.log("Usuario deslogueado exitosamente");
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+  }
+}

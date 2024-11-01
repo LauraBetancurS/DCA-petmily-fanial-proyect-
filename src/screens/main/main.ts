@@ -62,6 +62,11 @@ class Main extends HTMLElement {
             <link rel="stylesheet" href="../src/screens/main/main.css">
             `;
 
+            // const logoutButton = this.ownerDocument.querySelector('.logout-btn')
+            // logoutButton?.addEventListener('click', (e) => {
+            //     console.log('login clickeado');
+            // })
+
             // Navbar
             const navBar = this.ownerDocument.createElement('nav-bar');
             navBar.setAttribute('icon', "http://imgfz.com/i/DjpNIAU.png");

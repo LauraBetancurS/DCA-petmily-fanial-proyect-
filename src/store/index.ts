@@ -22,7 +22,7 @@ onAuth();
 
 // Estado global de la aplicación
 const initialState: AppState = {
-	screen: 'LOGIN',
+	screen: 'REGISTER',
 	products: [],
 	user: '',
 };
