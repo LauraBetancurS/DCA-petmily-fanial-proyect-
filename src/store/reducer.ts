@@ -7,10 +7,10 @@ export const reducer = (currentAction: any, currentState: any) => {
 		case Actions.NAVIGATE:
 			return {
 				...currentState,
-				screen: payload,
+				screen: payload,				
 			};
 
-		case Actions.GETPRODUCTS:
+		case Actions.GETPOSTS:
 			return {
 				...currentState,
 				products: payload,
