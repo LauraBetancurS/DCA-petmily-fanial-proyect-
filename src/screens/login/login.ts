@@ -45,52 +45,59 @@ class Login extends HTMLElement {
 			const style = this.ownerDocument.createElement('style');
 			style.innerHTML = style?.innerHTML + styles;
 			this.shadowRoot?.appendChild(style);
-
-			const formContainer = this.ownerDocument.createElement('div')
-			formContainer.className = 'form-container'
-
+			
+			const loginWrapper = this.ownerDocument.createElement('div');
+			loginWrapper.className = 'login-wrapper';
+	
+			const formContainer = this.ownerDocument.createElement('div');
+			formContainer.className = 'form-container';
+	
 			const title = this.ownerDocument.createElement('h1');
-			title.innerText = 'Login';
+			title.innerText = 'Iniciar sesión';
 			formContainer.appendChild(title);
-
+	
 			const uEmail = this.ownerDocument.createElement('input');
-			uEmail.placeholder = 'Correo electronico';
+			uEmail.placeholder = 'Correo electrónico';
 			uEmail.addEventListener('change', this.changeEmail);
 			formContainer.appendChild(uEmail);
-
+	
 			const uPassword = this.ownerDocument.createElement('input');
 			uPassword.placeholder = 'Contraseña';
 			uPassword.type = 'password';
 			uPassword.required = true;
 			uPassword.addEventListener('change', this.changePassword);
 			formContainer.appendChild(uPassword);
-
+	
 			const uSignIn = this.ownerDocument.createElement('button');
 			uSignIn.innerText = 'Iniciar sesión';
 			uSignIn.addEventListener('click', this.submitForm);
 			formContainer.appendChild(uSignIn);
-
-			const noAccount = this.ownerDocument.createElement('p')
-			const noAccountButton = this.ownerDocument.createElement('a')
+	
+			const noAccount = this.ownerDocument.createElement('p');
+			const noAccountButton = this.ownerDocument.createElement('a');
 			noAccountButton.addEventListener('click', (e) => {
-				dispatch(navigate(Screens.REGISTER))
-			})
-			noAccount.textContent = 'No Account?'
-			noAccountButton.textContent = ' register now'
-			noAccount.appendChild(noAccountButton)
-			formContainer.appendChild(noAccount)
-
-			this.shadowRoot.appendChild(formContainer)
-
-			// const image = this.ownerDocument.createElement('img')
-			// image.src = desktopImg
-			// this.shadowRoot.appendChild(image)
-
-			// const loginCss = this.ownerDocument.createElement('style');
-			// loginCss.innerHTML = styles;
-			// formContainer.appendChild(loginCss);
+				dispatch(navigate(Screens.REGISTER));
+			});
+			noAccount.textContent = '¿No tienes cuenta?';
+			noAccountButton.textContent = ' regístrate ahora';
+			noAccount.appendChild(noAccountButton);
+			formContainer.appendChild(noAccount);
+	
+			const imageContainer = this.ownerDocument.createElement('div');
+			imageContainer.className = 'image-container';
+	
+			const image = this.ownerDocument.createElement('img');
+			image.src = 'ruta/a/tu/imagen.jpg'; 
+			image.alt = 'Usuario sosteniendo un perro';
+			imageContainer.appendChild(image);
+	
+			loginWrapper.appendChild(formContainer);
+			loginWrapper.appendChild(imageContainer);
+	
+			this.shadowRoot.appendChild(loginWrapper);
 		}
 	}
+	
 }
 
 customElements.define('app-login', Login);

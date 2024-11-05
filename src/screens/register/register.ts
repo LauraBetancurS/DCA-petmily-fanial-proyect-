@@ -48,39 +48,68 @@ class Register extends HTMLElement {
 			const style = this.ownerDocument.createElement('style');
 			style.innerHTML = style?.innerHTML + styles;
 			this.shadowRoot?.appendChild(style);
-
+	
+			// Contenedor principal para la distribución del formulario e imagen
+			const registerWrapper = this.ownerDocument.createElement('div');
+			registerWrapper.className = 'register-wrapper';
+	
+			// Contenedor del formulario
+			const formContainer = this.ownerDocument.createElement('div');
+			formContainer.className = 'form-container';
+	
 			const title = this.ownerDocument.createElement('h1');
 			title.innerText = 'Register';
-			this.shadowRoot.appendChild(title);
-
+			formContainer.appendChild(title);
+	
 			const uName = this.ownerDocument.createElement('input');
 			uName.placeholder = 'Full name';
 			uName.required = true;
 			uName.addEventListener('change', (e) => this.changeName(e));
-			this.shadowRoot.appendChild(uName);
-
+			formContainer.appendChild(uName);
+	
 			const uEmail = this.ownerDocument.createElement('input');
 			uEmail.placeholder = 'Email';
 			uEmail.type = 'email';
 			uEmail.required = true;
 			uEmail.addEventListener('change', (e) => this.changeEmail(e));
-			this.shadowRoot.appendChild(uEmail);
-
+			formContainer.appendChild(uEmail);
+	
 			const uPasswordInput = this.ownerDocument.createElement('input');
 			uPasswordInput.placeholder = 'Password';
 			uPasswordInput.type = 'password';
 			uPasswordInput.required = true;
 			uPasswordInput.addEventListener('change', (e) => this.changePassword(e));
-			this.shadowRoot.appendChild(uPasswordInput);
-
+			formContainer.appendChild(uPasswordInput);
+	
 			const registerButton = this.ownerDocument.createElement('button');
 			registerButton.innerText = 'Register';
 			registerButton.addEventListener('click', this.submitForm);
-			this.shadowRoot.appendChild(registerButton);
-
-			const cssRegister = this.ownerDocument.createElement('style');
-			cssRegister.innerHTML = styles;
-			this.shadowRoot.appendChild(cssRegister);
+			formContainer.appendChild(registerButton);
+	
+			const haveAccount = this.ownerDocument.createElement('p');
+			const haveAccountButton = this.ownerDocument.createElement('a');
+			haveAccountButton.addEventListener('click', () => {
+				dispatch(navigate(Screens.LOGIN));
+			});
+			haveAccount.textContent = 'You have an account?';
+			haveAccountButton.textContent = ' log-in';
+			haveAccount.appendChild(haveAccountButton);
+			formContainer.appendChild(haveAccount);
+	
+			// Contenedor de la imagen
+			const imageContainer = this.ownerDocument.createElement('div');
+			imageContainer.className = 'image-container';
+	
+			const image = this.ownerDocument.createElement('img');
+			image.src = 'ruta/a/tu/imagen.jpg'; // Reemplaza con la ruta real de la imagen
+			image.alt = 'Usuario con gato';
+			imageContainer.appendChild(image);
+	
+			// Añadir formContainer e imageContainer a registerWrapper
+			registerWrapper.appendChild(formContainer);
+			registerWrapper.appendChild(imageContainer);
+	
+			this.shadowRoot.appendChild(registerWrapper);
 		}
 	}
 }
