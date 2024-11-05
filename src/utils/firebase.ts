@@ -75,12 +75,25 @@ export const logOut = async () => {
   }
 }
 
+export const addPost = async (posts: any) => {
+	try {
+		const { db } = await getFirebaseInstance();
+		const { collection, addDoc } = await import('firebase/firestore');
+
+		const where = collection(db, 'posts');
+		await addDoc(where, posts);
+		console.log('Se añadió con exito');
+	} catch (error) {
+		console.error('Error adding document', error);
+	}
+};
+
 export const getPost = async () => {
 	try {
 		const { db } = await getFirebaseInstance();
 		const { collection, getDocs } = await import('firebase/firestore');
 
-		const where = collection(db, 'products');
+		const where = collection(db, 'posts');
 		const querySnapshot = await getDocs(where);
 		const data: any[] = [];
 
