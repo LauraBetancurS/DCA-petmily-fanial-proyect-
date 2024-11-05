@@ -34,6 +34,11 @@ class AppContainer extends HTMLElement {
           this.shadowRoot.appendChild(main);
           break;
 
+        case Screens.CREATEPOST:
+            const createPost = this.ownerDocument.createElement("main-page");
+            this.shadowRoot.appendChild(createPost);
+            break;
+
         default:
           break;
       }
