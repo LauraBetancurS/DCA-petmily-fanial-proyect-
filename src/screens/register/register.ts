@@ -45,6 +45,9 @@ class Register extends HTMLElement {
 
 	async render() {
 		if (this.shadowRoot) {
+			const style = this.ownerDocument.createElement('style');
+			style.innerHTML = style?.innerHTML + styles;
+			this.shadowRoot?.appendChild(style);
 
 			const title = this.ownerDocument.createElement('h1');
 			title.innerText = 'Register';

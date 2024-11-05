@@ -5,6 +5,7 @@ import { loginUser } from '../../utils/firebase';
 
 // import desktopImg from '../../images/image1.jpg'
 import styles from './login.css'
+console.log(styles);
 
 const credentials = {
 	email: '',
@@ -41,6 +42,9 @@ class Login extends HTMLElement {
 
 	async render() {
 		if (this.shadowRoot) {
+			const style = this.ownerDocument.createElement('style');
+			style.innerHTML = style?.innerHTML + styles;
+			this.shadowRoot?.appendChild(style);
 
 			const formContainer = this.ownerDocument.createElement('div')
 			formContainer.className = 'form-container'
@@ -82,9 +86,9 @@ class Login extends HTMLElement {
 			// image.src = desktopImg
 			// this.shadowRoot.appendChild(image)
 
-			const loginCss = this.ownerDocument.createElement('style');
-			loginCss.innerHTML = styles;
-			formContainer.appendChild(loginCss);
+			// const loginCss = this.ownerDocument.createElement('style');
+			// loginCss.innerHTML = styles;
+			// formContainer.appendChild(loginCss);
 		}
 	}
 }
