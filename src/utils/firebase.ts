@@ -103,6 +103,6 @@ export const getPost = async () => {
 
 		return data;
 	} catch (error) {
-		console.error('Error getting documents', error);
+		console.error('Error getting posts', error);
 	}
 };
