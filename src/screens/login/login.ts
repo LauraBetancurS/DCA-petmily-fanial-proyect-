@@ -87,8 +87,8 @@ class Login extends HTMLElement {
 			imageContainer.className = 'image-container';
 	
 			const image = this.ownerDocument.createElement('img');
-			image.src = 'ruta/a/tu/imagen.jpg'; 
-			image.alt = 'Usuario sosteniendo un perro';
+			image.src = ''; 
+			image.alt = 'img';
 			imageContainer.appendChild(image);
 	
 			loginWrapper.appendChild(formContainer);

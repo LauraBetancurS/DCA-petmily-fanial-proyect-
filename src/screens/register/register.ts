@@ -49,11 +49,9 @@ class Register extends HTMLElement {
 			style.innerHTML = style?.innerHTML + styles;
 			this.shadowRoot?.appendChild(style);
 	
-			// Contenedor principal para la distribución del formulario e imagen
 			const registerWrapper = this.ownerDocument.createElement('div');
 			registerWrapper.className = 'register-wrapper';
 	
-			// Contenedor del formulario
 			const formContainer = this.ownerDocument.createElement('div');
 			formContainer.className = 'form-container';
 	
@@ -96,16 +94,14 @@ class Register extends HTMLElement {
 			haveAccount.appendChild(haveAccountButton);
 			formContainer.appendChild(haveAccount);
 	
-			// Contenedor de la imagen
 			const imageContainer = this.ownerDocument.createElement('div');
 			imageContainer.className = 'image-container';
 	
 			const image = this.ownerDocument.createElement('img');
-			image.src = 'ruta/a/tu/imagen.jpg'; // Reemplaza con la ruta real de la imagen
-			image.alt = 'Usuario con gato';
+			image.src = '';
+			image.alt = 'img';
 			imageContainer.appendChild(image);
 	
-			// Añadir formContainer e imageContainer a registerWrapper
 			registerWrapper.appendChild(formContainer);
 			registerWrapper.appendChild(imageContainer);
 	
