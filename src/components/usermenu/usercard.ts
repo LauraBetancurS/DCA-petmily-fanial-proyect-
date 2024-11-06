@@ -1,6 +1,9 @@
 import { data } from '../../data/data';
 import { datacommunity } from '../../data/datacommunity';
 import { logOut } from '../../utils/firebase';
+import { dispatch } from '../../store';
+import { navigate } from '../../store/actions';
+import { Screens } from '../../types/store';
 
 
 export enum Attribute {
@@ -43,6 +46,14 @@ class UserCard extends HTMLElement {
             logoutButton.addEventListener('click', () => {
                 console.log('logout clickeado');
                 logOut()
+            });
+        }
+
+        const myProfileBtn = this.shadowRoot?.querySelector('.btn');
+        if (myProfileBtn) {
+            myProfileBtn.addEventListener('click', () => {
+                console.log('my profile clickeado');
+                dispatch(navigate(Screens.PROFILE));
             });
         }
     }
