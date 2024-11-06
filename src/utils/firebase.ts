@@ -25,7 +25,7 @@ export const getFirebaseInstance = async () => {
     const app = initializeApp(firebaseConfig);
     db = getFirestore(app);
     auth = getAuth(app);
-    const storageFB = getStorage();
+    const storageFB = getStorage(app);
   }
   return { db, auth, storage };
 };
@@ -135,8 +135,12 @@ export const uploadFile = async (file: File, id: string) => {
   const { storage } = await getFirebaseInstance();
   const { ref, uploadBytes } = await import('firebase/storage');
 
-  const storageRef = ref(storageFB, 'imagesProfile/' + id);
-  uploadBytes(storageRef, file).then((snapshot) => {
+  const storageRef = ref(storageFB, 'imagesPost/' + id);
+  try {
+    await uploadBytes(storageRef, file);
     console.log('File uploaded');
-  });
-}
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    throw error;
+  }
+};
