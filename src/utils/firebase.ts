@@ -56,6 +56,7 @@ export const registerUser = async (credentials: any) => {
     const where = doc(db, 'users', userCredential.user.uid);
     const data = {
       name: credentials.name,
+      username: credentials.username,
       email: credentials.email,
     };
 
@@ -110,7 +111,7 @@ export const addPost = async (posts: any) => {
 export const getPost = async () => {
 	try {
 		const { db } = await getFirebaseInstance();
-		const { collection, getDocs } = await import('firebase/firestore');
+		const { collection, getDocs, orderBy } = await import('firebase/firestore');
 
 		const where = collection(db, 'posts');
 		const querySnapshot = await getDocs(where);

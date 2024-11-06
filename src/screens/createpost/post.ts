@@ -21,6 +21,9 @@ class CreatePost extends HTMLElement{
     async connectedCallback(){
         const user = await getUser()
         infoPosts.name = user.name
+        infoPosts.username = user.username
+        console.log(user);
+        
         this.render();
     }
 
@@ -32,9 +35,14 @@ class CreatePost extends HTMLElement{
         infoPosts.description = e.target.value;
     }
 
+    changeUsername(e: any) {
+        infoPosts.username = e.target.value;
+    }
+
     async submitForm() {
         console.log('Post submitted:', infoPosts);
         addPost(infoPosts);
+        dispatch(navigate(Screens.MAIN));        
     }
 
     async render() {
