@@ -43,19 +43,21 @@ class CreatePost extends HTMLElement{
             const imagePost = this.ownerDocument.createElement('input');
             imagePost.placeholder = 'Imagen';
             imagePost.addEventListener('change', this.changeImage.bind(this));
+            this.shadowRoot?.appendChild(imagePost);
             
-
             const descriptionPost = this.ownerDocument.createElement('input');
             descriptionPost.placeholder = 'Añade tu descripción';
             descriptionPost.addEventListener('change', this.changeDesciption.bind(this));
+            this.shadowRoot?.appendChild(descriptionPost);
 
             const savePost = this.ownerDocument.createElement('button');
             savePost.innerText = 'Post';
             savePost.addEventListener('click', this.submitForm.bind(this));
-
+            this.shadowRoot?.appendChild(savePost);
             
             const title = this.ownerDocument.createElement('h2');
             title.textContent = 'Crea tu publicacion';
+            this.shadowRoot?.appendChild(title);
 
         }
     }
