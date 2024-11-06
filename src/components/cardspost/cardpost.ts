@@ -1,11 +1,11 @@
 export enum Attribute {
-    "name" = "name",
     "username" = "username",
+    "name" = "name",
     "profileimg" = "profileimg",
     "postdesc" = "postdesc",
-    "imgpost" = "imgpost"
-
+    "imgpost" = "imgpost",
 }
+
 
 class CardPost extends HTMLElement {
     username?: string;
@@ -25,9 +25,12 @@ class CardPost extends HTMLElement {
     }
 
     attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
-        this[propName] = newValue;
-        this.render();
+        if (newValue !== oldValue) {
+            this[propName] = newValue;
+            this.render();
+        }
     }
+    
 
     connectedCallback() {
         this.render()
@@ -41,7 +44,7 @@ class CardPost extends HTMLElement {
 
             <article class='cardpost-container'>
                 <section class='post-container'>
-                    <div class='profile-icon'>
+                    <div class='profile-icon'
                         <img src="${this.profileimg || "no image"}">
                     </div>
                     <div class='info-post'>

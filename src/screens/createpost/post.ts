@@ -5,7 +5,9 @@ import {addPost, getPost} from '../../utils/firebase'
 
 import styles from './createpost.css'
 
-const infoPosts= {
+const infoPosts = {
+    username: '',
+    Nombre: '',
     image: '',
     description: ''
 }
@@ -17,6 +19,7 @@ class CreatePost extends HTMLElement{
     }
 
     connectedCallback(){
+
         this.render();
     }
 
@@ -57,24 +60,6 @@ class CreatePost extends HTMLElement{
             const title = this.ownerDocument.createElement('h2');
             title.textContent = 'Crea tu publicacion';
             this.shadowRoot?.appendChild(title);
-
-            const showPost = await getPost();
-            showPost?.forEach((post) => {
-                console.log(post);
-                
-                const containerPost = this.ownerDocument.createElement('section');
-
-                const image= this.ownerDocument.createElement('img');
-                image.src = post.image;
-			    image.alt = '';
-			    containerPost.appendChild(image);
-
-                const description= this.ownerDocument.createElement('p');
-                description.textContent= post.description;
-                containerPost.appendChild(description);
-
-                this.shadowRoot?.appendChild(containerPost);
-            })
 
         }
     }
