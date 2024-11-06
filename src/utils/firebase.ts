@@ -1,13 +1,16 @@
 import { appState } from '../store';
+// import storage from './storage';
 
 let db: any;
 let auth: any;
+let storage: any;
 
 export const getFirebaseInstance = async () => {
   if (!db) {
     const { getFirestore } = await import('firebase/firestore');
     const { initializeApp } = await import('firebase/app');
     const { getAuth } = await import('firebase/auth');
+    const { getStorage } = await import('firebase/storage');
 
     const firebaseConfig = {
       apiKey: "AIzaSyDUrgcTtkTTG92yNPDsgCBpxDaYmo10I7E",
@@ -22,8 +25,9 @@ export const getFirebaseInstance = async () => {
     const app = initializeApp(firebaseConfig);
     db = getFirestore(app);
     auth = getAuth(app);
+    const storage = getStorage();
   }
-  return { db, auth };
+  return { db, auth, storage };
 };
 
 export const getUser = async () => {
@@ -126,3 +130,13 @@ export const getPost = async () => {
 		console.error('Error getting posts', error);
 	}
 };
+
+export const uploadFile = async (file: File, id: string) => {
+  const { storage } = await getFirebaseInstance();
+  const { ref, uploadBytes } = await import('firebase/storage');
+
+  const storageRef = ref(storage, 'imagesProfile/' + id);
+  uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('File uploaded');
+  });
+}
