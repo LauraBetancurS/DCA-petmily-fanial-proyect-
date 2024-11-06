@@ -2,6 +2,7 @@ import "./screens/main/main";
 import "./screens/login/login";
 import "./screens/register/register";
 import "./screens/createpost/post"
+import "./screens/profile/profile";
 import { addObserver, appState } from "./store";
 import { Screens } from "./types/store";
 
