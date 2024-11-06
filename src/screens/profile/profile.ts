@@ -14,3 +14,4 @@ class Profile extends HTMLElement {
   }
 }
 customElements.define("app-profile", Profile);
+export default Profile;
