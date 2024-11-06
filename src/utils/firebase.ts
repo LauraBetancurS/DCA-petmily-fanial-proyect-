@@ -1,9 +1,9 @@
 import { appState } from '../store';
-// import storage from './storage';
+import storage from './storage';
 
 let db: any;
 let auth: any;
-let storage: any;
+let storageFB: any;
 
 export const getFirebaseInstance = async () => {
   if (!db) {
@@ -25,7 +25,7 @@ export const getFirebaseInstance = async () => {
     const app = initializeApp(firebaseConfig);
     db = getFirestore(app);
     auth = getAuth(app);
-    const storage = getStorage();
+    const storageFB = getStorage();
   }
   return { db, auth, storage };
 };
@@ -135,7 +135,7 @@ export const uploadFile = async (file: File, id: string) => {
   const { storage } = await getFirebaseInstance();
   const { ref, uploadBytes } = await import('firebase/storage');
 
-  const storageRef = ref(storage, 'imagesProfile/' + id);
+  const storageRef = ref(storageFB, 'imagesProfile/' + id);
   uploadBytes(storageRef, file).then((snapshot) => {
     console.log('File uploaded');
   });
