@@ -30,8 +30,7 @@ class CreatePost extends HTMLElement{
 
     async submitForm() {
         console.log('Post submitted:', infoPosts);
-        addPost(infoPosts); 
-        this.render();
+        addPost(infoPosts);
     }
 
     async render() {
@@ -58,6 +57,24 @@ class CreatePost extends HTMLElement{
             const title = this.ownerDocument.createElement('h2');
             title.textContent = 'Crea tu publicacion';
             this.shadowRoot?.appendChild(title);
+
+            const showPost = await getPost();
+            showPost?.forEach((post) => {
+                console.log(post);
+                
+                const containerPost = this.ownerDocument.createElement('section');
+
+                const image= this.ownerDocument.createElement('img');
+                image.src = post.image;
+			    image.alt = '';
+			    containerPost.appendChild(image);
+
+                const description= this.ownerDocument.createElement('p');
+                description.textContent= post.description;
+                containerPost.appendChild(description);
+
+                this.shadowRoot?.appendChild(containerPost);
+            })
 
         }
     }
