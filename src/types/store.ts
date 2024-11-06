@@ -10,7 +10,8 @@ export enum Screens {
 	'LOGIN' = 'LOGIN',
 	'MAIN' = 'MAIN', 
 	'REGISTER' = 'REGISTER',
-	'CREATEPOST' = 'CREATEPOST'
+	'CREATEPOST' = 'CREATEPOST',
+	'PROFILE' = 'PROFILE'
 }
 
 export enum Actions {
