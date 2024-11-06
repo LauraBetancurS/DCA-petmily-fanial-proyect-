@@ -75,7 +75,7 @@ class UserCard extends HTMLElement {
                         <h2 class="name">${this.name}</h2>
                         <p class="username">@${this.username}</p>
                         <p class="description">${this.profiledesc}</p>
-                        <button class="btn">My Profile</button>
+                        <button class="btn">Mi perfil</button>
                     </div>
                     <div class="community-card">
                         <h2 class="community-title">Communities</h2>
@@ -83,7 +83,7 @@ class UserCard extends HTMLElement {
                             ${communityItems}
                         </div>
                     </div>
-                    <div class="logout-btn">Log out</div>
+                    <div class="logout-btn">Cerrar Sesión</div>
                 </div>
             `;
         }

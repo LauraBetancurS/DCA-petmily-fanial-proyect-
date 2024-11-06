@@ -66,7 +66,7 @@ class NavBar extends HTMLElement {
                     </div>
 
                     <div class='search-bar'>
-                        <input type="text" placeholder="${this.input || 'Search PetNet'}">
+                        <input type="text" placeholder="${this.input || 'Busca en PetNet'}">
                         <img class="search-icon" src="${this.searchicon}" alt="Search Icon"> <!-- Icono de lupa -->
                     </div>
 
