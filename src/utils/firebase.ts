@@ -1,4 +1,4 @@
-import { AppState } from '../types/store';
+import { appState } from '../store';
 
 let db: any;
 let auth: any;
@@ -25,6 +25,25 @@ export const getFirebaseInstance = async () => {
   }
   return { db, auth };
 };
+
+export const getUser = async () => {
+  const { doc, getDoc } = await import('firebase/firestore');  
+  try {
+    const user = await getDoc(doc(db, 'users', appState.user))
+
+    if (user.exists()) {
+      // Si el documento existe, retorna los datos como un objeto
+      return user.data();
+    } else {
+      // Si el documento no existe, puedes retornar algo o lanzar un error
+      throw new Error("Document does not exists");
+    }
+  } catch (error) {
+    // Manejo de errores
+    console.error("Error al obtener el documento: ", error);
+    throw error;
+  }
+}
 
 export const registerUser = async (credentials: any) => {
   try {

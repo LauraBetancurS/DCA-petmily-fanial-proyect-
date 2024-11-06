@@ -1,13 +1,13 @@
 import { dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
-import {addPost, getPost} from '../../utils/firebase'
+import {addPost, getUser} from '../../utils/firebase'
 
 import styles from './createpost.css'
 
 const infoPosts = {
     username: '',
-    Nombre: '',
+    name: '',
     image: '',
     description: ''
 }
@@ -18,8 +18,9 @@ class CreatePost extends HTMLElement{
         this.attachShadow({mode: 'open'})
     }
 
-    connectedCallback(){
-
+    async connectedCallback(){
+        const user = await getUser()
+        infoPosts.name = user.name
         this.render();
     }
 

@@ -68,6 +68,7 @@ class Main extends HTMLElement {
       cardPost.setAttribute(Attribute.imgpost, post.image);
       this.posts.push(cardPost);
     });
+    
     this.render();
   }
 
