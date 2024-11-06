@@ -8,7 +8,7 @@ export type AppState = {
 
 export enum Screens {
 	'LOGIN' = 'LOGIN',
-	'MAIN' = 'MAIN', // Cambiado de DASHBOARD a MAIN
+	'MAIN' = 'MAIN', 
 	'REGISTER' = 'REGISTER',
 	'CREATEPOST' = 'CREATEPOST'
 }

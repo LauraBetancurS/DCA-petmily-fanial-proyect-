@@ -1,6 +1,7 @@
 import "./screens/main/main";
 import "./screens/login/login";
 import "./screens/register/register";
+import "./screens/createpost/post"
 import { addObserver, appState } from "./store";
 import { Screens } from "./types/store";
 
@@ -35,7 +36,7 @@ class AppContainer extends HTMLElement {
           break;
 
         case Screens.CREATEPOST:
-            const createPost = this.ownerDocument.createElement("main-page");
+            const createPost = this.ownerDocument.createElement("create-post");
             this.shadowRoot.appendChild(createPost);
             break;
 

@@ -1,3 +1,7 @@
+import { dispatch } from '../../store';
+import { navigate } from '../../store/actions';
+import { Screens } from '../../types/store';
+
 export enum Attribute {
     'icon' = 'icon',
     'img' = 'img',
@@ -5,7 +9,7 @@ export enum Attribute {
     'communityicon' = 'communityicon',
     'profilepic' = 'profilepic',
     'createicon' = 'createicon', 
-    'searchicon' = 'searchicon', // Añadimos el atributo para el ícono de lupa
+    'searchicon' = 'searchicon', 
 };
 
 class NavBar extends HTMLElement {
@@ -15,7 +19,7 @@ class NavBar extends HTMLElement {
     communityicon?: string;
     profilepic?: string;
     createicon?: string;
-    searchicon?: string; // Añadimos la propiedad para el ícono de lupa
+    searchicon?: string; 
 
     constructor() {
         super();
@@ -47,7 +51,7 @@ class NavBar extends HTMLElement {
         const createIcon = this.shadowRoot?.querySelector('.create-icon');
         if (createIcon) {
             createIcon.addEventListener('click', () => {
-                window.location.href = '/createpost'; // Ruta de la página de creación de posts
+                dispatch(navigate(Screens.CREATEPOST)); // Navega a la pantalla de creación de posts
             });
         }
     }
