@@ -8,6 +8,7 @@ import styles from './register.css'
 const credentials = {
 	name: '',
 	email: '',
+	username: '',
 	password: '',
 };
 
@@ -28,6 +29,11 @@ class Register extends HTMLElement {
 	changeEmail(e: any) {
 		credentials.email = e.target.value;
 	}
+
+	changeUserName(e: any) {
+		credentials.username = e.target.value;
+	}
+
 
 	changePassword(e: any) {
 		credentials.password = e.target.value;
@@ -64,6 +70,12 @@ class Register extends HTMLElement {
 			uName.required = true;
 			uName.addEventListener('change', (e) => this.changeName(e));
 			formContainer.appendChild(uName);
+
+			const userName = this.ownerDocument.createElement('input');
+			userName.placeholder = 'Username';
+			userName.required = true;
+			userName.addEventListener('change', (e) => this.changeUserName(e));
+			formContainer.appendChild(userName);
 	
 			const uEmail = this.ownerDocument.createElement('input');
 			uEmail.placeholder = 'Email';
