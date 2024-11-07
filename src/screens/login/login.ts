@@ -92,7 +92,7 @@ class Login extends HTMLElement {
 			imageContainer.className = 'image-container';
 	
 			const image = this.ownerDocument.createElement('img');
-			image.src = ''; 
+			image.src = 'https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/girl%20with%20dog%20login.png?alt=media&token=b75c1efb-f824-49c2-9b6f-9d8bd4aa6c12'; 
 			image.alt = 'img';
 			imageContainer.appendChild(image);
 	
