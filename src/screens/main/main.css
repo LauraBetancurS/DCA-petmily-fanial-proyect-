@@ -4,42 +4,55 @@
     padding-left: 32px;
     padding-right: 32px;
     margin-top: 100px;
-    /* Deja espacio para el NavBar fijo */
     align-items: flex-start;
-    /* Alinea los elementos al inicio en la dirección vertical */
-}
-
-body {
-    background-color: aqua;
-}
-
-.content-container {
+  }
+  
+  .content-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
-
-.cardpost-container {
-    width: 100%;
-    /* Asegura que los posts ocupen todo el ancho disponible en su contenedor */
-}
-
-user-card {
-    display: block;
-    /* Asegura que se trate como un bloque y no se extienda innecesariamente */
-    width: fit-content;
-    /* Ajusta el ancho al contenido */
-}
-
-/* @media (min-width: 768px) {
+  }
+  
+  /* UserMenu responsive adjustments */
+  @media (max-width: 1195px) {
     .main-container {
-        max-width: 1200px;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      margin-top: 40px;
     }
-} */
-
-@media (max-width: 1195px) {
-    .main-container {
-        grid-template-columns: 1fr;
-        margin-top: 40px;
+  
+    .left-sidebar {
+      display: none; /* Oculta el menú de usuario en el sidebar izquierdo */
     }
-}
+    
+   
+  }
+  /* Ocultar topUserMenu en versión de escritorio */
+.top-user-menu {
+    display: none; /* Oculto por defecto en pantallas grandes */
+  }
+  
+  /* Mostrar topUserMenu solo en pantallas móviles */
+  @media (max-width: 1195px) {
+    .top-user-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      background-color: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .top-user-menu .logo-img {
+      width: 40px;
+      height: auto;
+    }
+  
+    .top-user-menu .logo-text {
+      font-size: 1.5em;
+      color: #333;
+      font-weight: bold;
+    }
+  }
+  

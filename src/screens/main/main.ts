@@ -34,7 +34,6 @@ class Main extends HTMLElement {
       this.currentUserName = selectedUser.name;
       this.currentUserDesc = selectedUser.profileDesc;
     }
-    
   }
 
   async connectedCallback() {
@@ -49,19 +48,16 @@ class Main extends HTMLElement {
       cardPost.setAttribute(Attribute.postdesc, post.description);
       cardPost.setAttribute(Attribute.imgpost, post.image);
       this.posts.push(cardPost);
-
-      console.log(post);
-      
     });
-    
+
     this.render();
   }
 
   render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../src/screens/main/main.css">
-            `;
+        <link rel="stylesheet" href="../src/screens/main/main.css">
+      `;
 
       // Navbar
       const navBar = this.ownerDocument.createElement("nav-bar");
@@ -86,19 +82,27 @@ class Main extends HTMLElement {
       const leftSidebar = this.ownerDocument.createElement("div");
       leftSidebar.className = "left-sidebar";
 
-      // Contenedor del contenido principal (Posts y Publicidad)
-      const contentContainer = this.ownerDocument.createElement("div");
-      contentContainer.className = "content-container";
-      const rightSidebar = this.ownerDocument.createElement("div");
-      rightSidebar.className = "right-sidebar";
-
-      // User Card - Se coloca en el sidebar izquierdo
+      // User Card - Se coloca en el sidebar izquierdo en desktop
       const userCard = this.ownerDocument.createElement("user-banner");
       userCard.setAttribute("profilepic", this.currentUserPic);
       userCard.setAttribute("name", this.currentUserName);
       userCard.setAttribute("username", "doglover99");
       userCard.setAttribute("profiledesc", this.currentUserDesc);
 
+      // Verificación para agregar `topUserMenu` solo en la vista móvil
+      const topUserMenu = this.ownerDocument.createElement("div");
+      topUserMenu.className = "top-user-menu";
+      topUserMenu.innerHTML = `
+        <img src="https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514" alt="Petmily Logo" class="logo-img">
+        <p class="logo-text">Petmily</p>
+      `;
+      this.shadowRoot.appendChild(topUserMenu);
+
+      // Contenedor del contenido principal (Posts y Publicidad)
+      const contentContainer = this.ownerDocument.createElement("div");
+      contentContainer.className = "content-container";
+      const rightSidebar = this.ownerDocument.createElement("div");
+      rightSidebar.className = "right-sidebar";
 
       // Añadir los posts al contenedor del contenido principal
       this.posts.forEach((post) => {

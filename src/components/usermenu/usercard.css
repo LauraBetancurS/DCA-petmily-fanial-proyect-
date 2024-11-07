@@ -128,3 +128,53 @@
     display: none;
   }
 }
+/* Estilos del logo en la vista móvil */
+.top-user-menu {
+  display: none; /* Oculto en desktop */
+}
+
+@media (max-width: 1195px) {
+  .left-sidebar {
+    display: none;
+  }
+
+  .top-user-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+/* Ocultar topUserMenu en versión de escritorio */
+.top-user-menu {
+  display: none; /* Oculto por defecto en pantallas grandes */
+}
+
+/* Mostrar topUserMenu solo en pantallas móviles */
+@media (max-width: 1195px) {
+  .top-user-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .top-user-menu .logo-img {
+    width: 40px;
+    height: auto;
+  }
+
+  .top-user-menu .logo-text {
+    font-size: 1.5em;
+    color: #333;
+    font-weight: bold;
+  }
+}
+
+
+}
