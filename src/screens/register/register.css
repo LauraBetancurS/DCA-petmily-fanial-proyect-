@@ -112,11 +112,15 @@
 }
 
 @media (max-width: 767px) {
-    /* For mobile, stack elements vertically */
+    /* For mobile, set the background image */
     .register-wrapper {
         flex-direction: column;
         height: auto;
         padding: 20px;
+        background-color: #f8f9fa;
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/cat%20register.png?alt=media&token=1ebaa767-fdd0-4bf9-ac5e-40aff78bfea4');
+        background-size: cover;
+        background-position: center;
     }
 
     .form-container {
@@ -124,6 +128,7 @@
         max-width: 100%;
         box-shadow: none;
         border-radius: 0;
+        background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent to show the background image */
     }
 
     .logo {
@@ -140,7 +145,7 @@
     }
 
     .image-container {
-        display: none; /* Hide the image on smaller screens to save space */
+        display: none; /* Hide the image container on smaller screens */
     }
 }
 
