@@ -81,7 +81,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #AA6AFF;
+    background-color: none;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     overflow: hidden;
