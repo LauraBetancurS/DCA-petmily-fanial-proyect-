@@ -1,0 +1,16 @@
+.banner-container {
+    width: 100%;
+    height: 200px; /* Ajusta la altura según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E7D9FE;
+    overflow: hidden;
+    border-radius: 10px; /* Bordes redondeados opcionales */
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
