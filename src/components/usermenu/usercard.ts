@@ -5,7 +5,6 @@ import { dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
 
-
 export enum Attribute {
     'profilepic' = 'profilepic',
     'name' = 'name',
@@ -45,7 +44,7 @@ class UserCard extends HTMLElement {
         if (logoutButton) {
             logoutButton.addEventListener('click', () => {
                 console.log('logout clickeado');
-                logOut()
+                logOut();
             });
         }
 
@@ -68,7 +67,7 @@ class UserCard extends HTMLElement {
             `).join('');
 
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
+                <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
                 <div class="card-container">
                     <div class="profile-card">
                         <img src="${this.profilepic}" alt="Profile Picture" class="profile-pic">
@@ -83,7 +82,13 @@ class UserCard extends HTMLElement {
                             ${communityItems}
                         </div>
                     </div>
-                    <div class="logout-btn">Cerrar Sesión</div>
+                    <div class="logout-section">
+                        <div class="logout-btn">Cerrar Sesión</div>
+                        <div class="petmily-logo">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514" alt="Petmily Logo" class="logo-img">
+                            <p class="logo-text">Petmily</p>
+                        </div>
+                    </div>
                 </div>
             `;
         }

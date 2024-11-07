@@ -104,6 +104,24 @@
   width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
 }
 
+/* Contenedor del logo y el texto "petmily" */
+.petmily-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el logo y el texto */
+  margin-top: 10px;
+}
+
+.logo-img {
+  width: 40px; /* Tamaño del logo */
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: bold;
+}
 
 @media (max-width: 1195px) {
   .card-container {

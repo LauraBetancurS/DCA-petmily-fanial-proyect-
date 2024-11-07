@@ -6,8 +6,19 @@
     padding: 0;
     gap: 20px;
     background-color: #f8f9fa;
+    position: relative;
 }
 
+/* Logo for mobile view */
+.mobile-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    display: none; /* Hidden by default, shown only in mobile */
+}
+
+/* Form container */
 .form-container {
     display: flex;
     flex-direction: column;
@@ -102,6 +113,10 @@
     .image-container {
         display: flex;
     }
+
+    .mobile-logo {
+        display: none; /* Hide the logo on larger screens */
+    }
 }
 
 @media (max-width: 767px) {
@@ -126,6 +141,11 @@
 
     .image-container {
         display: none; /* Hide the image container on mobile */
+    }
+
+    /* Display mobile logo */
+    .mobile-logo {
+        display: block;
     }
 }
 
