@@ -27,7 +27,7 @@ export const getFirebaseInstance = async () => {
     auth = getAuth(app);
     const storageFB = getStorage(app);
   }
-  return { db, auth, storage };
+  return { db, auth, storageFB };
 };
 
 export const getUser = async () => {
@@ -132,7 +132,7 @@ export const getPost = async () => {
 };
 
 export const uploadFile = async (file: File, id: string) => {
-  const { storage } = await getFirebaseInstance();
+  const { storageFB } = await getFirebaseInstance();
   const { ref, uploadBytes } = await import('firebase/storage');
 
   const storageRef = ref(storageFB, 'imagesPost/' + id);

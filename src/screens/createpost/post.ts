@@ -24,6 +24,7 @@ class CreatePost extends HTMLElement {
     const user = await getUser();
     infoPosts.name = user.name;
     infoPosts.username = user.username;
+    console.log(user);
 
     this.render();
   }
@@ -49,18 +50,9 @@ class CreatePost extends HTMLElement {
 
       const imagePost = this.ownerDocument.createElement("input");
       imagePost.type = "file";
-      imagePost.addEventListener("change", async () => {
-        console.log(imagePost.files?.[0]);
-        
+      imagePost.addEventListener("change", () => {
         const file = imagePost.files?.[0];
-        if (file) {
-            try {
-              await uploadFile(file, appState.user);
-              console.log('File upload completed');
-            } catch (error) {
-              console.error('Error uploading file:', error);
-            }
-          }
+        if (file) uploadFile(file, appState.user);
       });
       this.shadowRoot?.appendChild(imagePost);
 
