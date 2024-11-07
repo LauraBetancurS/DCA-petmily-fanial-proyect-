@@ -67,10 +67,13 @@
     cursor: pointer;
     margin-top: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .form-container button:hover {
-    background-color: #61329f;
+    background-color: #935bdb;
+    transition: transform 0.3s ease;
+    transform: translateY(-3px)
 }
 
 .form-container p {

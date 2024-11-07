@@ -60,6 +60,8 @@
 
 .form-container button:hover {
     background-color: #935bdb;
+    transition: transform 0.3s ease;
+    transform: translateY(-3px);
 }
 
 .form-container p {
