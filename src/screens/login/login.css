@@ -1,25 +1,32 @@
 .login-wrapper {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding: 20px;
+    padding: 0;
+    gap: 20px;
     background-color: #f8f9fa;
-    gap: 20px; 
 }
 
-
+/* Form container */
 .form-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 400px;
     padding: 40px;
-    background-color: transparent; 
-    box-shadow: none; 
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.logo {
+    width: 60px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .form-container h1 {
     font-size: 24px;
@@ -28,7 +35,6 @@
     color: #333333;
     text-align: center;
 }
-
 
 .form-container input {
     width: 100%;
@@ -39,7 +45,6 @@
     font-size: 16px;
 }
 
-
 .form-container button {
     width: 100%;
     padding: 12px;
@@ -47,15 +52,15 @@
     color: white;
     font-size: 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-container button:hover {
     background-color: #935bdb;
 }
-
 
 .form-container p {
     font-size: 14px;
@@ -69,16 +74,71 @@
     font-weight: bold;
 }
 
-
+/* Image container for desktop view */
 .image-container {
-    max-width: 500px;
+    max-width: 50%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #AA6AFF;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
 }
 
 .image-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 20px;
+}
+
+/* Responsive design adjustments */
+@media (min-width: 768px) {
+    /* Desktop view: side-by-side layout */
+    .login-wrapper {
+        flex-direction: row;
+    }
+
+    .image-container {
+        display: flex;
+    }
+}
+
+@media (max-width: 767px) {
+    /* Mobile view: make image a background */
+    .login-wrapper {
+        flex-direction: column;
+        height: 100vh;
+        padding: 20px;
+        background-color: #AA6AFF;
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/girl%20with%20dog%20login.png?alt=media&token=b75c1efb-f824-49c2-9b6f-9d8bd4aa6c12');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .form-container {
+        padding: 20px;
+        max-width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        background-color: white;
+    }
+
+    .image-container {
+        display: none; /* Hide the image container on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Additional adjustments for very small screens */
+    .form-container input,
+    .form-container button {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .form-container h1 {
+        font-size: 18px;
+    }
 }
