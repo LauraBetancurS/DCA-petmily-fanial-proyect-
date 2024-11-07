@@ -60,6 +60,12 @@ class Register extends HTMLElement {
 	
 			const formContainer = this.ownerDocument.createElement('div');
 			formContainer.className = 'form-container';
+
+			const logo = this.ownerDocument.createElement('img');
+			logo.src = 'https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514';
+			logo.alt = 'Petmily Logo';
+			logo.className = 'logo';
+			formContainer.appendChild(logo);
 	
 			const title = this.ownerDocument.createElement('h1');
 			title.innerText = 'Register';
@@ -110,7 +116,7 @@ class Register extends HTMLElement {
 			imageContainer.className = 'image-container';
 	
 			const image = this.ownerDocument.createElement('img');
-			image.src = '';
+			image.src = 'https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/cat%20register.png?alt=media&token=1ebaa767-fdd0-4bf9-ac5e-40aff78bfea4';
 			image.alt = 'img';
 			imageContainer.appendChild(image);
 	
