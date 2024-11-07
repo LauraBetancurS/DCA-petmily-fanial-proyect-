@@ -51,6 +51,11 @@ class Login extends HTMLElement {
 	
 			const formContainer = this.ownerDocument.createElement('div');
 			formContainer.className = 'form-container';
+			const logo = this.ownerDocument.createElement('img');
+			logo.src = 'https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514';
+			logo.alt = 'Petmily Logo';
+			logo.className = 'logo';
+			formContainer.appendChild(logo);
 	
 			const title = this.ownerDocument.createElement('h1');
 			title.innerText = 'Iniciar sesión';
