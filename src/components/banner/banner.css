@@ -1,14 +1,17 @@
 .banner-container {
     width: 100%;
-    height: 200px; /* Ajusta la altura según sea necesario */
+    height: 550px; /* Aumenta la altura para que el banner ocupe más espacio */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #E7D9FE;
     overflow: hidden;
     border-radius: 10px; /* Bordes redondeados opcionales */
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Mantiene el banner en el fondo */
 }
-
 .banner-image {
     width: 100%;
     height: 100%;

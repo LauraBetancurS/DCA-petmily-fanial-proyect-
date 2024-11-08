@@ -2,17 +2,19 @@ import { appState, dispatch, addObserver } from "../../store";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
 import { addPost, getFileUrls, getUser, uploadFile } from "../../utils/firebase";
-import styles from "./createpost.css";
+import styles from "./posts.css";
+import "../../components/navbar/navbar";
+import "../../components/banner/banner";
 
 const infoPosts: {
   username: string;
   name: string;
-  image: string[]; // Definir explícitamente como un array de strings
+  image: string[];
   description: string;
 } = {
   username: "",
   name: "",
-  image: [], // Inicializar correctamente como un array de strings
+  image: [],
   description: "",
 };
 
@@ -27,8 +29,6 @@ class CreatePost extends HTMLElement {
     const user = await getUser();
     infoPosts.name = user.name;
     infoPosts.username = user.username;
-    console.log(user);
-
     this.render();
   }
 
@@ -36,56 +36,92 @@ class CreatePost extends HTMLElement {
     infoPosts.description = e.target.value;
   }
 
-  changeUsername(e: any) {
-    infoPosts.username = e.target.value;
-  }
-
   async changeImage() {
     const urls = await getFileUrls(appState.user);
-    console.log(urls);
-    infoPosts.image = urls; // Asignar todas las URLs
+    infoPosts.image = urls;
   }
 
   async submitForm() {
-    console.log("Post submitted:", infoPosts);
     await this.changeImage();
     addPost(infoPosts);
     dispatch(navigate(Screens.MAIN));
   }
 
-  async render() {
+  render() {
     if (this.shadowRoot) {
       const style = this.ownerDocument.createElement("style");
-      style.innerHTML = style?.innerHTML + styles;
-      this.shadowRoot?.appendChild(style);
+      style.innerHTML = styles;
+      this.shadowRoot.appendChild(style);
+
+      const everythingContainer = this.ownerDocument.createElement("section");
+      everythingContainer.className = "everything-container";
+
+      const banner = this.ownerDocument.createElement("app-banner");
+      banner.className = "banner";
+      banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
+      this.shadowRoot.appendChild(banner);
+
+      const navbarContainer = this.ownerDocument.createElement("div");
+      navbarContainer.className = "navbar-container";
+      
+      const navBar = this.ownerDocument.createElement("nav-bar");
+      navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
+      navBar.setAttribute("input", "Buscar en PetNet");
+      navBar.setAttribute("communityicon", "http://imgfz.com/i/rxAefV8.png");
+      navBar.setAttribute("profilepic", "path_to_profile_picture");
+      navBar.setAttribute("createicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276");
+      navBar.setAttribute("searchicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
+      
+      navbarContainer.appendChild(navBar);
+      this.shadowRoot.appendChild(navbarContainer);
+
+      const container = this.ownerDocument.createElement("div");
+      container.className = "createpost-wrapper";
+
+      const title = this.ownerDocument.createElement("h2");
+      title.className = "title";
+      title.textContent = "Crear publicación";
+      container.appendChild(title);
+
+      const divider = this.ownerDocument.createElement("div");
+      divider.className = "divider";
+      container.appendChild(divider);
+
+      const descriptionPost = this.ownerDocument.createElement("input");
+      descriptionPost.className = "description-input";
+      descriptionPost.placeholder = "Añade una descripción";
+      descriptionPost.addEventListener("change", this.changeDesciption.bind(this));
+      container.appendChild(descriptionPost);
+
+      const imageUploadContainer = this.ownerDocument.createElement("div");
+      imageUploadContainer.className = "image-upload-container";
 
       const imagePost = this.ownerDocument.createElement("input");
       imagePost.type = "file";
+      imagePost.className = "image-input";
       imagePost.addEventListener("change", () => {
         const file = imagePost.files?.[0];
-        console.log(file);
-        
         if (file) uploadFile(file, appState.user);
       });
-      this.shadowRoot?.appendChild(imagePost);
+      imageUploadContainer.appendChild(imagePost);
 
-      const descriptionPost = this.ownerDocument.createElement("input");
-      descriptionPost.placeholder = "Añade tu descripción";
-      descriptionPost.addEventListener(
-        "change",
-        this.changeDesciption.bind(this)
-      );
-      this.shadowRoot?.appendChild(descriptionPost);
+      const imageLabel = this.ownerDocument.createElement("p");
+      imageLabel.className = "image-label";
+      imageLabel.textContent = "Selecciona tu imagen";
+      imageUploadContainer.appendChild(imageLabel);
+
+      container.appendChild(imageUploadContainer);
 
       const savePost = this.ownerDocument.createElement("button");
-      savePost.innerText = "Post";
+      savePost.className = "publish-button";
+      savePost.innerText = "Publicar";
       savePost.addEventListener("click", this.submitForm.bind(this));
-      this.shadowRoot?.appendChild(savePost);
+      container.appendChild(savePost);
 
-      const title = this.ownerDocument.createElement("h2");
-      title.textContent = "Crea tu publicacion";
-      this.shadowRoot.appendChild(title);
+      this.shadowRoot.appendChild(container);
     }
   }
 }
+
 customElements.define("create-post", CreatePost);
+export default CreatePost;

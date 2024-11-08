@@ -1,0 +1,217 @@
+* {
+    font-family: inter, sans-serif;}
+.banner {
+    width: 100%;
+    height: 250px;
+    display: block;
+}
+
+.navbar {
+    
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px;
+        background-color: #f8f8f8;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 50;
+        max-width: 1800px;
+    
+
+}
+
+
+
+/* Contenedor principal */
+.createpost-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    background-color: #f9f9f9;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 90px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    position: relative;
+    z-index: 10;
+    margin-top: -50px; /* Ajusta la posición para superponerse al banner */
+}
+
+/* Título */
+.title {
+    font-size: 28px; /* Aumenta el tamaño del título */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: inter, sans-serif;
+}
+
+/* Línea divisoria */
+.divider {
+    width: 100%;
+    height: 2px; /* Engrosar la línea divisoria */
+    background-color: #ddd;
+    margin-bottom: 30px;
+}
+
+/* Campo de entrada para la descripción */
+.description-input {
+    width: 100%;
+    padding: 16px; /* Aumenta el padding para hacerlo más espacioso */
+    background-color: #e0e0e0;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px; /* Aumenta el tamaño del texto */
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: inter, sans-serif;
+}
+
+
+/* Contenedor de carga de imagen */
+.image-upload-container {
+    width: 100%;
+    height: 250px; /* Aumenta la altura para dar más espacio de carga */
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    font-size: 18px; /* Aumenta el tamaño del texto */
+    margin-bottom: 30px;
+    position: relative;
+    text-align: center;
+    font-family: inter, sans-serif;
+}
+
+.image-label {
+    font-size: 16px; /* Aumenta el tamaño del texto de la etiqueta */
+    color: #888;
+    margin-top: 12px;
+}
+
+.publish-button {
+    width: 100%;
+    padding: 16px; /* Aumenta el padding para un botón más grande */
+    background-color: #AA6AFF;
+    color: white;
+    font-size: 18px; /* Aumenta el tamaño del texto */
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    font-family: inter, sans-serif;
+}
+
+
+/* Botón de publicación */
+.publish-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #AA6AFF;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.publish-button:hover {
+    background-color: #935bdb;
+}
+
+    .title {
+        font-size: 24px;
+    }
+
+    .description-input,
+    .image-upload-container,
+    .publish-button {
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+       
+        /* Haceeverything-containerr que el banner cubra toda la pantalla */
+        .banner {
+            width: 100%;
+            height: 100%; /* Ocupa toda la altura de la pantalla */
+            position: fixed; /* Fija el banner al fondo */
+            top: 0;
+            left: 0;
+            z-index: -1; /* Envía el banner al fondo para que el contenido se muestre sobre él */
+            
+        }
+    
+        .navbar-container {
+            position: relative;
+            z-index: 10;
+        }
+    
+        .createpost-wrapper {
+            padding: 30px;
+            max-width: 90%;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+            margin-top: 100px;
+        }
+    
+        .title {
+            font-size: 24px;
+        }
+    
+        .description-input,
+        .image-upload-container,
+        .publish-button {
+            font-size: 15px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+         .body {
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+        .navbar {
+            padding: 10px;
+        }
+    
+        .createpost-wrapper {
+            padding: 20px;
+            max-width: 95%;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin-top: 120px;
+        }
+    
+        .title {
+            font-size: 20px;
+        }
+    
+        .description-input,
+        .image-upload-container,
+        .publish-button {
+            font-size: 14px;
+        }
+    
+        .banner {
+            height: 100vh;
+        }
+    }
