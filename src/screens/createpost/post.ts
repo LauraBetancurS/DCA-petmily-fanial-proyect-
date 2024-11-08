@@ -110,5 +110,9 @@ class CreatePost extends HTMLElement {
       });
       imageUploadContainer.appendChild(imagePost);
 
+      const imageLabel = this.ownerDocument.createElement("p");
+      imageLabel.className = "image-label";
+      imageLabel.textContent = "Selecciona tu imagen";
+      imageUploadContainer.appendChild(imageLabel);
 
       }  }  }  
