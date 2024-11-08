@@ -2,7 +2,7 @@ import { appState, dispatch, addObserver } from "../../store";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
 import { addPost, getFileUrls, getUser, uploadFile } from "../../utils/firebase";
-import styles from "./createpost.css";
+import styles from "./posts.css";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 
