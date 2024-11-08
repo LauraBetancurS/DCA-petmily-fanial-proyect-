@@ -92,6 +92,10 @@ class CreatePost extends HTMLElement {
       divider.className = "divider";
       container.appendChild(divider);
 
-
+      const descriptionPost = this.ownerDocument.createElement("input");
+      descriptionPost.className = "description-input";
+      descriptionPost.placeholder = "Añade una descripción";
+      descriptionPost.addEventListener("change", this.changeDesciption.bind(this));
+      container.appendChild(descriptionPost);
 
       }  }  }  
