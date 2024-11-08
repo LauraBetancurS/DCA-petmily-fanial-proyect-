@@ -99,3 +99,12 @@
     }
 }
 
+@media (max-width: 767px) {
+    /* Mobile view: make image a background */
+    .login-wrapper {
+        flex-direction: column;
+        height: 100vh;
+        padding: 20px;
+       
+    }
+}
