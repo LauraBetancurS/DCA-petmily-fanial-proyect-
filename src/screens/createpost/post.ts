@@ -66,10 +66,12 @@ class CreatePost extends HTMLElement {
       this.shadowRoot.appendChild(style);
 
       const banner = this.ownerDocument.createElement("app-banner");
+      banner.className = "banner";
       banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
       this.shadowRoot.appendChild(banner);
-
+      
       const navBar = this.ownerDocument.createElement("nav-bar");
+      navBar.className = "navbar";
       navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
       navBar.setAttribute("input", "Buscar en PetNet");
       navBar.setAttribute("communityicon", "http://imgfz.com/i/rxAefV8.png");
