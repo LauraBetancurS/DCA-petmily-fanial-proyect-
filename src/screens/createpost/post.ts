@@ -61,8 +61,8 @@ class CreatePost extends HTMLElement {
   async render() {
     if (this.shadowRoot) {
       const style = this.ownerDocument.createElement("style");
-      style.innerHTML = style?.innerHTML + styles;
-      this.shadowRoot?.appendChild(style);
+      style.innerHTML = styles;
+      this.shadowRoot.appendChild(style);
 
       const imagePost = this.ownerDocument.createElement("input");
       imagePost.type = "file";
