@@ -126,3 +126,18 @@
 
 
 }
+
+@media (max-width: 480px) {
+    /* Additional adjustments for very small screens */
+    .form-container input,
+    .form-container button {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+
+   
+}
+
+
+
