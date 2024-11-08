@@ -31,10 +31,10 @@
 
 /* Título */
 .title {
-    font-size: 24px;
+    font-size: 28px; /* Aumenta el tamaño del título */
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
