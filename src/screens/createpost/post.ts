@@ -4,6 +4,8 @@ import { Screens } from "../../types/store";
 import { addPost, getFileUrls, getUser, uploadFile } from "../../utils/firebase";
 import styles from "./posts.css";
 import { data } from "../../data/data";
+import "../../components/navbar/navbar";
+
 
 
 const infoPosts: {
