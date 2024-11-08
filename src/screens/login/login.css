@@ -32,5 +32,12 @@
     text-align: center;
     
 }
+.form-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    
+    font-size: 16px;
+}
 
 
