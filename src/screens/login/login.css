@@ -120,4 +120,9 @@
         background-color: white;
     }
 
+    .image-container {
+        display: none; /* Hide the image container on mobile */
+    }
+
+
 }
