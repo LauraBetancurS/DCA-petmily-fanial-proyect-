@@ -167,6 +167,7 @@
   .top-user-menu .logo-img {
     width: 40px;
     height: auto;
+    margin-left: -5px;
   }
 
   .top-user-menu .logo-text {

@@ -49,6 +49,8 @@ class Main extends HTMLElement {
       cardPost.setAttribute(Attribute.postdesc, post.description);
       cardPost.setAttribute(Attribute.imgpost, post.image);
       this.posts.push(cardPost);
+
+      console.log(post);
     });
 
     console.log(appState.user);
@@ -61,8 +63,8 @@ class Main extends HTMLElement {
   async render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
-        <link rel="stylesheet" href="../src/screens/main/main.css">
-      `;
+            <link rel="stylesheet" href="../src/screens/main/main.css">
+            `;
 
       // Navbar
       const navBar = this.ownerDocument.createElement("nav-bar");
@@ -108,13 +110,19 @@ class Main extends HTMLElement {
         <img src="https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514" alt="Petmily Logo" class="logo-img">
         <p class="logo-text">Petmily</p>
       `;
-      this.shadowRoot.appendChild(topUserMenu);
 
       // Contenedor del contenido principal (Posts y Publicidad)
       const contentContainer = this.ownerDocument.createElement("div");
       contentContainer.className = "content-container";
       const rightSidebar = this.ownerDocument.createElement("div");
       rightSidebar.className = "right-sidebar";
+
+      // User Card - Se coloca en el sidebar izquierdo en desktop
+      const userCard = this.ownerDocument.createElement("user-banner");
+      userCard.setAttribute("profilepic", this.currentUserPic);
+      userCard.setAttribute("name", this.currentUserName);
+      userCard.setAttribute("username", "doglover99");
+      userCard.setAttribute("profiledesc", this.currentUserDesc);
 
       // Añadir los posts al contenedor del contenido principal
       this.posts.forEach((post) => {
@@ -141,6 +149,7 @@ class Main extends HTMLElement {
 
       // Añadir navbar, sidebar izquierdo y contenedor principal al shadowRoot
       this.shadowRoot.appendChild(navBar);
+      this.shadowRoot.appendChild(topUserMenu); // Añadir User Menu en la parte superior en vista móvil
       this.shadowRoot.appendChild(mainContainer);
       mainContainer.appendChild(leftSidebar);
       mainContainer.appendChild(contentContainer);
