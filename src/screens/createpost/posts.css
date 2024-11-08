@@ -136,10 +136,24 @@
 .publish-button:hover {
     background-color: #935bdb;
 }
-@media (max-width: 1024px) {
-    .createpost-wrapper {
-        padding: 40px;
-        max-width: 80%;
+
+    .title {
+        font-size: 24px;
     }
 
-   
+    .description-input,
+    .image-upload-container,
+    .publish-button {
+        font-size: 16px;
+    }
+
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px;
+    }
+
+    .createpost-wrapper {
+        padding: 30px;
+        max-width: 90%;
+    }
