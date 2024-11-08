@@ -70,12 +70,14 @@ class CreatePost extends HTMLElement {
       this.shadowRoot.appendChild(banner);
 
       const navBar = this.ownerDocument.createElement("nav-bar");
-      navBar.setAttribute("icon", "");
+      navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
       navBar.setAttribute("input", "Buscar en PetNet");
-      navBar.setAttribute("communityicon", "");
+      navBar.setAttribute("communityicon", "http://imgfz.com/i/rxAefV8.png");
       navBar.setAttribute("profilepic", "path_to_profile_picture");
-      navBar.setAttribute("createicon", "");
-      navBar.setAttribute("searchicon", "");
+      navBar.setAttribute("createicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276");
+      navBar.setAttribute("searchicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
+      this.shadowRoot.appendChild(navBar);
+
 
       const imagePost = this.ownerDocument.createElement("input");
       imagePost.type = "file";
