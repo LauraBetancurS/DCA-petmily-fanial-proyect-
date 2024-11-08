@@ -167,3 +167,30 @@
         font-size: 15px;
     }
 }
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .createpost-wrapper {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .description-input,
+    .image-upload-container,
+    .publish-button {
+        font-size: 14px;
+    }
+
+    .banner {
+        height: 200px;
+    }
+}
+
+
