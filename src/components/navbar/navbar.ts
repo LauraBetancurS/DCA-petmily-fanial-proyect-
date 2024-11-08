@@ -41,6 +41,13 @@ class NavBar extends HTMLElement {
     }
 
     addEventListeners() {
+        const appIcon = this.shadowRoot?.querySelector('.app-icon');
+        if (appIcon) {
+            appIcon.addEventListener('click', () => {
+                dispatch(navigate(Screens.MAIN)); // Navega a la pantalla principal 'main'
+            });
+        }
+
         const communityicon = this.shadowRoot?.querySelector('.community-icon');
         if (communityicon) {
             communityicon.addEventListener('click', () => {
