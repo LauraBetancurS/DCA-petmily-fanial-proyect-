@@ -49,15 +49,16 @@
 /* Campo de entrada para la descripción */
 .description-input {
     width: 100%;
-    padding: 12px;
-    background-color: #333;
+    padding: 16px; /* Aumenta el padding para hacerlo más espacioso */
+    background-color: #e0e0e0;
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 18px; /* Aumenta el tamaño del texto */
+    margin-bottom: 30px;
     text-align: center;
 }
+
 
 /* Contenedor de carga de imagen */
 .image-upload-container {
