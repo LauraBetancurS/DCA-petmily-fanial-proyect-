@@ -25,13 +25,7 @@
 
 }
 
-.navbar-container {
-    display: flex;
-    justify-content: center; /* Centra la navbar horizontalmente */
-   
-    width: 80%;
-    margin-bottom: 20px; /* Espacio debajo de la navbar */
-}
+
 
 /* Contenedor principal */
 .createpost-wrapper {
