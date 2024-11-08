@@ -98,4 +98,8 @@ class CreatePost extends HTMLElement {
       descriptionPost.addEventListener("change", this.changeDesciption.bind(this));
       container.appendChild(descriptionPost);
 
+      const imageUploadContainer = this.ownerDocument.createElement("div");
+      imageUploadContainer.className = "image-upload-container";
+
+
       }  }  }  
