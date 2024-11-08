@@ -86,3 +86,13 @@
     height: auto;
     border-radius: 20px;
 }
+
+@media (min-width: 768px) {
+    /* Desktop view: side-by-side layout */
+    .login-wrapper {
+        flex-direction: row;
+    }
+
+
+   
+}
