@@ -63,16 +63,16 @@
 /* Contenedor de carga de imagen */
 .image-upload-container {
     width: 100%;
-    height: 200px;
-    background-color: #e0e0e0;
+    height: 250px; /* Aumenta la altura para dar más espacio de carga */
+    background-color: #333;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #888;
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 18px; /* Aumenta el tamaño del texto */
+    margin-bottom: 30px;
     position: relative;
     text-align: center;
 }
