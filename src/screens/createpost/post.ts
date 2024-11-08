@@ -115,4 +115,14 @@ class CreatePost extends HTMLElement {
       imageLabel.textContent = "Selecciona tu imagen";
       imageUploadContainer.appendChild(imageLabel);
 
+      container.appendChild(imageUploadContainer);
+
+      const savePost = this.ownerDocument.createElement("button");
+      savePost.className = "publish-button";
+      savePost.innerText = "Publicar";
+      savePost.addEventListener("click", this.submitForm.bind(this));
+      container.appendChild(savePost);
+
+      this.shadowRoot.appendChild(container);
+
       }  }  }  
