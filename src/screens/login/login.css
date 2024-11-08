@@ -53,3 +53,7 @@
     box-shadow: 0 4px 8px rgba(19, 19, 19, 0.1);
    
 }
+.form-container button:hover {
+    background-color: #935bdb;
+    
+}
