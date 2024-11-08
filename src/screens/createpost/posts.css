@@ -30,3 +30,15 @@
     background-color: #ddd;
     margin-bottom: 20px;
 }
+
+.description-input {
+    width: 100%;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
