@@ -3,21 +3,18 @@ import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
 import { addPost, getFileUrls, getUser, uploadFile } from "../../utils/firebase";
 import styles from "./posts.css";
-import { data } from "../../data/data";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
-
-
 
 const infoPosts: {
   username: string;
   name: string;
-  image: string[]; // Definir explícitamente como un array de strings
+  image: string[];
   description: string;
 } = {
   username: "",
   name: "",
-  image: [], // Inicializar correctamente como un array de strings
+  image: [],
   description: "",
 };
 
@@ -32,8 +29,6 @@ class CreatePost extends HTMLElement {
     const user = await getUser();
     infoPosts.name = user.name;
     infoPosts.username = user.username;
-    console.log(user);
-
     this.render();
   }
 
@@ -41,26 +36,19 @@ class CreatePost extends HTMLElement {
     infoPosts.description = e.target.value;
   }
 
-  changeUsername(e: any) {
-    infoPosts.username = e.target.value;
-  }
-
   async changeImage() {
     const urls = await getFileUrls(appState.user);
-    console.log(urls);
-    infoPosts.image = urls; // Asignar todas las URLs
+    infoPosts.image = urls;
   }
 
   async submitForm() {
-    console.log("Post submitted:", infoPosts);
     await this.changeImage();
     addPost(infoPosts);
     dispatch(navigate(Screens.MAIN));
   }
 
-  async render() {
+  render() {
     if (this.shadowRoot) {
-
       const style = this.ownerDocument.createElement("style");
       style.innerHTML = styles;
       this.shadowRoot.appendChild(style);
@@ -82,7 +70,7 @@ class CreatePost extends HTMLElement {
 
       const container = this.ownerDocument.createElement("div");
       container.className = "createpost-wrapper";
-      
+
       const title = this.ownerDocument.createElement("h2");
       title.className = "title";
       title.textContent = "Crear publicación";
@@ -124,5 +112,9 @@ class CreatePost extends HTMLElement {
       container.appendChild(savePost);
 
       this.shadowRoot.appendChild(container);
+    }
+  }
+}
 
-      }  }  }  
+customElements.define("create-post", CreatePost);
+export default CreatePost;
