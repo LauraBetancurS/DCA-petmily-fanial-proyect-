@@ -63,3 +63,10 @@
     text-align: center;
     color: #666666;
 }
+
+.form-container p a {
+    color: #7f4acb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
