@@ -69,7 +69,7 @@ class CreatePost extends HTMLElement {
       banner.className = "banner";
       banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
       this.shadowRoot.appendChild(banner);
-      
+
       const navBar = this.ownerDocument.createElement("nav-bar");
       navBar.className = "navbar";
       navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
@@ -80,34 +80,18 @@ class CreatePost extends HTMLElement {
       navBar.setAttribute("searchicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
       this.shadowRoot.appendChild(navBar);
 
-
-      const imagePost = this.ownerDocument.createElement("input");
-      imagePost.type = "file";
-      imagePost.addEventListener("change", () => {
-        const file = imagePost.files?.[0];
-        console.log(file);
-        
-        if (file) uploadFile(file, appState.user);
-      });
-      this.shadowRoot?.appendChild(imagePost);
-
-      const descriptionPost = this.ownerDocument.createElement("input");
-      descriptionPost.placeholder = "Añade tu descripción";
-      descriptionPost.addEventListener(
-        "change",
-        this.changeDesciption.bind(this)
-      );
-      this.shadowRoot?.appendChild(descriptionPost);
-
-      const savePost = this.ownerDocument.createElement("button");
-      savePost.innerText = "Post";
-      savePost.addEventListener("click", this.submitForm.bind(this));
-      this.shadowRoot?.appendChild(savePost);
-
+      const container = this.ownerDocument.createElement("div");
+      container.className = "createpost-wrapper";
+      
       const title = this.ownerDocument.createElement("h2");
-      title.textContent = "Crea tu publicacion";
-      this.shadowRoot.appendChild(title);
-    }
-  }
-}
-customElements.define("create-post", CreatePost);
+      title.className = "title";
+      title.textContent = "Crear publicación";
+      container.appendChild(title);
+
+      const divider = this.ownerDocument.createElement("div");
+      divider.className = "divider";
+      container.appendChild(divider);
+
+
+
+      }  }  }  
