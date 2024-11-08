@@ -68,7 +68,7 @@ class CreatePost extends HTMLElement {
       navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
       navBar.setAttribute("input", "Buscar en PetNet");
       navBar.setAttribute("communityicon", "http://imgfz.com/i/rxAefV8.png");
-      navBar.setAttribute("profilepic", "path_to_profile_picture");
+      navBar.setAttribute("profilepic", "https://firebasestorage.googleapis.com/v0/b/narracion-hipermedia.appspot.com/o/imgs%2FLaura%20Betancur%2Fpfp1.png?alt=media&token=a288411a-eeb0-46b3-adfc-9db0d3bb6fb6");
       navBar.setAttribute("createicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276");
       navBar.setAttribute("searchicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
       
