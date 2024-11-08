@@ -90,3 +90,16 @@
     cursor: pointer;
 }
 
+.publish-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #AA6AFF;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
