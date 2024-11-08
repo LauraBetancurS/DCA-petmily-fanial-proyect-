@@ -70,7 +70,7 @@ class UserCard extends HTMLElement {
                 <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
                 <div class="card-container">
                     <div class="profile-card">
-                        <img src="${this.profilepic || "urlvacio"}" alt="Profile Picture" class="profile-pic">
+                        <img src="${this.profilepic || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"}" alt="Profile Picture" class="profile-pic">
                         <h2 class="name">${this.name}</h2>
                         <p class="username">@${this.username}</p>
                         <p class="description">${this.profiledesc}</p>
