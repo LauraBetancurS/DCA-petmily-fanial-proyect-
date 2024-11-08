@@ -1,16 +1,18 @@
 import { appState, dispatch, addObserver } from "../../store";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
-import { addPost, getFile, getUser, uploadFile } from "../../utils/firebase";
-import { getFirebaseInstance } from "../../utils/firebase";
-
-
+import { addPost, getFileUrls, getUser, uploadFile } from "../../utils/firebase";
 import styles from "./createpost.css";
 
-const infoPosts = {
+const infoPosts: {
+  username: string;
+  name: string;
+  image: string[]; // Definir explícitamente como un array de strings
+  description: string;
+} = {
   username: "",
   name: "",
-  image: "",
+  image: [], // Inicializar correctamente como un array de strings
   description: "",
 };
 
@@ -29,6 +31,7 @@ class CreatePost extends HTMLElement {
 
     this.render();
   }
+
   changeDesciption(e: any) {
     infoPosts.description = e.target.value;
   }
@@ -37,15 +40,15 @@ class CreatePost extends HTMLElement {
     infoPosts.username = e.target.value;
   }
 
-  async changeImage(){
-    const urlImg = await getFile(appState.user);
-    console.log(urlImg);
-    infoPosts.image = urlImg;
+  async changeImage() {
+    const urls = await getFileUrls(appState.user);
+    console.log(urls);
+    infoPosts.image = urls; // Asignar todas las URLs
   }
 
   async submitForm() {
     console.log("Post submitted:", infoPosts);
-    await this.changeImage()
+    await this.changeImage();
     addPost(infoPosts);
     dispatch(navigate(Screens.MAIN));
   }
@@ -66,7 +69,6 @@ class CreatePost extends HTMLElement {
       });
       this.shadowRoot?.appendChild(imagePost);
 
-
       const descriptionPost = this.ownerDocument.createElement("input");
       descriptionPost.placeholder = "Añade tu descripción";
       descriptionPost.addEventListener(
@@ -82,7 +84,7 @@ class CreatePost extends HTMLElement {
 
       const title = this.ownerDocument.createElement("h2");
       title.textContent = "Crea tu publicacion";
-      this.shadowRoot?.appendChild(title);
+      this.shadowRoot.appendChild(title);
     }
   }
 }

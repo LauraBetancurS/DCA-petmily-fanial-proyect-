@@ -1,5 +1,6 @@
 import { appState } from '../store';
 import storage from './storage';
+import { v4 as uuidv4 } from 'uuid'; // Importar uuid para generar identificadores únicos
 
 let db: any;
 let auth: any;
@@ -33,21 +34,18 @@ export const getFirebaseInstance = async () => {
 export const getUser = async () => {
   const { doc, getDoc } = await import('firebase/firestore');  
   try {
-    const user = await getDoc(doc(db, 'users', appState.user))
+    const user = await getDoc(doc(db, 'users', appState.user));
 
     if (user.exists()) {
-      // Si el documento existe, retorna los datos como un objeto
       return user.data();
     } else {
-      // Si el documento no existe, puedes retornar algo o lanzar un error
       throw new Error("Document does not exists");
     }
   } catch (error) {
-    // Manejo de errores
     console.error("Error al obtener el documento: ", error);
     throw error;
   }
-}
+};
 
 export const registerUser = async (credentials: any) => {
   try {
@@ -97,59 +95,97 @@ export const logOut = async () => {
   } catch (error) {
     console.error("Error al cerrar sesión:", error);
   }
-}
+};
 
 export const addPost = async (posts: any) => {
-	try {
-		const { db } = await getFirebaseInstance();
-		const { collection, addDoc } = await import('firebase/firestore');
+  try {
+    const { db } = await getFirebaseInstance();
+    const { collection, addDoc } = await import('firebase/firestore');
 
-		const where = collection(db, 'posts');
-		await addDoc(where, posts);
-		console.log('Se añadió con exito');
-	} catch (error) {
-		console.error('Error adding document', error);
-	}
+    const where = collection(db, 'posts');
+    await addDoc(where, posts);
+    console.log('Se añadió con exito');
+  } catch (error) {
+    console.error('Error adding document', error);
+  }
 };
 
 export const getPost = async () => {
-	try {
-		const { db } = await getFirebaseInstance();
-		const { collection, getDocs, orderBy } = await import('firebase/firestore');
+  try {
+    const { db } = await getFirebaseInstance();
+    const { collection, getDocs, orderBy } = await import('firebase/firestore');
 
-		const where = collection(db, 'posts');
-		const querySnapshot = await getDocs(where);
-		const data: any[] = [];
+    const where = collection(db, 'posts');
+    const querySnapshot = await getDocs(where);
+    const data: any[] = [];
 
-		querySnapshot.forEach((doc) => {
-			data.push(doc.data());
-		});
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data());
+    });
 
-		return data;
-	} catch (error) {
-		console.error('Error getting posts', error);
-	}
+    return data;
+  } catch (error) {
+    console.error('Error getting posts', error);
+  }
 };
 
-export const uploadFile = async (file: File, id: string) => {
-  const { storageFB } = await getFirebaseInstance();
+export const uploadFile = async (file: File, userId: string) => {
+  const { storageFB, db } = await getFirebaseInstance();
   const { ref, uploadBytes } = await import('firebase/storage');
+  const { doc, setDoc, updateDoc, getDoc } = await import('firebase/firestore');
 
-  const storageRef = ref(storageFB, 'imagesPost/' + id);
+  const uniqueId = uuidv4();
+  const storageRef = ref(storageFB, `imagesPost/${userId}/${uniqueId}`);
+
   try {
     await uploadBytes(storageRef, file);
     console.log('File uploaded');
+
+    const userPostRef = doc(db, 'posts', userId);
+
+    // Verifica si el documento ya existe
+    const docSnapshot = await getDoc(userPostRef);
+    if (!docSnapshot.exists()) {
+      // Si no existe, crea el documento inicial con el array de URLs
+      await setDoc(userPostRef, {
+        imageUrls: [`imagesPost/${userId}/${uniqueId}`]
+      });
+    } else {
+      // Si existe, añade la nueva ruta al array
+      await updateDoc(userPostRef, {
+        imageUrls: (`imagesPost/${userId}/${uniqueId}`),
+      });
+    }
   } catch (error) {
     console.error('Error uploading file:', error);
     throw error;
   }
 };
 
-export const getFile = async (id: string) => {
-  const { storageFB } = await getFirebaseInstance();
+export const getFileUrls = async (userId: string) => {
+  const { storageFB, db } = await getFirebaseInstance();
   const { ref, getDownloadURL } = await import('firebase/storage');
+  const { doc, getDoc } = await import('firebase/firestore');
 
-  const storageRef = ref(storageFB, 'imagesPost/' + id);
-  const urlImg = await getDownloadURL(ref(storageRef))
-  return urlImg;
+  try {
+    const userPostRef = doc(db, 'posts', userId);
+    const docSnapshot = await getDoc(userPostRef);
+
+    if (docSnapshot.exists()) {
+      const data = docSnapshot.data();
+      if (data.imageUrls && Array.isArray(data.imageUrls)) {
+        const urls = await Promise.all(
+          data.imageUrls.map(async (path: string) => {
+            const fileRef = ref(storageFB, path);
+            return await getDownloadURL(fileRef);
+          })
+        );
+        return urls;
+      }
+    }
+    return [];
+  } catch (error) {
+    console.error('Error getting file URLs:', error);
+    throw error;
+  }
 };
