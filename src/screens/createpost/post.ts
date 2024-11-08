@@ -60,9 +60,14 @@ class CreatePost extends HTMLElement {
 
   async render() {
     if (this.shadowRoot) {
+
       const style = this.ownerDocument.createElement("style");
       style.innerHTML = styles;
       this.shadowRoot.appendChild(style);
+
+      const banner = this.ownerDocument.createElement("app-banner");
+      banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
+      this.shadowRoot.appendChild(banner);
 
       const imagePost = this.ownerDocument.createElement("input");
       imagePost.type = "file";
