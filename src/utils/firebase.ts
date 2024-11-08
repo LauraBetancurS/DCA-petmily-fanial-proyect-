@@ -16,16 +16,16 @@ export const getFirebaseInstance = async () => {
       apiKey: "AIzaSyDUrgcTtkTTG92yNPDsgCBpxDaYmo10I7E",
       authDomain: "petmilyapp-fd5b0.firebaseapp.com",
       projectId: "petmilyapp-fd5b0",
-      storageBucket: "petmilyapp-fd5b0.appspot.com",
+      storageBucket: "petmilyapp-fd5b0.firebasestorage.app",
       messagingSenderId: "795760909779",
       appId: "1:795760909779:web:4dbd3846be8264a86c6326",
-      measurementId: "G-FT0WND85H5",
+      measurementId: "G-FT0WND85H5"
     };
 
     const app = initializeApp(firebaseConfig);
     db = getFirestore(app);
     auth = getAuth(app);
-    const storageFB = getStorage(app);
+    storageFB = getStorage(app);
   }
   return { db, auth, storageFB };
 };
@@ -143,4 +143,13 @@ export const uploadFile = async (file: File, id: string) => {
     console.error('Error uploading file:', error);
     throw error;
   }
+};
+
+export const getFile = async (id: string) => {
+  const { storageFB } = await getFirebaseInstance();
+  const { ref, getDownloadURL } = await import('firebase/storage');
+
+  const storageRef = ref(storageFB, 'imagesPost/' + id);
+  const urlImg = await getDownloadURL(ref(storageRef))
+  return urlImg;
 };

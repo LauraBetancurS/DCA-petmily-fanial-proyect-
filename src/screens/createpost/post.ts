@@ -1,7 +1,8 @@
 import { appState, dispatch, addObserver } from "../../store";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
-import { addPost, getUser, uploadFile } from "../../utils/firebase";
+import { addPost, getFile, getUser, uploadFile } from "../../utils/firebase";
+import { getFirebaseInstance } from "../../utils/firebase";
 
 
 import styles from "./createpost.css";
@@ -36,8 +37,15 @@ class CreatePost extends HTMLElement {
     infoPosts.username = e.target.value;
   }
 
+  async changeImage(){
+    const urlImg = await getFile(appState.user);
+    console.log(urlImg);
+    infoPosts.image = urlImg;
+  }
+
   async submitForm() {
     console.log("Post submitted:", infoPosts);
+    await this.changeImage()
     addPost(infoPosts);
     dispatch(navigate(Screens.MAIN));
   }
@@ -52,9 +60,12 @@ class CreatePost extends HTMLElement {
       imagePost.type = "file";
       imagePost.addEventListener("change", () => {
         const file = imagePost.files?.[0];
+        console.log(file);
+        
         if (file) uploadFile(file, appState.user);
       });
       this.shadowRoot?.appendChild(imagePost);
+
 
       const descriptionPost = this.ownerDocument.createElement("input");
       descriptionPost.placeholder = "Añade tu descripción";

@@ -5,7 +5,8 @@ import CardPost, { Attribute } from "../../components/cardspost/cardpost";
 import "../../components/cardspost/cardpost";
 import "../../components/publicitycard/publicitycard";
 import { data } from "../../data/data";
-import { getPost } from "../../utils/firebase";
+import { getPost, getUser } from "../../utils/firebase";
+import { appState } from "../../store";
 
 interface User {
   uid: number;
@@ -50,10 +51,14 @@ class Main extends HTMLElement {
       this.posts.push(cardPost);
     });
 
+    console.log(appState.user);
+
+    
+
     this.render();
   }
 
-  render() {
+  async render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="../src/screens/main/main.css">
@@ -83,11 +88,18 @@ class Main extends HTMLElement {
       leftSidebar.className = "left-sidebar";
 
       // User Card - Se coloca en el sidebar izquierdo en desktop
-      const userCard = this.ownerDocument.createElement("user-banner");
-      userCard.setAttribute("profilepic", this.currentUserPic);
-      userCard.setAttribute("name", this.currentUserName);
-      userCard.setAttribute("username", "doglover99");
-      userCard.setAttribute("profiledesc", this.currentUserDesc);
+      // const userCard = this.ownerDocument.createElement("user-banner");
+      // userCard.setAttribute("profilepic", this.currentUserPic);
+      // userCard.setAttribute("name", this.currentUserName);
+      // userCard.setAttribute("username", "doglover99");
+      // userCard.setAttribute("profiledesc", this.currentUserDesc);
+      const userData = await getUser();
+     // User Card - Se coloca en el sidebar izquierdo en desktop
+     const userCard = this.ownerDocument.createElement("user-banner");
+     userCard.setAttribute("profilepic", this.currentUserPic);
+     userCard.setAttribute("name", userData.name);
+     userCard.setAttribute("username", userData.username);
+     userCard.setAttribute("profiledesc", this.currentUserDesc);
 
       // Verificación para agregar `topUserMenu` solo en la vista móvil
       const topUserMenu = this.ownerDocument.createElement("div");
