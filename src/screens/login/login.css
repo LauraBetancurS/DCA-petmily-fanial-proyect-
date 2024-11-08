@@ -70,3 +70,9 @@
     font-weight: bold;
 }
 
+.image-container {
+    max-width: 50%;
+    height: 100vh;
+    display: flex;
+   
+}
