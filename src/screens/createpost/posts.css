@@ -157,3 +157,13 @@
         padding: 30px;
         max-width: 90%;
     }
+    .title {
+        font-size: 22px;
+    }
+
+    .description-input,
+    .image-upload-container,
+    .publish-button {
+        font-size: 15px;
+    }
+}
