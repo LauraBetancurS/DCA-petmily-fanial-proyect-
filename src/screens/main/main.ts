@@ -118,11 +118,11 @@ class Main extends HTMLElement {
       rightSidebar.className = "right-sidebar";
 
       // User Card - Se coloca en el sidebar izquierdo en desktop
-      const userCard = this.ownerDocument.createElement("user-banner");
-      userCard.setAttribute("profilepic", this.currentUserPic);
-      userCard.setAttribute("name", this.currentUserName);
-      userCard.setAttribute("username", "doglover99");
-      userCard.setAttribute("profiledesc", this.currentUserDesc);
+      // const userCard = this.ownerDocument.createElement("user-banner");
+      // userCard.setAttribute("profilepic", this.currentUserPic);
+      // userCard.setAttribute("name", this.currentUserName);
+      // userCard.setAttribute("username", "doglover99");
+      // userCard.setAttribute("profiledesc", this.currentUserDesc);
 
       // Añadir los posts al contenedor del contenido principal
       this.posts.forEach((post) => {
