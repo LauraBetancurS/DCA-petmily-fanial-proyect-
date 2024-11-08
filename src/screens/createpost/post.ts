@@ -53,6 +53,9 @@ class CreatePost extends HTMLElement {
       style.innerHTML = styles;
       this.shadowRoot.appendChild(style);
 
+      const everythingContainer = this.ownerDocument.createElement("section");
+      everythingContainer.className = "everything-container";
+
       const banner = this.ownerDocument.createElement("app-banner");
       banner.className = "banner";
       banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");

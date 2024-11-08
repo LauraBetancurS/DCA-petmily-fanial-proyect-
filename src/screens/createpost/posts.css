@@ -147,50 +147,71 @@
         font-size: 16px;
     }
 
-
-@media (max-width: 768px) {
-    .navbar {
-        padding: 15px;
+    @media (max-width: 768px) {
+       
+        /* Haceeverything-containerr que el banner cubra toda la pantalla */
+        .banner {
+            width: 100%;
+            height: 100%; /* Ocupa toda la altura de la pantalla */
+            position: fixed; /* Fija el banner al fondo */
+            top: 0;
+            left: 0;
+            z-index: -1; /* Envía el banner al fondo para que el contenido se muestre sobre él */
+            
+        }
+    
+        .navbar-container {
+            position: relative;
+            z-index: 10;
+        }
+    
+        .createpost-wrapper {
+            padding: 30px;
+            max-width: 90%;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+            margin-top: 100px;
+        }
+    
+        .title {
+            font-size: 24px;
+        }
+    
+        .description-input,
+        .image-upload-container,
+        .publish-button {
+            font-size: 15px;
+        }
     }
-
-    .createpost-wrapper {
-        padding: 30px;
-        max-width: 90%;
+    
+    @media (max-width: 480px) {
+         .body {
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
-    .title {
-        font-size: 22px;
+        .navbar {
+            padding: 10px;
+        }
+    
+        .createpost-wrapper {
+            padding: 20px;
+            max-width: 95%;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin-top: 120px;
+        }
+    
+        .title {
+            font-size: 20px;
+        }
+    
+        .description-input,
+        .image-upload-container,
+        .publish-button {
+            font-size: 14px;
+        }
+    
+        .banner {
+            height: 100vh;
+        }
     }
-
-    .description-input,
-    .image-upload-container,
-    .publish-button {
-        font-size: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 10px;
-    }
-
-    .createpost-wrapper {
-        padding: 20px;
-        max-width: 95%;
-    }
-
-    .title {
-        font-size: 20px;
-    }
-
-    .description-input,
-    .image-upload-container,
-    .publish-button {
-        font-size: 14px;
-    }
-
-    .banner {
-        height: 200px;
-    }
-}
-
-
