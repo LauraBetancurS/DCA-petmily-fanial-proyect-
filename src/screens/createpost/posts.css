@@ -7,9 +7,30 @@
 }
 
 .navbar {
-    position: relative;
-    top: 0;
-    width: 100%;
+    
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px;
+        background-color: #f8f8f8;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 50;
+        max-width: 1800px;
+    
+
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: center; /* Centra la navbar horizontalmente */
+   
+    width: 80%;
+    margin-bottom: 20px; /* Espacio debajo de la navbar */
 }
 
 /* Contenedor principal */
@@ -53,7 +74,7 @@
     width: 100%;
     padding: 16px; /* Aumenta el padding para hacerlo más espacioso */
     background-color: #e0e0e0;
-    color: #fff;
+    color: #000000;
     border: none;
     border-radius: 8px;
     font-size: 18px; /* Aumenta el tamaño del texto */
