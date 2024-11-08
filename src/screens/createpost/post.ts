@@ -101,5 +101,14 @@ class CreatePost extends HTMLElement {
       const imageUploadContainer = this.ownerDocument.createElement("div");
       imageUploadContainer.className = "image-upload-container";
 
+      const imagePost = this.ownerDocument.createElement("input");
+      imagePost.type = "file";
+      imagePost.className = "image-input";
+      imagePost.addEventListener("change", () => {
+        const file = imagePost.files?.[0];
+        if (file) uploadFile(file, appState.user);
+      });
+      imageUploadContainer.appendChild(imagePost);
+
 
       }  }  }  
