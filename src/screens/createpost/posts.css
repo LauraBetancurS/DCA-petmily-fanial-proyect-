@@ -75,12 +75,12 @@
     position: relative;
     text-align: center;
 }
+
 .image-label {
     font-size: 14px;
     color: #888;
     margin-top: 10px;
 }
-
 
 .image-input {
     position: absolute;
@@ -90,6 +90,7 @@
     cursor: pointer;
 }
 
+/* Botón de publicación */
 .publish-button {
     width: 100%;
     padding: 12px;
@@ -102,4 +103,8 @@
     cursor: pointer;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.publish-button:hover {
+    background-color: #935bdb;
 }
