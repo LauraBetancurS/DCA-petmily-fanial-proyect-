@@ -43,7 +43,6 @@ class Main extends HTMLElement {
 
     if (appState.posts.length > 0) {
       this.render();
-      console.log(appState.posts);
       
     } else {
       const posts = await getPosts();
