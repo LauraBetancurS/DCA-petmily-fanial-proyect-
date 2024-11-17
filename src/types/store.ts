@@ -6,6 +6,10 @@ export type AppState = {
 	user: string; // El ID del usuario autenticado
 };
 
+export enum PersistanceKeys {
+	"STORE" = "STORE",
+  }  
+
 export enum Screens {
 	'LOGIN' = 'LOGIN',
 	'MAIN' = 'MAIN', 

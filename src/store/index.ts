@@ -1,9 +1,10 @@
 import { reducer } from './reducer';
 import Storage from '../utils/storage';
-import { AppState, Observer, Screens } from '../types/store';
+import { AppState, Observer, PersistanceKeys, Screens } from '../types/store';
 import { onAuthStateChanged } from 'firebase/auth';
 import { getFirebaseInstance } from '../utils/firebase';
 import { navigate, setUserCredentials } from './actions';
+
 
 const onAuth = async () => {
 	const { auth } = await getFirebaseInstance();
@@ -31,6 +32,8 @@ export let appState = initialState;
 
 let observers: Observer[] = [];
 
+const persistStore = (state: AppState) =>
+	Storage.set(PersistanceKeys.STORE, JSON.stringify(state));
 // Crear el dispatch para actualizar el estado
 export const dispatch = (action: any) => {
 	const clone = JSON.parse(JSON.stringify(appState)); // Clona el estado actual
@@ -38,6 +41,8 @@ export const dispatch = (action: any) => {
 	console.log(`estado actualizado desde ${action.action} y ${action.payload}`);
 	appState = newState;
 
+
+	persistStore(newState);
 	// Notifica a los observadores para que se actualicen
 	observers.forEach((o: any) => o.render());
 };

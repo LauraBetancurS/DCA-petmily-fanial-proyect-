@@ -13,7 +13,7 @@ export const reducer = (currentAction: any, currentState: any) => {
 		case Actions.GETPOSTS:
 			return {
 				...currentState,
-				products: payload,
+				posts: payload,
 			};
 
 		case Actions.SETUSERCREDENTIALS:

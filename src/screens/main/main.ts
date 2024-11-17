@@ -6,7 +6,9 @@ import "../../components/cardspost/cardpost";
 import "../../components/publicitycard/publicitycard";
 import { data } from "../../data/data";
 import { getPost, getUser } from "../../utils/firebase";
-import { appState } from "../../store";
+import { appState, dispatch } from "../../store";
+import { getPosts } from "../../store/actions";
+import { dashboardPost } from "../../types/post";
 
 interface User {
   uid: number;
@@ -38,26 +40,15 @@ class Main extends HTMLElement {
   }
 
   async connectedCallback() {
-    const posts = await getPost();
-    posts?.forEach((post) => {
-      const cardPost = this.ownerDocument.createElement(
-        "card-post"
-      ) as CardPost;
-      cardPost.setAttribute(Attribute.name, post.name);
-      cardPost.setAttribute(Attribute.username, post.username);
-      cardPost.setAttribute(Attribute.profileimg, post.profileImg);
-      cardPost.setAttribute(Attribute.postdesc, post.description);
-      cardPost.setAttribute(Attribute.imgpost, post.image);
-      this.posts.push(cardPost);
 
-      console.log(post);
-    });
-
-    console.log(appState.user);
-
-    
-
-    this.render();
+    if (appState.posts.length > 0) {
+      this.render();
+      console.log(appState.posts);
+      
+    } else {
+      const posts = await getPosts();
+      dispatch(posts);    
+    }
   }
 
   async render() {
@@ -89,19 +80,13 @@ class Main extends HTMLElement {
       const leftSidebar = this.ownerDocument.createElement("div");
       leftSidebar.className = "left-sidebar";
 
-      // User Card - Se coloca en el sidebar izquierdo en desktop
-      // const userCard = this.ownerDocument.createElement("user-banner");
-      // userCard.setAttribute("profilepic", this.currentUserPic);
-      // userCard.setAttribute("name", this.currentUserName);
-      // userCard.setAttribute("username", "doglover99");
-      // userCard.setAttribute("profiledesc", this.currentUserDesc);
       const userData = await getUser();
-     // User Card - Se coloca en el sidebar izquierdo en desktop
-     const userCard = this.ownerDocument.createElement("user-banner");
-     userCard.setAttribute("profilepic", this.currentUserPic);
-     userCard.setAttribute("name", userData.name);
-     userCard.setAttribute("username", userData.username);
-     userCard.setAttribute("profiledesc", this.currentUserDesc);
+      // User Card - Se coloca en el sidebar izquierdo en desktop
+      const userCard = this.ownerDocument.createElement("user-banner");
+      userCard.setAttribute("profilepic", this.currentUserPic);
+      userCard.setAttribute("name", userData.name);
+      userCard.setAttribute("username", userData.username);
+      userCard.setAttribute("profiledesc", this.currentUserDesc);
 
       // Verificación para agregar `topUserMenu` solo en la vista móvil
       const topUserMenu = this.ownerDocument.createElement("div");
@@ -117,17 +102,18 @@ class Main extends HTMLElement {
       const rightSidebar = this.ownerDocument.createElement("div");
       rightSidebar.className = "right-sidebar";
 
-      // User Card - Se coloca en el sidebar izquierdo en desktop
-      // const userCard = this.ownerDocument.createElement("user-banner");
-      // userCard.setAttribute("profilepic", this.currentUserPic);
-      // userCard.setAttribute("name", this.currentUserName);
-      // userCard.setAttribute("username", "doglover99");
-      // userCard.setAttribute("profiledesc", this.currentUserDesc);
 
-      // Añadir los posts al contenedor del contenido principal
-      this.posts.forEach((post) => {
-        contentContainer.appendChild(post);
-      });
+      appState.posts.forEach((post: dashboardPost) => {
+        const cardPost = this.ownerDocument.createElement(
+          "card-post"
+        ) as CardPost;
+        cardPost.setAttribute(Attribute.name, post.name);
+        cardPost.setAttribute(Attribute.username, post.username);
+        cardPost.setAttribute(Attribute.profileimg, post.profileImg);
+        cardPost.setAttribute(Attribute.postdesc, post.description);
+        cardPost.setAttribute(Attribute.imgpost, post.image);
+        contentContainer.appendChild(cardPost);
+      });   
 
       // Publicity Card - Se añade al contenedor del contenido principal
       const publicityCard = this.ownerDocument.createElement("publicity-card");
