@@ -94,10 +94,10 @@ class Profile extends HTMLElement {
         "description",
         "Juntos brindamos el amor y el cuidado que merecen. Comparte experiencias, aprende de otros propietarios y sé parte de un grupo que valora el bienestar animal tanto como tú. ¡Haz que cada huella cuente!"
       );
-      // publicityCard.setAttribute(
-      //   "img",
-      //   "https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2FimgPublicityCard.png?alt=media&token=bba7b6d2-4dd4-4ab7-9d88-2e69638a2a49"
-      // );
+      publicityCard.setAttribute(
+        "img",
+        "https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2Ffoto1%201.png?alt=media&token=2db66df2-6b62-4c65-bcdf-c82b4acad636"
+      );
 
       navbarContainer.appendChild(navBar);
       this.shadowRoot.appendChild(navbarContainer);
