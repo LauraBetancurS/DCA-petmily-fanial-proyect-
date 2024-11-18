@@ -1,6 +1,9 @@
 import { appState, dispatch, addObserver } from "../../store";
+import { getPost, getUser } from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
+import "../../components/publicitycard/publicitycard";
+import "../../components/user/user";
 
 import styles from "./profile.css";
 
@@ -27,11 +30,17 @@ class Profile extends HTMLElement {
     this.render();
   }
 
-  render() {
+  async render() {
     if (this.shadowRoot) {
       const style = this.ownerDocument.createElement("style");
       style.innerHTML = styles;
       this.shadowRoot.appendChild(style);
+
+      const mainContainer = this.ownerDocument.createElement("section");
+      mainContainer.className = "main-container";
+
+      const contentContainer = this.ownerDocument.createElement("div");
+      contentContainer.className = "content-container";
 
       const banner = this.ownerDocument.createElement("app-banner");
       banner.className = "banner";
@@ -58,8 +67,45 @@ class Profile extends HTMLElement {
         "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029"
       );
 
+      // const userData = appState.user.find((user: User) => user.uid === appState.currentUser.uid);
+
+      const leftSidebar = this.ownerDocument.createElement("div");
+      leftSidebar.className = "left-sidebar";
+
+      const userData = await getUser();
+      const userCard = this.ownerDocument.createElement("user-profile");
+      userCard.setAttribute("profilepic", this.currentUserPic);
+      userCard.setAttribute("name", userData.name);
+      userCard.setAttribute("username", userData.username);
+      userCard.setAttribute("profiledesc", this.currentUserDesc);
+
+      leftSidebar.appendChild(userCard);
+      this.shadowRoot.appendChild(leftSidebar);
+
+      const rightSidebar = this.ownerDocument.createElement("div");
+      rightSidebar.className = "right-sidebar";
+
+      const publicityCard = this.ownerDocument.createElement("publicity-card");
+      publicityCard.setAttribute(
+        "cardtitle",
+        "Únase a una de nuestras comunidades"
+      );
+      publicityCard.setAttribute(
+        "description",
+        "Juntos brindamos el amor y el cuidado que merecen. Comparte experiencias, aprende de otros propietarios y sé parte de un grupo que valora el bienestar animal tanto como tú. ¡Haz que cada huella cuente!"
+      );
+      // publicityCard.setAttribute(
+      //   "img",
+      //   "https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2FimgPublicityCard.png?alt=media&token=bba7b6d2-4dd4-4ab7-9d88-2e69638a2a49"
+      // );
+
       navbarContainer.appendChild(navBar);
       this.shadowRoot.appendChild(navbarContainer);
+      this.shadowRoot.appendChild(mainContainer);
+      rightSidebar.appendChild(publicityCard);
+      mainContainer.appendChild(leftSidebar);
+      mainContainer.appendChild(contentContainer);
+      mainContainer.appendChild(rightSidebar);
     }
   }
 }
