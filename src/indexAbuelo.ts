@@ -44,11 +44,14 @@ class AppContainer extends HTMLElement {
 
         case Screens.PROFILE:
           const profile = this.ownerDocument.createElement("app-profile");
+          if (appState.params?.username) {
+            profile.setAttribute("username",appState.params.username)
+          }
           this.shadowRoot.appendChild(profile);
           break;
 
           case Screens.EDIT:
-            const edit = this.ownerDocument.createElement("app-profile");
+            const edit = this.ownerDocument.createElement("edit-profile");
             this.shadowRoot.appendChild(edit);
             break;
 
