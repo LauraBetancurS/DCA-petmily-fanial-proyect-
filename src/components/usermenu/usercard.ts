@@ -1,63 +1,89 @@
-import { data } from '../../data/data';
 import { datacommunity } from '../../data/datacommunity';
-import { logOut } from '../../utils/firebase';
-import { dispatch } from '../../store';
+import { getDocumentIdByUsername, logOut } from '../../utils/firebase';
+import { appState, dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
+
 
 export enum Attribute {
     'profilepic' = 'profilepic',
     'name' = 'name',
+    'uid' = 'uid',
     'username' = 'username',
     'profiledesc' = 'profiledesc',
     'communitydata' = 'communitydata',
 }
 
+
 class UserCard extends HTMLElement {
+    uid?: string;
     profilepic?: string;
     name?: string;
     username?: string;
     profiledesc?: string;
     communitydata?: string;
 
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
     }
 
+
     static get observedAttributes() {
         return Object.keys(Attribute) as Array<Attribute>;
     }
+
 
     attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
         this[propName] = newValue;
         this.render();
     }
 
+
     connectedCallback() {
         this.render();
-        this.addEventListeners();
     }
+
 
     addEventListeners() {
         const logoutButton = this.shadowRoot?.querySelector('.logout-btn');
         if (logoutButton) {
-            logoutButton.addEventListener('click', () => {
+            logoutButton.addEventListener('click', async () => {
                 console.log('logout clickeado');
                 logOut();
+                dispatch(navigate(Screens.LOGIN))
             });
         }
+
 
         const myProfileBtn = this.shadowRoot?.querySelector('.btn');
-        if (myProfileBtn) {
-            myProfileBtn.addEventListener('click', () => {
-                console.log('my profile clickeado');
-                dispatch(navigate(Screens.PROFILE));
-            });
-        }
+
+
+        myProfileBtn?.addEventListener('click', async () => {
+            if (!this.username) {
+                return
+            }
+
+
+            const profileId = await getDocumentIdByUsername(this.username);
+
+
+            dispatch(navigate(
+                appState.screen === Screens.PROFILE && profileId === appState.user ?
+                    Screens.EDIT : Screens.PROFILE,
+                { username: this.username }))
+        });
+
+
     }
 
-    render() {
+
+
+
+
+
+    async render() {
         if (this.shadowRoot) {
             const communityItems = datacommunity.map(community => `
                 <div class="community-item">
@@ -65,6 +91,20 @@ class UserCard extends HTMLElement {
                     <span class="community-name">${community.communityname}</span>
                 </div>
             `).join('');
+
+
+            const buttonLabel = this.username
+                ? (await getDocumentIdByUsername(this.username)) === appState.user
+                    ? appState.screen === Screens.PROFILE
+                        ? 'Edit my Profile'
+                        : appState.screen === Screens.MAIN
+                            ? 'My Profile'
+                            : 'Label'
+                    : 'Label'
+                : 'Label';
+
+
+
 
             this.shadowRoot.innerHTML = `
                 <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
@@ -74,7 +114,7 @@ class UserCard extends HTMLElement {
                         <h2 class="name">${this.name}</h2>
                         <p class="username">@${this.username}</p>
                        
-                        <button class="btn">Mi perfil</button>
+                        <button class="btn">${buttonLabel}</button>
                     </div>
                     <div class="community-card">
                         <h2 class="community-title">Communities</h2>
@@ -91,9 +131,20 @@ class UserCard extends HTMLElement {
                     </div>
                 </div>
             `;
+
+
+            this.addEventListeners();
+
+
         }
     }
 }
 
+
 customElements.define('user-banner', UserCard);
 export default UserCard;
+
+
+
+
+
