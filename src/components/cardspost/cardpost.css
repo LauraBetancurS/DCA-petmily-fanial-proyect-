@@ -37,3 +37,10 @@
   flex-direction: column;
   justify-content: center;
 }
+.info-post h4 {
+  cursor: pointer;
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}
