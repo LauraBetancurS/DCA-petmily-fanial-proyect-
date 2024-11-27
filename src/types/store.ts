@@ -15,8 +15,10 @@ export enum Screens {
 	'MAIN' = 'MAIN', 
 	'REGISTER' = 'REGISTER',
 	'CREATEPOST' = 'CREATEPOST',
-	'PROFILE' = 'PROFILE'
+	'PROFILE' = 'PROFILE',
+	'EDIT' = 'EDIT',
 }
+
 
 export enum Actions {
 	'NAVIGATE' = 'NAVIGATE',
