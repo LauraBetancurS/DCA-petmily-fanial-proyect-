@@ -26,6 +26,7 @@ const initialState: AppState = {
 	screen: 'LOGIN',
 	posts: [],
 	user: '',
+	params: {},
 };
 
 export let appState = initialState;
