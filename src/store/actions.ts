@@ -2,10 +2,10 @@ import { Actions, Screens } from '../types/store';
 import { getPost } from '../utils/firebase';
 
 
-export const navigate = (screen: Screens) => {
+export const navigate = (screen: Screens, params?: any) => {
 	return {
 		action: (Actions.NAVIGATE),
-		payload: screen,
+		payload: {screen, params},
 	};
 };
 
