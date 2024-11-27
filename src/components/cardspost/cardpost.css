@@ -16,3 +16,8 @@
   overflow: hidden;
   transition: box-shadow 0.3s ease;
 }
+
+.post-container {
+  display: flex;
+  padding: 15px 20px;
+}
