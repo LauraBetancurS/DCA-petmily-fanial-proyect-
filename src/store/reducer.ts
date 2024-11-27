@@ -7,7 +7,8 @@ export const reducer = (currentAction: any, currentState: any) => {
 		case Actions.NAVIGATE:
 			return {
 				...currentState,
-				screen: payload,				
+				screen: payload.screen,
+				params : payload.params || {}				
 			};
 
 		case Actions.GETPOSTS:
@@ -26,3 +27,4 @@ export const reducer = (currentAction: any, currentState: any) => {
 			return currentState;
 	}
 };
+
