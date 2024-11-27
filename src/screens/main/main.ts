@@ -79,9 +79,11 @@ class Main extends HTMLElement {
       leftSidebar.className = "left-sidebar";
 
       const userData = await getUser();
+      
       // User Card - Se coloca en el sidebar izquierdo en desktop
       const userCard = this.ownerDocument.createElement("user-banner");
       userCard.setAttribute("profilepic", this.currentUserPic);
+      userCard.setAttribute("uid", appState.user)
       userCard.setAttribute("name", userData.name);
       userCard.setAttribute("username", userData.username);
       userCard.setAttribute("profiledesc", this.currentUserDesc);
