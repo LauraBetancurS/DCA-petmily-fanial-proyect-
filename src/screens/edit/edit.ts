@@ -18,7 +18,7 @@ class EditProfile extends HTMLElement {
   }
 
   async connectedCallback() {
-    await this.fetchUserData(); // Obtén los datos actuales del usuario autenticado
+    await this.fetchUserData();
     this.render();
     this.addEventListeners();
   }
@@ -53,7 +53,6 @@ class EditProfile extends HTMLElement {
           return;
         }
 
-        // Validar longitud de la contraseña
         const password = passwordInput?.value;
         if (password && password.length < 6) {
           alert("Password must be at least 6 characters long.");
@@ -101,6 +100,7 @@ class EditProfile extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../src/components/editprofile/editprofile.css">
     `;
+
     const navBar = this.ownerDocument.createElement("nav-bar");
     navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
     navBar.setAttribute("input", "Search PetNet");
@@ -134,6 +134,9 @@ class EditProfile extends HTMLElement {
     const form = this.ownerDocument.createElement("form");
     form.className = "edit-form";
 
+    const inputContainer = this.ownerDocument.createElement("div");
+    inputContainer.className = "input-container";
+
     const createInputField = (
       labelText: string,
       id: string,
@@ -149,8 +152,8 @@ class EditProfile extends HTMLElement {
       input.id = id;
       input.placeholder = placeholder;
 
-      form.appendChild(label);
-      form.appendChild(input);
+      inputContainer.appendChild(label);
+      inputContainer.appendChild(input);
     };
 
     createInputField(
@@ -178,6 +181,7 @@ class EditProfile extends HTMLElement {
     saveButton.className = "save-btn";
     saveButton.textContent = "Save Changes";
 
+    form.appendChild(inputContainer);
     form.appendChild(saveButton);
     container.appendChild(title);
     container.appendChild(form);
