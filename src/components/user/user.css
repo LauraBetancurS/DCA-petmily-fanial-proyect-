@@ -42,7 +42,7 @@
     word-wrap: break-word;
   }
   
-  .btn {
+  .btnEdit {
     background-color: #AA6AFF;
     color: white;
     padding: 10px;
@@ -54,7 +54,7 @@
   
   }
   
-  .btn:hover {
+  .btnEdit:hover {
     background-color: #935bdb;
     transition: transform 0.3s ease;
     transform: translateY(-3px)

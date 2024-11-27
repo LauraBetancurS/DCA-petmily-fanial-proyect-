@@ -1,4 +1,3 @@
-import { data } from '../../data/data';
 import { datacommunity } from '../../data/datacommunity';
 import { logOut } from '../../utils/firebase';
 import { dispatch } from '../../store';
@@ -48,11 +47,11 @@ class UserProfile extends HTMLElement {
             });
         }
 
-        const myProfileBtn = this.shadowRoot?.querySelector('.btn');
-        if (myProfileBtn) {
-            myProfileBtn.addEventListener('click', () => {
-                console.log('my profile clickeado');
-                dispatch(navigate(Screens.PROFILE));
+        const editProfile = this.shadowRoot?.querySelector('.btnEdit');
+        if (editProfile) {
+            editProfile.addEventListener('click', () => {
+                console.log('pantalla navega a edit clickeado');
+                dispatch(navigate(Screens.EDIT));
             });
         }
     }
@@ -74,7 +73,7 @@ class UserProfile extends HTMLElement {
                         <h2 class="name">${this.name}</h2>
                         <p class="username">@${this.username}</p>
                        
-                        <button class="btn">Editar Perfil ✏️</button>
+                        <button class="btnEdit">Editar Perfil ✏️</button>
                     </div>
                     <div class="community-card">
                         <h2 class="community-title">Communities</h2>
