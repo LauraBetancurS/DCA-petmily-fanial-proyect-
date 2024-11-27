@@ -1,6 +1,3 @@
-//cardpost.ts
-
-
 import { dispatch } from "../../store";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
