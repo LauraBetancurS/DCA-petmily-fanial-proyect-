@@ -6,6 +6,7 @@ import {
   updateUserPosts,
 } from "../../utils/firebase";
 import "../../components/navbar/navbar";
+import "../../components/banner/banner";
 
 class EditProfile extends HTMLElement {
   userData: any;
