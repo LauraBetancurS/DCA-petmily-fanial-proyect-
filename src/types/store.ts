@@ -4,6 +4,7 @@ export type AppState = {
 	screen: string;
 	posts: [];
 	user: string; // El ID del usuario autenticado
+	params : {[key:string] : any};
 };
 
 export enum PersistanceKeys {
