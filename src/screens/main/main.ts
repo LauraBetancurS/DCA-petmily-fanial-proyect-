@@ -1,4 +1,3 @@
-import * as components from "../../components/indexPadre";
 import "../../components/navbar/navbar";
 import "../../components/usermenu/usercard";
 import CardPost, { Attribute } from "../../components/cardspost/cardpost";
@@ -101,7 +100,8 @@ class Main extends HTMLElement {
       const rightSidebar = this.ownerDocument.createElement("div");
       rightSidebar.className = "right-sidebar";
 
-
+      //Este es el foreach que falta poner en la screen profile
+      //para que se rendericen los post en el contenedor "content-container"
       appState.posts.forEach((post: dashboardPost) => {
         const cardPost = this.ownerDocument.createElement(
           "card-post"
