@@ -23,3 +23,9 @@
     flex-direction: column;
     gap: 20px;
   }
+
+  .left-container {
+    border-color: black;
+    width: 20px;
+    height: 100%;
+  }

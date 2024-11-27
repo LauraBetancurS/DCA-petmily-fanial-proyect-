@@ -39,6 +39,8 @@ class Profile extends HTMLElement {
       const mainContainer = this.ownerDocument.createElement("section");
       mainContainer.className = "main-container";
 
+      //El contenedor de los posts, aun no esta el foreach de los post 
+      //porque se deben de renderizar solo los del perfil clickeado
       const contentContainer = this.ownerDocument.createElement("div");
       contentContainer.className = "content-container";
 
@@ -57,7 +59,7 @@ class Profile extends HTMLElement {
       navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
       navBar.setAttribute("input", "Search PetNet");
       navBar.setAttribute("communityIcon", "http://imgfz.com/i/rxAefV8.png");
-      navBar.setAttribute("profilePic", this.currentUserPic);
+      navBar.setAttribute("profilePic", "https://firebasestorage.googleapis.com/v0/b/narracion-hipermedia.appspot.com/o/imgs%2FLaura%20Betancur%2Fpfp1.png?alt=media&token=a288411a-eeb0-46b3-adfc-9db0d3bb6fb6");
       navBar.setAttribute(
         "createicon",
         "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276"
@@ -66,8 +68,6 @@ class Profile extends HTMLElement {
         "searchicon",
         "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029"
       );
-
-      // const userData = appState.user.find((user: User) => user.uid === appState.currentUser.uid);
 
       const leftSidebar = this.ownerDocument.createElement("div");
       leftSidebar.className = "left-sidebar";
