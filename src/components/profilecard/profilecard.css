@@ -1,0 +1,49 @@
+/* profilecard.css */
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #AA6AFF; 
+    border-radius: 20px;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: none; /* Fondo morado */
+    border-radius: 20px;
+    padding: 2rem;
+    width: 300px; /* Ancho del card */
+    height: 400px; /* Alto del card */
+    
+  }
+  
+  .profile-pic {
+    width: 120px; /* Tamaño del círculo */
+    height: 120px;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover;
+    border: 4px solid #d4bbff; /* Borde claro */
+  }
+  
+  .name {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff; /* Texto blanco */
+    text-align: center;
+  }
+  
+  .username {
+    font-size: 1rem;
+    color: #e0d4ff; /* Texto en un tono más claro */
+    text-align: center;
+    margin-top: 0.5rem;
+  }
