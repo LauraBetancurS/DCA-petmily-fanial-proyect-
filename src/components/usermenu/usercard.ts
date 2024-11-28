@@ -96,12 +96,12 @@ class UserCard extends HTMLElement {
             const buttonLabel = this.username
                 ? (await getDocumentIdByUsername(this.username)) === appState.user
                     ? appState.screen === Screens.PROFILE
-                        ? 'Edit my Profile'
+                        ? 'Editar Perfil ✏️'
                         : appState.screen === Screens.MAIN
-                            ? 'My Profile'
-                            : 'Label'
-                    : 'Label'
-                : 'Label';
+                            ? 'Mi perfil'
+                            : 'Compartir perfil'
+                    : 'Compartir perfil'
+                : 'Compartir perfil';
 
 
 
