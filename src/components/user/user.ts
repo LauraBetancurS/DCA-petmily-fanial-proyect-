@@ -1,6 +1,6 @@
 import { datacommunity } from '../../data/datacommunity';
-import { logOut } from '../../utils/firebase';
-import { dispatch } from '../../store';
+import { logOut, getFileUrlProfileImg } from '../../utils/firebase';
+import { appState, dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
 
@@ -33,9 +33,23 @@ class UserProfile extends HTMLElement {
         this.render();
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        // Si no se define el atributo de imagen, busca la URL desde Firebase
+        if (!this.profilepic) {
+            this.profilepic = await this.fetchProfilePic();
+        }
         this.render();
         this.addEventListeners();
+    }
+
+    async fetchProfilePic(): Promise<string> {
+        try {
+            const profilePicUrl = await getFileUrlProfileImg(appState.user);
+            return profilePicUrl || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg";
+        } catch (error) {
+            console.error("Error fetching profile picture:", error);
+            return "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"; // Imagen por defecto
+        }
     }
 
     addEventListeners() {
@@ -69,9 +83,9 @@ class UserProfile extends HTMLElement {
                 <link rel="stylesheet" href="../src/components/user/user.css" />
                 <div class="card-container">
                     <div class="profile-card">
-                        <img src="${this.profilepic || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"}" alt="Profile Picture" class="profile-pic">
-                        <h2 class="name">${this.name}</h2>
-                        <p class="username">@${this.username}</p>
+                        <img src="${this.profilepic}" alt="Profile Picture" class="profile-pic">
+                        <h2 class="name">${this.name || "Usuario"}</h2>
+                        <p class="username">@${this.username || "Sin nombre"}</p>
                        
                         <button class="btnEdit">Editar Perfil ✏️</button>
                     </div>
