@@ -7,8 +7,8 @@ import {
 } from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
-import styles from "./edit.css"; // Importa la hoja de estilos como módulo si está configurado tu bundler.
-
+import styles from "./edit.css"; 
+import  "../../components/profilecard/profilecard";
 class EditProfile extends HTMLElement {
   userData: any;
   currentUserPic: string = "";
@@ -192,6 +192,17 @@ class EditProfile extends HTMLElement {
     container.appendChild(form);
 
     this.shadowRoot.appendChild(container);
+
+    const profileCard = this.ownerDocument.createElement("profile-card");
+    profileCard.setAttribute("profilepic", this.userData?.profilePic || "");
+    profileCard.setAttribute("name", this.userData?.name || "Anonymous");
+    profileCard.setAttribute("username", this.userData?.username || "Unknown");
+    container.appendChild(profileCard);
+  
+    this.shadowRoot.appendChild(container);
+
+
+
   }
 }
 
