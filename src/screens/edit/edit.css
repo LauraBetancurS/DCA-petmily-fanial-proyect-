@@ -32,13 +32,11 @@ h1 {
 /* Profile card styling */
 .profile-card {
   flex: 1;
-  max-width: 300px; /* Tamaño máximo de la tarjeta */
-  
+  max-width: 250px; /* Ajusta el tamaño máximo de la tarjeta */
   border-radius: 10px;
   color: #fff; /* Texto en blanco */
   padding: 20px;
   text-align: center;
- 
 }
 
 /* Form container styling */
@@ -50,13 +48,14 @@ h1 {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+  max-width: 750px; /* Ajusta el tamaño máximo del formulario */
+  width: 100%; /* Asegura que el formulario use el 100% del contenedor disponible */
 }
 
 .input-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  
 }
 
 label {
@@ -70,7 +69,8 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  width: 100%;
+  width: 80%; /* Reduce el ancho al 80% del contenedor */
+  max-width: 300px; /* Tamaño máximo para dispositivos grandes */
 }
 
 input:focus {
@@ -130,6 +130,3 @@ nav-bar {
     max-width: 90%;
   }
 }
-
-
-
