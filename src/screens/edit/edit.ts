@@ -1,12 +1,5 @@
 import { appState } from "../../store";
-import {
-  getUser,
-  updateUserCredentials,
-  updateAuthCredentials,
-  updateUserPosts,
-  uploadFileProfileImg,
-  getFileUrlProfileImg,
-} from "../../utils/firebase";
+import { getUser, updateUserCredentials, updateAuthCredentials, updateUserPosts, uploadFileProfileImg, getFileUrlProfileImg} from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 import "../../components/profilecard/profilecard";
@@ -60,19 +53,8 @@ class EditProfile extends HTMLElement {
         const emailInput = this.shadowRoot?.querySelector<HTMLInputElement>("#email");
         const passwordInput = this.shadowRoot?.querySelector<HTMLInputElement>("#password");
 
-        if (!this.userData?.username) {
-          console.error("El usuario no está autenticado");
-          return;
-        }
-
-        const password = passwordInput?.value;
-        if (password && password.length < 6) {
-          alert("Contraseña de mínimo 8 caracteres");
-          return;
-        }
-
         let profilePicUrl = this.userData?.profilePic;
-        
+
         const file = fileInput?.files?.[0];
         if (file) {
           try {
@@ -80,7 +62,7 @@ class EditProfile extends HTMLElement {
             profilePicUrl = await getFileUrlProfileImg(appState.user); // Obtener la URL de la imagen subida
             console.log("Nueva imagen de perfil cargada:", profilePicUrl);
           } catch (error) {
-            console.error("Error al subir la imagen de perfil:", error);
+            console.error("Error al subir o obtener la imagen de perfil:", error);
             return;
           }
         }
