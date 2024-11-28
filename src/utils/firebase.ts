@@ -222,6 +222,7 @@ export const getPost = async (username?: string) => {
   }
 };
 
+//Obtine los datos actualizados del usaurio
 export const updateUserPosts = async (username: string, updatedData: Record<string, string>) => {
   try {
       const { db } = await getFirebaseInstance();
@@ -305,4 +306,26 @@ export const getFileUrls = async (userId: string) => {
     console.error('Error getting file URLs:', error);
     throw error;
   }
+};
+
+export const uploadFileProfileImg = async (file: File, userId: string) => {
+  const { storageFB } = await getFirebaseInstance();
+  const { ref, uploadBytes } = await import('firebase/storage');
+
+  const storageRef = ref(storageFB, `imagesProfile/${userId}`);
+  uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('File uploaded');
+  })
+}
+
+export const getFileUrlProfileImg = async (userId: string) => {
+  const { storageFB } = await getFirebaseInstance();
+  const { ref, getDownloadURL } = await import('firebase/storage');
+
+  const storageRef = ref(storageFB, `imagesProfile/${userId}`);
+  const urlImagesProfile = await getDownloadURL(storageRef).then((url) => {
+    return url;
+  }).catch((error) => {
+    console.log(error);
+  });
 };
