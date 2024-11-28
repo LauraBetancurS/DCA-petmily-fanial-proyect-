@@ -7,8 +7,9 @@ import {
 } from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
-import styles from "./edit.css"; 
-import  "../../components/profilecard/profilecard";
+import "../../components/profilecard/profilecard";
+import styles from "./edit.css";
+
 class EditProfile extends HTMLElement {
   userData: any;
   currentUserPic: string = "";
@@ -103,7 +104,7 @@ class EditProfile extends HTMLElement {
     `;
 
     const style = this.ownerDocument.createElement("style");
-    style.innerHTML = styles; // Aquí se usa el contenido de `edit.css`
+    style.innerHTML = styles;
     this.shadowRoot.appendChild(style);
 
     const navBar = this.ownerDocument.createElement("nav-bar");
@@ -119,7 +120,6 @@ class EditProfile extends HTMLElement {
       "searchicon",
       "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029"
     );
-
     this.shadowRoot.appendChild(navBar);
 
     const banner = this.ownerDocument.createElement("app-banner");
@@ -133,11 +133,21 @@ class EditProfile extends HTMLElement {
     const container = this.ownerDocument.createElement("div");
     container.className = "edit-container";
 
-    const title = this.ownerDocument.createElement("h1");
-    title.textContent = "Edit Profile";
+    const profileCard = this.ownerDocument.createElement("profile-card");
+    profileCard.className = "profile-card";
+    profileCard.setAttribute("profilepic", this.userData?.profilePic || "");
+    profileCard.setAttribute("name", this.userData?.name || "Carla Van Di");
+    profileCard.setAttribute("username", this.userData?.username || "@cutiepaws");
+    container.appendChild(profileCard);
 
     const form = this.ownerDocument.createElement("form");
     form.className = "edit-form";
+
+    const title = this.ownerDocument.createElement("h1");
+    title.textContent = "Mi perfil";
+
+    const line = this.ownerDocument.createElement("div");
+    line.className = "title-line";
 
     const inputContainer = this.ownerDocument.createElement("div");
     inputContainer.className = "input-container";
@@ -162,49 +172,40 @@ class EditProfile extends HTMLElement {
     };
 
     createInputField(
-      "Name:",
-      "name",
-      "text",
-      this.userData?.name || "Your current name"
+      "Email Adress:",
+      "email",
+      "email",
+      this.userData?.email || "@frankie.smith@gmail.com"
     );
     createInputField(
-      "Username:",
+      "Nombre de Usuario:",
       "username",
       "text",
-      this.userData?.username || "Your current username"
+      this.userData?.username || "@cutiepaws"
     );
     createInputField(
-      "Email:",
-      "email",
-      "email",
-      this.userData?.email || "Your current email"
+      "Contrasena:",
+      "password",
+      "password",
+      "**********"
     );
-    createInputField("New Password:", "password", "password", "Enter new password");
 
     const saveButton = this.ownerDocument.createElement("button");
     saveButton.type = "button";
     saveButton.className = "save-btn";
-    saveButton.textContent = "Save Changes";
+    saveButton.textContent = "Guardar";
 
+    form.appendChild(title);
+    form.appendChild(line);
     form.appendChild(inputContainer);
     form.appendChild(saveButton);
-    container.appendChild(title);
+
     container.appendChild(form);
-
     this.shadowRoot.appendChild(container);
-
-    const profileCard = this.ownerDocument.createElement("profile-card");
-    profileCard.setAttribute("profilepic", this.userData?.profilePic || "");
-    profileCard.setAttribute("name", this.userData?.name || "Anonymous");
-    profileCard.setAttribute("username", this.userData?.username || "Unknown");
-    container.appendChild(profileCard);
-  
-    this.shadowRoot.appendChild(container);
-
-
-
   }
 }
 
 customElements.define("edit-profile", EditProfile);
 export default EditProfile;
+
+

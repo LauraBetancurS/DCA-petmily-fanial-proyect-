@@ -46,7 +46,7 @@ class profilecard extends HTMLElement {
   async render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
+                <link rel="stylesheet" href="../src/components/profilecard/profilecard.css" />
                 <div class="card-container">
                     <div class="profile-card">
                         <img src="${

@@ -1,128 +1,134 @@
-/* Estilo principal del contenedor */
+/* General container styling */
 .edit-container {
-    display: flex;
+  display: flex;
+  justify-content: space-between; /* Separa los elementos a los extremos */
+  align-items: flex-start; /* Alinea al inicio verticalmente */
+  gap: 30px; /* Espaciado entre la tarjeta de perfil y el formulario */
+  margin-top: -80px; /* Ajuste para superponer el banner */
+  position: relative;
+  z-index: 2; /* Asegura que estén por encima del banner */
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Título del formulario */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* Línea decorativa debajo del título */
+.title-line {
+  width: 100%;
+  height: 2px;
+  background-color: #6a5acd; /* Color principal */
+  margin-bottom: 20px;
+}
+
+/* Profile card styling */
+.profile-card {
+  flex: 1;
+  max-width: 300px; /* Tamaño máximo de la tarjeta */
+  
+  border-radius: 10px;
+  color: #fff; /* Texto en blanco */
+  padding: 20px;
+  text-align: center;
+ 
+}
+
+/* Form container styling */
+.edit-form {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+}
+
+input:focus {
+  border-color: #6a5acd;
+  outline: none;
+}
+
+/* Save button styling */
+.save-btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #6a5acd;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #483d8b;
+}
+
+/* Banner styling */
+.banner {
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  margin-bottom: -50px;
+  z-index: 1;
+  position: relative;
+}
+
+/* Navbar styling */
+nav-bar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: #f8f8f8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .edit-container {
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    background-color: #f9fafc;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    margin: 0 auto;
+    margin-top: -20px;
+    gap: 20px;
   }
-  
-  /* Título */
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #333;
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 10px;
-    width: 100%;
-  }
-  
-  /* Formulario */
+
+  .profile-card,
   .edit-form {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    max-width: 90%;
   }
-  
-  /* Contenedor de entradas */
-  .input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  /* Etiquetas de entrada */
-  .input-container label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #555;
-    font-weight: bold;
-  }
-  
-  /* Campos de entrada */
-  .input-container input {
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease;
-  }
-  
-  .input-container input:focus {
-    border-color: #7c3aed;
-    outline: none;
-  }
-  
-  /* Botón guardar */
-  .save-btn {
-    margin-top: 20px;
-    padding: 12px;
-    font-size: 1rem;
-    color: white;
-    background-color: #7c3aed; /* Púrpura similar al diseño */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .save-btn:hover {
-    background-color: #5a27b0;
-    transform: scale(1.02);
-  }
-  
-  .save-btn:active {
-    transform: scale(0.98);
-  }
-  
-  /* Responsividad */
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 1.5rem;
-    }
-  
-    .edit-form {
-      gap: 10px;
-    }
-  
-    .input-container input {
-      padding: 10px;
-      font-size: 0.95rem;
-    }
-  
-    .save-btn {
-      padding: 10px;
-      font-size: 0.95rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .edit-container {
-      padding: 15px;
-    }
-  
-    h1 {
-      font-size: 1.3rem;
-    }
-  
-    .input-container input {
-      padding: 8px;
-      font-size: 0.9rem;
-    }
-  
-    .save-btn {
-      padding: 8px;
-      font-size: 0.9rem;
-    }
-  }
-  
+}
+
+
+
