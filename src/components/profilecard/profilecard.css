@@ -35,6 +35,7 @@
   
   .name {
     margin-top: 1rem;
+    margin-bottom: 0.5rem;
     font-size: 2rem;
     font-weight: bold;
     color: #fff; /* Texto blanco */
@@ -42,8 +43,8 @@
   }
   
   .username {
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #e0d4ff; /* Texto en un tono más claro */
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.1rem;
   }
