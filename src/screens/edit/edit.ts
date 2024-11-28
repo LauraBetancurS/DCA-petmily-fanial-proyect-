@@ -1,5 +1,12 @@
 import { appState } from "../../store";
-import { getUser, updateUserCredentials, updateAuthCredentials, updateUserPosts } from "../../utils/firebase";
+import {
+  getUser,
+  updateUserCredentials,
+  updateAuthCredentials,
+  updateUserPosts,
+  uploadFileProfileImg,
+  getFileUrlProfileImg,
+} from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 import "../../components/profilecard/profilecard";
@@ -30,6 +37,22 @@ class EditProfile extends HTMLElement {
 
   addEventListeners() {
     const saveButton = this.shadowRoot?.querySelector(".save-btn");
+    const fileInput = this.shadowRoot?.querySelector<HTMLInputElement>("#profile-pic");
+    const previewImage = this.shadowRoot?.querySelector<HTMLImageElement>("#profile-pic-preview");
+
+    if (fileInput) {
+      fileInput.addEventListener("change", async () => {
+        const file = fileInput.files?.[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            if (previewImage) previewImage.src = reader.result as string;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
     if (saveButton) {
       saveButton.addEventListener("click", async () => {
         const nameInput = this.shadowRoot?.querySelector<HTMLInputElement>("#name");
@@ -48,10 +71,25 @@ class EditProfile extends HTMLElement {
           return;
         }
 
+        let profilePicUrl = this.userData?.profilePic;
+        
+        const file = fileInput?.files?.[0];
+        if (file) {
+          try {
+            await uploadFileProfileImg(file, appState.user); // Subir la imagen al almacenamiento
+            profilePicUrl = await getFileUrlProfileImg(appState.user); // Obtener la URL de la imagen subida
+            console.log("Nueva imagen de perfil cargada:", profilePicUrl);
+          } catch (error) {
+            console.error("Error al subir la imagen de perfil:", error);
+            return;
+          }
+        }
+
         const updatedData = {
           ...(nameInput?.value && { name: nameInput.value }),
           ...(usernameInput?.value && { username: usernameInput.value }),
           ...(emailInput?.value && { email: emailInput.value }),
+          ...(profilePicUrl && { profilePic: profilePicUrl }),
         };
 
         const updateFirestore = await updateUserCredentials(appState.user, updatedData);
@@ -62,7 +100,6 @@ class EditProfile extends HTMLElement {
         }
 
         if (updateFirestore && updateAuth) {
-          console.log("Credentials updated successfully.");
           if (nameInput) nameInput.value = "";
           if (usernameInput) usernameInput.value = "";
           if (emailInput) emailInput.value = "";
@@ -70,8 +107,6 @@ class EditProfile extends HTMLElement {
 
           await this.fetchUserData();
           this.render();
-        } else {
-          console.error("Error actualizando las credenciales");
         }
       });
     }
@@ -146,6 +181,22 @@ class EditProfile extends HTMLElement {
     createInputField("Correo Electrónico:", "email", "email", this.userData?.email || "");
     createInputField("Nombre de Usuario:", "username", "text", this.userData?.username || "");
     createInputField("Contraseña:", "password", "password", "**********");
+
+    const createImageUploadField = (labelText: string, id: string) => {
+      const label = this.ownerDocument.createElement("label");
+      label.setAttribute("for", id);
+      label.textContent = labelText;
+
+      const input = this.ownerDocument.createElement("input");
+      input.type = "file";
+      input.id = id;
+      input.accept = "image/*";
+
+      inputContainer.appendChild(label);
+      inputContainer.appendChild(input);
+    };
+
+    createImageUploadField("Subir nueva imagen de perfil:", "profile-pic");
 
     const saveButton = this.ownerDocument.createElement("button");
     saveButton.type = "button";
