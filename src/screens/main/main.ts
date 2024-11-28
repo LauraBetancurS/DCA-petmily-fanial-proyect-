@@ -4,7 +4,7 @@ import CardPost, { Attribute } from "../../components/cardspost/cardpost";
 import "../../components/cardspost/cardpost";
 import "../../components/publicitycard/publicitycard";
 import { data } from "../../data/data";
-import { getPost, getUser } from "../../utils/firebase";
+import { getPost, getUser, getFileUrlProfileImg } from "../../utils/firebase";
 import { appState, dispatch } from "../../store";
 import { getPosts } from "../../store/actions";
 import { dashboardPost } from "../../types/post";
@@ -18,34 +18,17 @@ interface User {
 }
 
 class Main extends HTMLElement {
-  currentUserPic: string = "";
-  currentUserName: string = "";
-  currentUserDesc: string = "";
-  user: any[] = [];
-  posts: CardPost[] = [];
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-
-    const selectedUser: User | undefined = data.find(
-      (user: User) => user.username === "doglover99"
-    );
-    if (selectedUser) {
-      this.currentUserPic = selectedUser.profileImg;
-      this.currentUserName = selectedUser.name;
-      this.currentUserDesc = selectedUser.profileDesc;
-    }
   }
 
   async connectedCallback() {
-
     if (appState.posts.length > 0) {
       this.render();
-      
     } else {
       const posts = await getPosts();
-      dispatch(posts);    
+      dispatch(posts);
     }
   }
 
@@ -60,7 +43,21 @@ class Main extends HTMLElement {
       navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
       navBar.setAttribute("input", "Search PetNet");
       navBar.setAttribute("communityIcon", "http://imgfz.com/i/rxAefV8.png");
-      navBar.setAttribute("profilePic", this.currentUserPic);
+
+      // Obtén los datos del usuario logueado
+      const userData = await getUser();
+      let profilePicUrl: string;
+
+      try {
+        // Obtén la URL de la imagen de perfil desde Firebase
+        profilePicUrl = await getFileUrlProfileImg(appState.user);
+      } catch (error) {
+        console.error("Error fetching profile picture:", error);
+        profilePicUrl =
+          "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"; // Imagen por defecto
+      }
+
+      navBar.setAttribute("profilePic", profilePicUrl);
       navBar.setAttribute(
         "createicon",
         "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276"
@@ -78,15 +75,12 @@ class Main extends HTMLElement {
       const leftSidebar = this.ownerDocument.createElement("div");
       leftSidebar.className = "left-sidebar";
 
-      const userData = await getUser();
-      
       // User Card - Se coloca en el sidebar izquierdo en desktop
       const userCard = this.ownerDocument.createElement("user-banner");
-      userCard.setAttribute("profilepic", this.currentUserPic);
-      userCard.setAttribute("uid", appState.user)
+      userCard.setAttribute("profilepic", profilePicUrl); // Imagen de perfil dinámica
+      userCard.setAttribute("uid", appState.user);
       userCard.setAttribute("name", userData.name);
       userCard.setAttribute("username", userData.username);
-      userCard.setAttribute("profiledesc", this.currentUserDesc);
 
       // Verificación para agregar `topUserMenu` solo en la vista móvil
       const topUserMenu = this.ownerDocument.createElement("div");
@@ -102,8 +96,7 @@ class Main extends HTMLElement {
       const rightSidebar = this.ownerDocument.createElement("div");
       rightSidebar.className = "right-sidebar";
 
-      //Este es el foreach que falta poner en la screen profile
-      //para que se rendericen los post en el contenedor "content-container"
+      // Renderizar los posts en el contenedor "content-container"
       appState.posts.forEach((post: dashboardPost) => {
         const cardPost = this.ownerDocument.createElement(
           "card-post"
@@ -114,7 +107,7 @@ class Main extends HTMLElement {
         cardPost.setAttribute(Attribute.postdesc, post.description);
         cardPost.setAttribute(Attribute.imgpost, post.image);
         contentContainer.appendChild(cardPost);
-      });   
+      });
 
       // Publicity Card - Se añade al contenedor del contenido principal
       const publicityCard = this.ownerDocument.createElement("publicity-card");
