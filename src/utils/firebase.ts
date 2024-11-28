@@ -308,24 +308,30 @@ export const getFileUrls = async (userId: string) => {
   }
 };
 
-export const uploadFileProfileImg = async (file: File, userId: string) => {
+export const uploadFileProfileImg = async (file: File, userId: string): Promise<void> => {
   const { storageFB } = await getFirebaseInstance();
   const { ref, uploadBytes } = await import('firebase/storage');
 
   const storageRef = ref(storageFB, `imagesProfile/${userId}`);
-  uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('File uploaded');
-  })
-}
+  try {
+    await uploadBytes(storageRef, file);
+    console.log('File uploaded successfully to:', `imagesProfile/${userId}`);
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    throw error; // Asegúrate de manejar errores explícitos
+  }
+};
 
-export const getFileUrlProfileImg = async (userId: string) => {
+export const getFileUrlProfileImg = async (userId: string): Promise<string> => {
   const { storageFB } = await getFirebaseInstance();
   const { ref, getDownloadURL } = await import('firebase/storage');
 
   const storageRef = ref(storageFB, `imagesProfile/${userId}`);
-  const urlImagesProfile = await getDownloadURL(storageRef).then((url) => {
-    return url;
-  }).catch((error) => {
-    console.log(error);
-  });
+  try {
+    const urlImagesProfile = await getDownloadURL(storageRef);
+    return urlImagesProfile; // Retorna la URL obtenida correctamente
+  } catch (error) {
+    console.error('Error getting profile image URL:', error);
+    throw new Error('Failed to retrieve profile image URL');
+  }
 };
