@@ -1,9 +1,8 @@
 import { datacommunity } from '../../data/datacommunity';
-import { getDocumentIdByUsername, logOut } from '../../utils/firebase';
+import { getDocumentIdByUsername, getFileUrlProfileImg, logOut } from '../../utils/firebase';
 import { appState, dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
-
 
 export enum Attribute {
     'profilepic' = 'profilepic',
@@ -14,7 +13,6 @@ export enum Attribute {
     'communitydata' = 'communitydata',
 }
 
-
 class UserCard extends HTMLElement {
     uid?: string;
     profilepic?: string;
@@ -23,28 +21,37 @@ class UserCard extends HTMLElement {
     profiledesc?: string;
     communitydata?: string;
 
-
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
     }
 
-
     static get observedAttributes() {
         return Object.keys(Attribute) as Array<Attribute>;
     }
-
 
     attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
         this[propName] = newValue;
         this.render();
     }
 
-
-    connectedCallback() {
+    async connectedCallback() {
+        // Cargar la URL actualizada de la imagen si no está ya definida
+        if (!this.profilepic) {
+            this.profilepic = await this.fetchProfilePic();
+        }
         this.render();
     }
 
+    async fetchProfilePic(): Promise<string> {
+        try {
+            const profilePicUrl = await getFileUrlProfileImg(appState.user);
+            return profilePicUrl || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg";
+        } catch (error) {
+            console.error("Error fetching profile picture:", error);
+            return "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"; // Default image
+        }
+    }
 
     addEventListeners() {
         const logoutButton = this.shadowRoot?.querySelector('.logout-btn');
@@ -56,32 +63,21 @@ class UserCard extends HTMLElement {
             });
         }
 
-
         const myProfileBtn = this.shadowRoot?.querySelector('.btn');
-
 
         myProfileBtn?.addEventListener('click', async () => {
             if (!this.username) {
                 return
             }
 
-
             const profileId = await getDocumentIdByUsername(this.username);
-
 
             dispatch(navigate(
                 appState.screen === Screens.PROFILE && profileId === appState.user ?
                     Screens.EDIT : Screens.PROFILE,
                 { username: this.username }))
         });
-
-
     }
-
-
-
-
-
 
     async render() {
         if (this.shadowRoot) {
@@ -91,7 +87,6 @@ class UserCard extends HTMLElement {
                     <span class="community-name">${community.communityname}</span>
                 </div>
             `).join('');
-
 
             const buttonLabel = this.username
                 ? (await getDocumentIdByUsername(this.username)) === appState.user
@@ -103,16 +98,13 @@ class UserCard extends HTMLElement {
                     : 'Compartir perfil'
                 : 'Compartir perfil';
 
-
-
-
             this.shadowRoot.innerHTML = `
                 <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
                 <div class="card-container">
                     <div class="profile-card">
-                        <img src="${this.profilepic || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"}" alt="Profile Picture" class="profile-pic">
-                        <h2 class="name">${this.name}</h2>
-                        <p class="username">@${this.username}</p>
+                        <img src="${this.profilepic}" alt="Profile Picture" class="profile-pic">
+                        <h2 class="name">${this.name || "Usuario"}</h2>
+                        <p class="username">@${this.username || "Sin nombre"}</p>
                        
                         <button class="btn">${buttonLabel}</button>
                     </div>
@@ -132,19 +124,10 @@ class UserCard extends HTMLElement {
                 </div>
             `;
 
-
             this.addEventListeners();
-
-
         }
     }
 }
 
-
 customElements.define('user-banner', UserCard);
 export default UserCard;
-
-
-
-
-
