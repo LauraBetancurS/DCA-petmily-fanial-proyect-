@@ -7,6 +7,7 @@ import {
 } from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
+import styles from "./edit.css"; // Importa la hoja de estilos como módulo si está configurado tu bundler.
 
 class EditProfile extends HTMLElement {
   userData: any;
@@ -100,6 +101,10 @@ class EditProfile extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../src/components/editprofile/editprofile.css">
     `;
+
+    const style = this.ownerDocument.createElement("style");
+    style.innerHTML = styles; // Aquí se usa el contenido de `edit.css`
+    this.shadowRoot.appendChild(style);
 
     const navBar = this.ownerDocument.createElement("nav-bar");
     navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
