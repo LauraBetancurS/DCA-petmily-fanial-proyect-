@@ -1,3 +1,5 @@
+/* profilecard.css */
+
 .card-container {
     display: flex;
     justify-content: center;
@@ -15,7 +17,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #AA6AFF; /* Fondo morado */
+    background-color: none; /* Fondo morado */
     border-radius: 20px;
     padding: 2rem;
     width: 300px; /* Ancho del card */
@@ -34,15 +36,14 @@
   .name {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #fff; /* Texto blanco */
     text-align: center;
   }
   
   .username {
-    font-size: 0.9rem;
-    font-weight:bolder;
+    font-size: 1.5rem;
     color: #e0d4ff; /* Texto en un tono más claro */
     text-align: center;
     margin-top: 0.1rem;

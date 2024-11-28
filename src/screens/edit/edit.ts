@@ -1,5 +1,5 @@
 import { appState } from "../../store";
-import { getUser, updateUserCredentials, updateAuthCredentials, updateUserPosts} from "../../utils/firebase";
+import { getUser, updateUserCredentials, updateAuthCredentials, updateUserPosts } from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 import "../../components/profilecard/profilecard";
@@ -32,27 +32,19 @@ class EditProfile extends HTMLElement {
     const saveButton = this.shadowRoot?.querySelector(".save-btn");
     if (saveButton) {
       saveButton.addEventListener("click", async () => {
-        const nameInput = this.shadowRoot?.querySelector<HTMLInputElement>(
-          "#name"
-        );
-        const usernameInput = this.shadowRoot?.querySelector<HTMLInputElement>(
-          "#username"
-        );
-        const emailInput = this.shadowRoot?.querySelector<HTMLInputElement>(
-          "#email"
-        );
-        const passwordInput = this.shadowRoot?.querySelector<HTMLInputElement>(
-          "#password"
-        );
+        const nameInput = this.shadowRoot?.querySelector<HTMLInputElement>("#name");
+        const usernameInput = this.shadowRoot?.querySelector<HTMLInputElement>("#username");
+        const emailInput = this.shadowRoot?.querySelector<HTMLInputElement>("#email");
+        const passwordInput = this.shadowRoot?.querySelector<HTMLInputElement>("#password");
 
         if (!this.userData?.username) {
-          console.error("El usuario no esta autenticado");
+          console.error("El usuario no está autenticado");
           return;
         }
 
         const password = passwordInput?.value;
         if (password && password.length < 6) {
-          alert("Contraseña de minimo 8 caracteres");
+          alert("Contraseña de mínimo 8 caracteres");
           return;
         }
 
@@ -62,14 +54,8 @@ class EditProfile extends HTMLElement {
           ...(emailInput?.value && { email: emailInput.value }),
         };
 
-        const updateFirestore = await updateUserCredentials(
-          appState.user,
-          updatedData
-        );
-        const updateAuth = await updateAuthCredentials(
-          emailInput?.value || "",
-          passwordInput?.value || ""
-        );
+        const updateFirestore = await updateUserCredentials(appState.user, updatedData);
+        const updateAuth = await updateAuthCredentials(emailInput?.value || "", passwordInput?.value || "");
 
         if (updatedData.name || updatedData.username) {
           await updateUserPosts(this.userData.username, updatedData);
@@ -107,22 +93,13 @@ class EditProfile extends HTMLElement {
     navBar.setAttribute("input", "Search PetNet");
     navBar.setAttribute("communityIcon", "http://imgfz.com/i/rxAefV8.png");
     navBar.setAttribute("profilePic", this.currentUserPic);
-    navBar.setAttribute(
-      "createicon",
-      "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276"
-    );
-    navBar.setAttribute(
-      "searchicon",
-      "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029"
-    );
+    navBar.setAttribute("createicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276");
+    navBar.setAttribute("searchicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
     this.shadowRoot.appendChild(navBar);
 
     const banner = this.ownerDocument.createElement("app-banner");
     banner.className = "banner";
-    banner.setAttribute(
-      "bannerImage",
-      "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be"
-    );
+    banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
     this.shadowRoot.appendChild(banner);
 
     const container = this.ownerDocument.createElement("div");
@@ -166,24 +143,9 @@ class EditProfile extends HTMLElement {
       inputContainer.appendChild(input);
     };
 
-    createInputField(
-      "Correo Electrónico:",
-      "email",
-      "email",
-      this.userData?.email || ""
-    );
-    createInputField(
-      "Nombre de Usuario:",
-      "username",
-      "text",
-      this.userData?.username || ""
-    );
-    createInputField(
-      "Contraseña:",
-      "password",
-      "password",
-      "**********"
-    );
+    createInputField("Correo Electrónico:", "email", "email", this.userData?.email || "");
+    createInputField("Nombre de Usuario:", "username", "text", this.userData?.username || "");
+    createInputField("Contraseña:", "password", "password", "**********");
 
     const saveButton = this.ownerDocument.createElement("button");
     saveButton.type = "button";
@@ -202,5 +164,3 @@ class EditProfile extends HTMLElement {
 
 customElements.define("edit-profile", EditProfile);
 export default EditProfile;
-
-
