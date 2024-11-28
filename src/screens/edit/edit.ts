@@ -1,10 +1,5 @@
 import { appState } from "../../store";
-import {
-  getUser,
-  updateUserCredentials,
-  updateAuthCredentials,
-  updateUserPosts,
-} from "../../utils/firebase";
+import { getUser, updateUserCredentials, updateAuthCredentials, updateUserPosts} from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 import "../../components/profilecard/profilecard";
@@ -51,13 +46,13 @@ class EditProfile extends HTMLElement {
         );
 
         if (!this.userData?.username) {
-          console.error("No authenticated user found.");
+          console.error("El usuario no esta autenticado");
           return;
         }
 
         const password = passwordInput?.value;
         if (password && password.length < 6) {
-          alert("Password must be at least 6 characters long.");
+          alert("Contraseña de minimo 8 caracteres");
           return;
         }
 
@@ -90,7 +85,7 @@ class EditProfile extends HTMLElement {
           await this.fetchUserData();
           this.render();
         } else {
-          console.error("There was an issue updating the credentials.");
+          console.error("Error actualizando las credenciales");
         }
       });
     }
@@ -136,15 +131,15 @@ class EditProfile extends HTMLElement {
     const profileCard = this.ownerDocument.createElement("profile-card");
     profileCard.className = "profile-card";
     profileCard.setAttribute("profilepic", this.userData?.profilePic || "");
-    profileCard.setAttribute("name", this.userData?.name || "Carla Van Di");
-    profileCard.setAttribute("username", this.userData?.username || "@cutiepaws");
+    profileCard.setAttribute("name", this.userData?.name || "");
+    profileCard.setAttribute("username", this.userData?.username || "");
     container.appendChild(profileCard);
 
     const form = this.ownerDocument.createElement("form");
     form.className = "edit-form";
 
     const title = this.ownerDocument.createElement("h1");
-    title.textContent = "Mi perfil";
+    title.textContent = "Editar perfil";
 
     const line = this.ownerDocument.createElement("div");
     line.className = "title-line";
@@ -172,19 +167,19 @@ class EditProfile extends HTMLElement {
     };
 
     createInputField(
-      "Email Adress:",
+      "Correo Electrónico:",
       "email",
       "email",
-      this.userData?.email || "@frankie.smith@gmail.com"
+      this.userData?.email || ""
     );
     createInputField(
       "Nombre de Usuario:",
       "username",
       "text",
-      this.userData?.username || "@cutiepaws"
+      this.userData?.username || ""
     );
     createInputField(
-      "Contrasena:",
+      "Contraseña:",
       "password",
       "password",
       "**********"
