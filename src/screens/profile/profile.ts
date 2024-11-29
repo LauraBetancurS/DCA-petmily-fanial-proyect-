@@ -96,7 +96,7 @@ class Profile extends HTMLElement {
 
     const contentContainer = this.ownerDocument.createElement("main");
     contentContainer.className = "content-container";
-
+//Guardo en la varibale userpost los post del usuario al que se le clickea utilizando la funcion getPost
     const userPosts = await getPost(this.username);
     userPosts?.forEach((post: dashboardPost) => {
       const cardPost = this.ownerDocument.createElement(

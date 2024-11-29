@@ -19,7 +19,7 @@ class EditProfile extends HTMLElement {
     this.render();
     this.addEventListeners();
   }
-
+//Traer al usuario de firebase y lo guarda en userData
   async fetchUserData() {
     try {
       this.userData = await getUser();
@@ -27,7 +27,7 @@ class EditProfile extends HTMLElement {
       console.error("Error fetching user data:", error);
     }
   }
-
+//Se seleccionan los elementos del DOM donde se logra cargar la imagen y la informacion dnetro del input segun el usuario
   addEventListeners() {
     const saveButton = this.shadowRoot?.querySelector(".save-btn");
     const fileInput = this.shadowRoot?.querySelector<HTMLInputElement>("#profile-pic");
@@ -37,7 +37,7 @@ class EditProfile extends HTMLElement {
       fileInput.addEventListener("change", async () => {
         const file = fileInput.files?.[0];
         if (file) {
-          const reader = new FileReader();
+          const reader = new FileReader(); //Lee el archivo y lo convierte en una URL
           reader.onload = () => {
             if (previewImage) previewImage.src = reader.result as string;
           };
@@ -54,7 +54,7 @@ class EditProfile extends HTMLElement {
         const passwordInput = this.shadowRoot?.querySelector<HTMLInputElement>("#password");
 
         let profilePicUrl = this.userData?.profilePic;
-
+//Es una validacion. File guarda la primer aimagen que se suba. Guardar la imagen que se suba en la variable file
         const file = fileInput?.files?.[0];
         if (file) {
           try {
@@ -66,14 +66,16 @@ class EditProfile extends HTMLElement {
             return;
           }
         }
-
+//Es un objeto que contiene los datos actualizados del usuario. Si el usuario proporciona un nuevo nombre, 
+//nombre de usuario o correo electrónico, se actualiza el objeto updatedData.
         const updatedData = {
           ...(nameInput?.value && { name: nameInput.value }),
           ...(usernameInput?.value && { username: usernameInput.value }),
           ...(emailInput?.value && { email: emailInput.value }),
           ...(profilePicUrl && { profilePic: profilePicUrl }),
         };
-
+//Si se proporcionan nuevos datos, se actualiza el usuario en Firebase y se actualiza la información del usuario en la aplicación.
+//Las credenciales del usuario son el nombre de usuario y su nombre y el aut son correo y contrasena
         const updateFirestore = await updateUserCredentials(appState.user, updatedData);
         const updateAuth = await updateAuthCredentials(emailInput?.value || "", passwordInput?.value || "");
 
@@ -140,7 +142,7 @@ class EditProfile extends HTMLElement {
 
     const inputContainer = this.ownerDocument.createElement("div");
     inputContainer.className = "input-container";
-
+//Hace una funcion que crea un campo de entrada de formulario con un label y un input. Es como un componente
     const createInputField = (
       labelText: string,
       id: string,
@@ -148,7 +150,7 @@ class EditProfile extends HTMLElement {
       placeholder: string
     ) => {
       const label = this.ownerDocument.createElement("label");
-      label.setAttribute("for", id);
+      label.setAttribute("for", id); //Crea una etqiueta con el id del input y el contenido va a ser el texto del label
       label.textContent = labelText;
 
       const input = this.ownerDocument.createElement("input");

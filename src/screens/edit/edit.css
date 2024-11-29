@@ -115,6 +115,10 @@ nav-bar {
 
 /* Media query para diseño responsive */
 @media (max-width: 768px) {
+  .banner {
+    display: none; /* Oculta completamente el banner */
+  }
+
   .edit-container {
     flex-direction: column;
     align-items: center;
@@ -128,6 +132,7 @@ nav-bar {
     background-color: transparent; /* Fondo transparente */
     color: #000; /* Cambiar texto a negro */
     box-shadow: none; /* Eliminar sombra */
+    width: 200px;
   }
 
   .edit-form {
@@ -140,11 +145,11 @@ nav-bar {
     width: 100%; /* Inputs ocupan todo el ancho disponible */
     max-width: none; /* Eliminar límite máximo de ancho */
   }
-}
 
-.save-btn {
-  width: 100%; /* Botón más accesible en pantallas pequeñas */
-  max-width: 300px;
-  font-size: 14px;
-  padding: 12px;
+  .save-btn {
+    width: 100%; /* Botón más accesible en pantallas pequeñas */
+    max-width: 300px;
+    font-size: 14px;
+    padding: 12px;
+  }
 }

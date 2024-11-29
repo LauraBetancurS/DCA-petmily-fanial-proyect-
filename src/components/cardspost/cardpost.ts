@@ -43,7 +43,7 @@ class CardPost extends HTMLElement {
     }
    
 
-
+//Hundir al usuario y que navegue a su perfil
     connectedCallback() {
         this.render()
         const usernameElement = this.shadowRoot?.querySelector('.username');

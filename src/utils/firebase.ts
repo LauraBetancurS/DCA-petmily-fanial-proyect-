@@ -45,7 +45,7 @@ export const getUser = async () => {
     throw error;
   }
 };
-
+//Esta funcion se usa para obtener el usuario por su username cuando se carga el perfil
 export const getUserByUsername = async (username: string) => {
   const { db } = await getFirebaseInstance();
   const { collection, getDocs, query, where } = await import('firebase/firestore');
@@ -60,7 +60,7 @@ export const getUserByUsername = async (username: string) => {
   }
   throw new Error('User not found');
 };
-
+//Esta funcion se usa para obtener el usuario por su username cuando se carga el perfil
 export const getDocumentIdByUsername = async (username: string): Promise<string | null> => {
   if (!username) {
       console.error("Username no proporcionado.");
@@ -111,7 +111,7 @@ export const registerUser = async (credentials: any) => {
     return false;
   }
 };
-
+//actualiza las credenciales del usuario en firebase (nombre de usuario y nombre normal)
 export const updateUserCredentials = async (userId: string, updatedData: Record<string, string>) => {
   try {
       const { db } = await getFirebaseInstance();
@@ -127,7 +127,7 @@ export const updateUserCredentials = async (userId: string, updatedData: Record<
       return false;
   }
 };
-
+//Esta es para actualizar las credenciales de autenticacion (correo y contraseña)
 export const updateAuthCredentials = async (email: string, password: string) => {
   try {
       const { auth } = await getFirebaseInstance();

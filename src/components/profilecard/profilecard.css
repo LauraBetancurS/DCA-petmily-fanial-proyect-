@@ -22,7 +22,7 @@
   border-radius: 20px;
   padding: 2rem;
   width: 300px; /* Ancho del card */
-  height: 400px; /* Alto del card */
+  height: 200px; /* Alto del card */
   transition: all 0.3s ease-in-out; /* Suavizar cambios */
 }
 
