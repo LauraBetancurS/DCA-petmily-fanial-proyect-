@@ -36,7 +36,6 @@ class UserCard extends HTMLElement {
     }
 
     async connectedCallback() {
-        // Cargar la URL actualizada de la imagen si no está ya definida
         if (!this.profilepic) {
             this.profilepic = await this.fetchProfilePic();
         }
@@ -57,9 +56,8 @@ class UserCard extends HTMLElement {
         const logoutButton = this.shadowRoot?.querySelector('.logout-btn');
         if (logoutButton) {
             logoutButton.addEventListener('click', async () => {
-                console.log('logout clickeado');
                 logOut();
-                dispatch(navigate(Screens.LOGIN))
+                dispatch(navigate(Screens.LOGIN));
             });
         }
 
@@ -67,7 +65,7 @@ class UserCard extends HTMLElement {
 
         myProfileBtn?.addEventListener('click', async () => {
             if (!this.username) {
-                return
+                return;
             }
 
             const profileId = await getDocumentIdByUsername(this.username);
@@ -75,12 +73,15 @@ class UserCard extends HTMLElement {
             dispatch(navigate(
                 appState.screen === Screens.PROFILE && profileId === appState.user ?
                     Screens.EDIT : Screens.PROFILE,
-                { username: this.username }))
+                { username: this.username }
+            ));
         });
     }
 
     async render() {
         if (this.shadowRoot) {
+            const isMobileView = window.innerWidth <= 768;
+
             const communityItems = datacommunity.map(community => `
                 <div class="community-item">
                     <img src="${community.communityimg}" alt="${community.communityname}" class="community-img">
@@ -101,13 +102,17 @@ class UserCard extends HTMLElement {
             this.shadowRoot.innerHTML = `
                 <link rel="stylesheet" href="../src/components/usermenu/usercard.css" />
                 <div class="card-container">
+                    <div class="petmily-logo">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514" alt="Petmily Logo" class="logo-img">
+                        <p class="logo-text">Petmily</p>
+                    </div>
                     <div class="profile-card">
                         <img src="${this.profilepic}" alt="Profile Picture" class="profile-pic">
                         <h2 class="name">${this.name || "Usuario"}</h2>
                         <p class="username">@${this.username || "Sin nombre"}</p>
-                       
                         <button class="btn">${buttonLabel}</button>
                     </div>
+                    ${!isMobileView ? `
                     <div class="community-card">
                         <h2 class="community-title">Communities</h2>
                         <div class="community-list">
@@ -116,11 +121,7 @@ class UserCard extends HTMLElement {
                     </div>
                     <div class="logout-section">
                         <div class="logout-btn">Cerrar Sesión</div>
-                        <div class="petmily-logo">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/petmily%20logo.png?alt=media&token=65392fad-3e98-435c-a2ac-d0a4d13ef514" alt="Petmily Logo" class="logo-img">
-                            <p class="logo-text">Petmily</p>
-                        </div>
-                    </div>
+                    </div>` : ''}
                 </div>
             `;
 
