@@ -4,14 +4,13 @@ import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 import "../../components/publicitycard/publicitycard";
 import "../../components/usermenu/usercard";
-
 import styles from "./profile.css";
 import { dashboardPost } from "../../types/post";
 import CardPost, { Attribute } from "../../components/cardspost/cardpost";
 
 class Profile extends HTMLElement {
   username: string = "";
-  userId: string = ""; // ID del usuario para la validación dinámica
+  userId: string = "";
 
   constructor() {
     super();
@@ -20,11 +19,9 @@ class Profile extends HTMLElement {
   }
 
   async connectedCallback() {
-    // Obtiene el username del atributo al cargar el componente
     this.username = this.getAttribute("username") || "";
-
     if (this.username) {
-      this.userId = await getDocumentIdByUsername(this.username) || ""; // Obtén el ID del usuario basado en el username
+      this.userId = await getDocumentIdByUsername(this.username) || "";
       this.render();
     } else {
       console.error("Username not defined for app-profile");
@@ -34,30 +31,11 @@ class Profile extends HTMLElement {
   async render() {
     if (!this.shadowRoot) return;
 
-    this.shadowRoot.innerHTML = "";
+    this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="../src/screens/profile/profile.css">
+    `;
 
-    const style = this.ownerDocument.createElement("style");
-    style.innerHTML = styles;
-    this.shadowRoot.appendChild(style);
-
-    const mainContainer = this.ownerDocument.createElement("section");
-    mainContainer.className = "main-container";
-
-    // Contenedor de los posts (contenido principal)
-    const contentContainer = this.ownerDocument.createElement("div");
-    contentContainer.className = "content-container";
-
-    const banner = this.ownerDocument.createElement("app-banner");
-    banner.className = "banner";
-    banner.setAttribute(
-      "bannerImage",
-      "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be"
-    );
-    this.shadowRoot.appendChild(banner);
-
-    const navbarContainer = this.ownerDocument.createElement("div");
-    navbarContainer.className = "navbar-container";
-
+    // Navbar
     const navBar = this.ownerDocument.createElement("nav-bar");
     navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
     navBar.setAttribute("input", "Search PetNet");
@@ -71,51 +49,64 @@ class Profile extends HTMLElement {
       "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029"
     );
 
+    // Banner
+    const banner = this.ownerDocument.createElement("app-banner");
+    banner.className = "banner";
+    banner.setAttribute(
+      "bannerImage",
+      "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be"
+    );
+
+    // Main container
+    const mainContainer = this.ownerDocument.createElement("section");
+    mainContainer.className = "main-container";
+
+    // Left Sidebar
     const leftSidebar = this.ownerDocument.createElement("div");
     leftSidebar.className = "left-sidebar";
 
-    if (this.userId) { // Validar que el ID del usuario fue obtenido
+    const userCard = this.ownerDocument.createElement("user-banner");
+
+    if (this.userId) {
       try {
         const userData = await getUserByUsername(this.username);
-        let profilePicUrl;
+        let profilePicUrl = await getFileUrlProfileImg(this.userId).catch(() =>
+          "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"
+        );
 
-        try {
-          // Intentar obtener la imagen de perfil con el ID
-          profilePicUrl = await getFileUrlProfileImg(this.userId);
-        } catch {
-          // Si no se encuentra una imagen, usar la imagen por defecto
-          profilePicUrl = "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg";
-        }
-
-        const userPosts = await getPost(this.username);
-
-        // Crear el componente `user-banner` con los datos del usuario
-        const userCard = this.ownerDocument.createElement("user-banner");
         userCard.setAttribute("profilepic", profilePicUrl);
         userCard.setAttribute("name", userData.name);
-        userCard.setAttribute("uid", this.userId); // Asignar el ID dinámico
+        userCard.setAttribute("uid", this.userId);
         userCard.setAttribute("username", userData.username);
         userCard.setAttribute("profiledesc", userData.profileDesc || "");
 
         leftSidebar.appendChild(userCard);
-
-        // Renderizar los posts del usuario
-        userPosts?.forEach((post: dashboardPost) => {
-          const cardPost = this.ownerDocument.createElement(
-            "card-post"
-          ) as CardPost;
-          cardPost.setAttribute(Attribute.name, post.name);
-          cardPost.setAttribute(Attribute.username, post.username);
-          cardPost.setAttribute(Attribute.profileimg, post.profileImg);
-          cardPost.setAttribute(Attribute.postdesc, post.description);
-          cardPost.setAttribute(Attribute.imgpost, post.image);
-          contentContainer.appendChild(cardPost);
-        });
       } catch (error) {
         console.error(error);
       }
     }
 
+    // UserCard for responsive (top-user-menu)
+    const topUserMenu = this.ownerDocument.createElement("div");
+    topUserMenu.className = "top-user-menu";
+    topUserMenu.appendChild(userCard.cloneNode(true)); // Clone userCard for the responsive menu
+
+    // Content Container
+    const contentContainer = this.ownerDocument.createElement("div");
+    contentContainer.className = "content-container";
+
+    const userPosts = await getPost(this.username);
+    userPosts?.forEach((post: dashboardPost) => {
+      const cardPost = this.ownerDocument.createElement("card-post") as CardPost;
+      cardPost.setAttribute(Attribute.name, post.name);
+      cardPost.setAttribute(Attribute.username, post.username);
+      cardPost.setAttribute(Attribute.profileimg, post.profileImg);
+      cardPost.setAttribute(Attribute.postdesc, post.description);
+      cardPost.setAttribute(Attribute.imgpost, post.image);
+      contentContainer.appendChild(cardPost);
+    });
+
+    // Right Sidebar
     const rightSidebar = this.ownerDocument.createElement("div");
     rightSidebar.className = "right-sidebar";
 
@@ -133,11 +124,13 @@ class Profile extends HTMLElement {
       "https://firebasestorage.googleapis.com/v0/b/petmily-7b24c.appspot.com/o/Assets%20Dash%2Ffoto1%201.png?alt=media&token=2db66df2-6b62-4c65-bcdf-c82b4acad636"
     );
 
-    navbarContainer.appendChild(navBar);
-    this.shadowRoot.appendChild(navbarContainer);
-    this.shadowRoot.appendChild(mainContainer);
-    this.shadowRoot.appendChild(leftSidebar);
     rightSidebar.appendChild(publicityCard);
+
+    // Append sections
+    this.shadowRoot.appendChild(navBar);
+    this.shadowRoot.appendChild(banner); // Conserva el banner
+    this.shadowRoot.appendChild(topUserMenu); // UserCard for responsive
+    this.shadowRoot.appendChild(mainContainer);
     mainContainer.appendChild(leftSidebar);
     mainContainer.appendChild(contentContainer);
     mainContainer.appendChild(rightSidebar);
