@@ -1,8 +1,7 @@
-import { dispatch } from '../../store';
+import { dispatch, appState } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
 import { getFileUrlProfileImg } from '../../utils/firebase'; // Importamos la función para obtener la imagen de perfil
-import { appState } from '../../store';
 
 export enum Attribute {
     'icon' = 'icon',
@@ -74,6 +73,22 @@ class NavBar extends HTMLElement {
         if (createIcon) {
             createIcon.addEventListener('click', () => {
                 dispatch(navigate(Screens.CREATEPOST)); // Navega a la pantalla de creación de posts
+            });
+        }
+
+        const profileImgUser = this.shadowRoot?.querySelector('.profile-pic img'); // Selector ajustado para el elemento <img>
+        if (profileImgUser) {
+            profileImgUser.addEventListener('click', async () => {
+                console.log('Navegando al perfil del usuario logueado');
+
+                // Obtener el username del usuario logueado desde el estado
+                const userId = appState.user;
+
+                if (userId) {
+                    dispatch(navigate(Screens.PROFILE, { username: userId })); // Pasa el username como parámetro
+                } else {
+                    console.error('No se pudo obtener el ID del usuario logueado.');
+                }
             });
         }
     }
