@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 :host {
@@ -10,22 +11,219 @@
 }
 
 .main-container {
-    display: grid;
-    grid-template-columns: 300px 1fr 300px;
-    padding-left: 32px;
-    padding-right: 32px;
-    margin-top: 100px;
-    align-items: flex-start;
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-top: 100px;
+  align-items: flex-start;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.left-container {
+  border-color: black;
+  width: 20px;
+  height: 100%;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+
+  .app-profile {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be');
+ 
   }
-  
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  .main-container {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    }
+
+  .left-sidebar,
+  .right-sidebar {
+    display: none;
   }
 
-  .left-container {
-    border-color: black;
-    width: 20px;
-    height: 100%;
+  .content-container {
+    gap: 10px;
+    padding: 0 10px;
   }
+}
+
+/* Estilo del banner */
+.banner {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    display: none;
+  }
+}
+
+/* Navbar */
+.navbar-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav-bar {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Barra lateral izquierda */
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .left-sidebar {
+    display: none;
+  }
+}
+
+/* Barra lateral derecha */
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .right-sidebar {
+    display: none;
+  }
+}
+
+/* Publicidad */
+publicity-card {
+  max-width: 100%;
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  publicity-card {
+    display: none;
+  }
+}
+
+/* Ajustes adicionales para móviles */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 16px;
+  }
+
+  .content-container {
+    gap: 10px;
+    padding: 0;
+  }
+}
+
+/* Mostrar solo logo y tarjeta de perfil en versión responsive */
+.card-container {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.profile-card {
+  text-align: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  display: block; /* Asegúrate de que se muestre */
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: 1.5em;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.username {
+  font-size: 1em;
+  color: #777;
+  word-wrap: break-word;
+}
+
+.logo-img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.logo-text {
+  font-size: 1.2em;
+  color: #555;
+  text-align: center;
+}
+
+/* UserMenu responsive adjustments */
+.top-user-menu {
+  display: none; /* Oculto por defecto en pantallas grandes */
+}
+
+/* Mostrar topUserMenu solo en pantallas móviles */
+@media (max-width: 768px) {
+  
+  .top-user-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .top-user-menu .profile-card {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .top-user-menu .logo-img {
+    width: 40px;
+    height: auto;
+  }
+
+  .top-user-menu .logo-text {
+    font-size: 1.5em;
+    color: #333;
+    font-weight: bold;
+  }
+}
+
+/* Ajustes adicionales para garantizar compatibilidad */
+@media (max-width: 768px) {
+  .card-container {
+    gap: 1rem;
+  }
+}
