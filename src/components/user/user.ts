@@ -7,7 +7,6 @@ import { Screens } from '../../types/store';
 export enum Attribute {
     'profilepic' = 'profilepic',
     'name' = 'name',
-    'uid' = 'uid', // Cambiamos para usar el ID del usuario
     'username' = 'username',
     'profiledesc' = 'profiledesc',
     'communitydata' = 'communitydata',
@@ -16,7 +15,6 @@ export enum Attribute {
 class UserProfile extends HTMLElement {
     profilepic?: string;
     name?: string;
-    uid?: string; // ID del usuario
     username?: string;
     profiledesc?: string;
     communitydata?: string;
@@ -36,18 +34,17 @@ class UserProfile extends HTMLElement {
     }
 
     async connectedCallback() {
+        // Si no se define el atributo de imagen, busca la URL desde Firebase
         if (!this.profilepic) {
-            // Obtén la imagen de perfil según el ID del usuario (uid)
-            this.profilepic = await this.fetchProfilePic(this.uid);
+            this.profilepic = await this.fetchProfilePic();
         }
         this.render();
         this.addEventListeners();
     }
 
-    async fetchProfilePic(uid?: string): Promise<string> {
+    async fetchProfilePic(): Promise<string> {
         try {
-            const userId = uid || appState.user; // Si no hay `uid`, usamos el ID del usuario logueado
-            const profilePicUrl = await getFileUrlProfileImg(userId);
+            const profilePicUrl = await getFileUrlProfileImg(appState.user);
             return profilePicUrl || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg";
         } catch (error) {
             console.error("Error fetching profile picture:", error);
