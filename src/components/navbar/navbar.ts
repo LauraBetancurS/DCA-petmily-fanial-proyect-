@@ -1,6 +1,8 @@
 import { dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 import { Screens } from '../../types/store';
+import { getFileUrlProfileImg } from '../../utils/firebase'; // Importamos la función para obtener la imagen de perfil
+import { appState } from '../../store';
 
 export enum Attribute {
     'icon' = 'icon',
@@ -35,9 +37,22 @@ class NavBar extends HTMLElement {
         this.render();
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        // Obtener la imagen de perfil del usuario logueado
+        this.profilepic = await this.fetchProfilePic();
         this.render();
         this.addEventListeners();
+    }
+
+    async fetchProfilePic(): Promise<string> {
+        try {
+            // Intentar obtener la imagen de perfil del usuario logueado
+            const profilePicUrl = await getFileUrlProfileImg(appState.user);
+            return profilePicUrl || "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"; // Imagen por defecto
+        } catch (error) {
+            console.error("Error fetching profile picture:", error);
+            return "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"; // Imagen por defecto
+        }
     }
 
     addEventListeners() {

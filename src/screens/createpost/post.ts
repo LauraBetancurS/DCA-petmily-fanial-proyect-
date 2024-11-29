@@ -1,7 +1,7 @@
 import { appState, dispatch, addObserver } from "../../store";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
-import { addPost, getFileUrls, getUser, uploadFile } from "../../utils/firebase";
+import { addPost, getFileUrls, getUser, uploadFile, getFileUrlProfileImg } from "../../utils/firebase";
 import styles from "./posts.css";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
@@ -29,6 +29,7 @@ class CreatePost extends HTMLElement {
     const user = await getUser();
     infoPosts.name = user.name;
     infoPosts.username = user.username;
+
     this.render();
   }
 
@@ -47,7 +48,7 @@ class CreatePost extends HTMLElement {
     dispatch(navigate(Screens.MAIN));
   }
 
-  render() {
+  async render() {
     if (this.shadowRoot) {
       const style = this.ownerDocument.createElement("style");
       style.innerHTML = styles;
@@ -58,20 +59,40 @@ class CreatePost extends HTMLElement {
 
       const banner = this.ownerDocument.createElement("app-banner");
       banner.className = "banner";
-      banner.setAttribute("bannerImage", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be");
+      banner.setAttribute(
+        "bannerImage",
+        "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/banner%20componenet.png?alt=media&token=19fb1727-6c11-4281-8723-c0100079d0be"
+      );
       this.shadowRoot.appendChild(banner);
 
       const navbarContainer = this.ownerDocument.createElement("div");
       navbarContainer.className = "navbar-container";
-      
+
       const navBar = this.ownerDocument.createElement("nav-bar");
       navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
       navBar.setAttribute("input", "Buscar en PetNet");
       navBar.setAttribute("communityicon", "http://imgfz.com/i/rxAefV8.png");
-      navBar.setAttribute("profilepic", "https://firebasestorage.googleapis.com/v0/b/narracion-hipermedia.appspot.com/o/imgs%2FLaura%20Betancur%2Fpfp1.png?alt=media&token=a288411a-eeb0-46b3-adfc-9db0d3bb6fb6");
-      navBar.setAttribute("createicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276");
-      navBar.setAttribute("searchicon", "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029");
-      
+
+      // Obtener imagen de perfil dinámica
+      let profilePicUrl: string;
+      try {
+        profilePicUrl = await getFileUrlProfileImg(appState.user);
+      } catch (error) {
+        console.error("Error fetching profile picture:", error);
+        profilePicUrl =
+          "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg"; // Imagen por defecto
+      }
+
+      navBar.setAttribute("profilepic", profilePicUrl);
+      navBar.setAttribute(
+        "createicon",
+        "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276"
+      );
+      navBar.setAttribute(
+        "searchicon",
+        "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20lupa.png?alt=media&token=16d3b4ec-5267-407c-8b63-a46f3bdba029"
+      );
+
       navbarContainer.appendChild(navBar);
       this.shadowRoot.appendChild(navbarContainer);
 
