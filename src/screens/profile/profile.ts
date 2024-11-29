@@ -1,5 +1,5 @@
 import { addObserver, appState } from "../../store";
-import { getPost, getUserByUsername } from "../../utils/firebase";
+import { getPost, getUserByUsername, getDocumentIdByUsername, getFileUrlProfileImg } from "../../utils/firebase";
 import "../../components/navbar/navbar";
 import "../../components/banner/banner";
 import "../../components/publicitycard/publicitycard";
@@ -9,19 +9,9 @@ import styles from "./profile.css";
 import { dashboardPost } from "../../types/post";
 import CardPost, { Attribute } from "../../components/cardspost/cardpost";
 
-// interface User {
-//   uid: number;
-//   username: string;
-//   profileImg: string;
-//   name: string;
-//   profileDesc: string;
-// }
-
 class Profile extends HTMLElement {
   username: string = "";
-  currentUserPic: string = "";
-  currentUserName: string = "";
-  currentUserDesc: string = "";
+  userId: string = ""; // ID del usuario para la validación dinámica
 
   constructor() {
     super();
@@ -29,11 +19,12 @@ class Profile extends HTMLElement {
     addObserver(this);
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     // Obtiene el username del atributo al cargar el componente
     this.username = this.getAttribute("username") || "";
 
     if (this.username) {
+      this.userId = await getDocumentIdByUsername(this.username) || ""; // Obtén el ID del usuario basado en el username
       this.render();
     } else {
       console.error("Username not defined for app-profile");
@@ -52,8 +43,7 @@ class Profile extends HTMLElement {
     const mainContainer = this.ownerDocument.createElement("section");
     mainContainer.className = "main-container";
 
-    //El contenedor de los posts, aun no esta el foreach de los post 
-    //porque se deben de renderizar solo los del perfil clickeado
+    // Contenedor de los posts (contenido principal)
     const contentContainer = this.ownerDocument.createElement("div");
     contentContainer.className = "content-container";
 
@@ -72,7 +62,6 @@ class Profile extends HTMLElement {
     navBar.setAttribute("icon", "http://imgfz.com/i/DjpNIAU.png");
     navBar.setAttribute("input", "Search PetNet");
     navBar.setAttribute("communityIcon", "http://imgfz.com/i/rxAefV8.png");
-    navBar.setAttribute("profilePic", "https://firebasestorage.googleapis.com/v0/b/narracion-hipermedia.appspot.com/o/imgs%2FLaura%20Betancur%2Fpfp1.png?alt=media&token=a288411a-eeb0-46b3-adfc-9db0d3bb6fb6");
     navBar.setAttribute(
       "createicon",
       "https://firebasestorage.googleapis.com/v0/b/dca-petmily.appspot.com/o/icono%20create.png?alt=media&token=d58dc436-cffa-4b16-940d-a4467c5ff276"
@@ -85,18 +74,32 @@ class Profile extends HTMLElement {
     const leftSidebar = this.ownerDocument.createElement("div");
     leftSidebar.className = "left-sidebar";
 
-    if (this.username) {
+    if (this.userId) { // Validar que el ID del usuario fue obtenido
       try {
         const userData = await getUserByUsername(this.username);
-        const userPosts = await getPost(this.username)
+        let profilePicUrl;
+
+        try {
+          // Intentar obtener la imagen de perfil con el ID
+          profilePicUrl = await getFileUrlProfileImg(this.userId);
+        } catch {
+          // Si no se encuentra una imagen, usar la imagen por defecto
+          profilePicUrl = "https://i.pinimg.com/474x/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg";
+        }
+
+        const userPosts = await getPost(this.username);
+
+        // Crear el componente `user-banner` con los datos del usuario
         const userCard = this.ownerDocument.createElement("user-banner");
-        userCard.setAttribute("profilepic", this.currentUserPic);
+        userCard.setAttribute("profilepic", profilePicUrl);
         userCard.setAttribute("name", userData.name);
-        userCard.setAttribute("uid", appState.user)
+        userCard.setAttribute("uid", this.userId); // Asignar el ID dinámico
         userCard.setAttribute("username", userData.username);
-        userCard.setAttribute("profiledesc", this.currentUserDesc);
+        userCard.setAttribute("profiledesc", userData.profileDesc || "");
+
         leftSidebar.appendChild(userCard);
 
+        // Renderizar los posts del usuario
         userPosts?.forEach((post: dashboardPost) => {
           const cardPost = this.ownerDocument.createElement(
             "card-post"
@@ -107,11 +110,9 @@ class Profile extends HTMLElement {
           cardPost.setAttribute(Attribute.postdesc, post.description);
           cardPost.setAttribute(Attribute.imgpost, post.image);
           contentContainer.appendChild(cardPost);
-        })
-
+        });
       } catch (error) {
         console.error(error);
-
       }
     }
 
@@ -140,8 +141,8 @@ class Profile extends HTMLElement {
     mainContainer.appendChild(leftSidebar);
     mainContainer.appendChild(contentContainer);
     mainContainer.appendChild(rightSidebar);
-
   }
 }
+
 customElements.define("app-profile", Profile);
 export default Profile;
