@@ -79,7 +79,6 @@ class NavBar extends HTMLElement {
         const profileImgUser = this.shadowRoot?.querySelector('.profile-pic img'); // Selector ajustado para el elemento <img>
         if (profileImgUser) {
             profileImgUser.addEventListener('click', async () => {
-                console.log('Navegando al perfil del usuario logueado');
 
                 // Obtener el username del usuario logueado desde el estado
                 const userId = appState.user;

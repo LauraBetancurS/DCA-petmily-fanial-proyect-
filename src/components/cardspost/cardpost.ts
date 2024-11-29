@@ -49,7 +49,6 @@ class CardPost extends HTMLElement {
         const usernameElement = this.shadowRoot?.querySelector('.username');
         if (usernameElement) {
             usernameElement.addEventListener('click',()=> {
-                console.log(`Username clicked: ${this.username}`);
                 dispatch(navigate(Screens.PROFILE, {username : this.username}))
                
             })
