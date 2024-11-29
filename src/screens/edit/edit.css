@@ -1,3 +1,5 @@
+/* edit.css */
+
 .edit-container {
   display: flex;
   align-items: flex-start; /* Alinea al inicio verticalmente */
@@ -111,16 +113,38 @@ nav-bar {
   background-color: #f8f8f8;
 }
 
+/* Media query para diseño responsive */
 @media (max-width: 768px) {
   .edit-container {
     flex-direction: column;
     align-items: center;
-    margin-top: -20px;
+    margin-top: -50px; /* Ajuste para superposición leve del contenedor sobre el banner */
     gap: 20px; /* Espaciado entre los elementos en pantallas pequeñas */
+    position: relative; /* Necesario para la superposición */
+    z-index: 2; /* Asegura que se muestre encima del banner */
   }
 
-  .profile-card,
-  .edit-form {
-    max-width: 90%;
+  .profile-card {
+    background-color: transparent; /* Fondo transparente */
+    color: #000; /* Cambiar texto a negro */
+    box-shadow: none; /* Eliminar sombra */
   }
+
+  .edit-form {
+    width: 100%;
+    padding: 20px; /* Reducir padding en pantallas pequeñas */
+    box-shadow: none; /* Quitar sombra */
+  }
+
+  .input-container input {
+    width: 100%; /* Inputs ocupan todo el ancho disponible */
+    max-width: none; /* Eliminar límite máximo de ancho */
+  }
+}
+
+.save-btn {
+  width: 100%; /* Botón más accesible en pantallas pequeñas */
+  max-width: 300px;
+  font-size: 14px;
+  padding: 12px;
 }
